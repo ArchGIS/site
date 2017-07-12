@@ -1,0 +1,17 @@
+
+<!--
+<md-tab-group class="main-tabs">
+    <md-tab  *ngFor="let item of listTopB"
+             [routerLink]="item.link"
+             label="{{item.label}}">Content 1</md-tab>
+</md-tab-group>-->
+
+<nav md-tab-nav-bar>
+    <a md-tab-link
+       *ngFor="let item of listTopB"
+       [routerLink]="item.link"
+       routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive">
+        {{item.label}}
+    </a>
+</nav>
