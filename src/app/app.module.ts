@@ -34,7 +34,11 @@ import {TranslatePipe} from "./theme/pipes/translate/translate.pipe";
 import {TopBarComponent} from "./pages/top-bar/top-bar.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "@angular/material";
-import {AboutComponent} from "./theme/about/about.component";
+import {AboutComponent} from "./theme/components/about/about.component";
+import {TokenService} from "./theme/services/token/token.serviece";
+import {ConstService} from "./theme/services/http/service-const.service";
+import {MainService} from "./theme/services/main/main.service";
+import {GUID} from "./theme/services/guid/guid";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -52,6 +56,12 @@ const Pipes = [
   TranslatePipe
 ];
 
+const HTTP_CONST = [
+  TokenService,
+  ConstService,
+  MainService,
+  GUID
+];
 
 
 /**
@@ -84,7 +94,8 @@ const Pipes = [
     APP_PROVIDERS,
     TRANSLATION_PROVIDERS,
     TranslateService,
-    Pipes
+    Pipes,
+    HTTP_CONST
   ]
 })
 export class AppModule {

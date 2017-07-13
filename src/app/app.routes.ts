@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home';
-import { AboutComponent } from './theme/about/about.component';
+import { AboutComponent } from './theme/components/about/about.component';
 import { NoContentComponent } from './no-content';
 
 
