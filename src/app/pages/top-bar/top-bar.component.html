@@ -14,4 +14,18 @@
        [active]="rla.isActive">
         {{item.label}}
     </a>
+    <button md-button
+            [mdMenuTriggerFor]="menu"
+            class="menu">Язык</button>
+    <md-menu #menu="mdMenu">
+        <button md-menu-item>
+            <span class="lg-button"><img src="assets/icon/ru.png">Русский</span>
+        </button>
+        <button md-menu-item >
+            <span class="lg-button"><img src="assets/icon/en.png">English</span>
+        </button>
+    </md-menu>
 </nav>
+
+
+
