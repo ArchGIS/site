@@ -3,7 +3,7 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-  template: `asd`,
+  templateUrl: `./about.component.html`,
   styleUrls: ['about.component.scss'],
 })
 

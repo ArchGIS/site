@@ -26,7 +26,7 @@ export class LoginComponent {
     public listTopB: Array<{ link: string, label: string }> = [
         {
             link: '',
-            label: 'Arch Gic'
+            label: 'Arch Gis'
         },
         {
             link: 'about',
