@@ -1,26 +1,39 @@
-.main{
-  height: 54px;
+@import "../../const/css/material";
+@import '~@angular/material/theming';
+
+
+$defaultColor: #0D47A1;
+
+
+.form-group{
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: #F8F8F8;
+  justify-content: center;
 }
 
-
-.main-tabs{
-  background-color: #F8F8F8;
+.container-material{
+  /* position: absolute; */
+  display: block;
+  /* margin: 0; */
+  margin: 10vw auto;
+  background: #fff;
+  /* max-height: 100vh; */
+  padding: 3rem 5rem 1rem;
+  border-radius: 1px;
+  width: 42rem;
+  /* width: 100%; */
+  /* left: 30%; */
+  /* top: 30%; */
 }
-.item{
-  padding: 10px;
-  color: #9E9EB6;
-  font-size: 15px;
-  text-decoration: none;
+
+h1{
+  color: $defaultColor;
 }
 
-.item:hover{
-  color: #333333;
+button{
+  background-color: $defaultColor;
+  color: white;
 }
 
-a{
-  min-width: auto !important;
+#shest::-webkit-inner-spin-button {
+  display: none;
 }

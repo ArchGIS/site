@@ -11,7 +11,8 @@ import { TranslateService } from '../../services/translate/translate.service'; /
 
 export class TranslatePipe implements PipeTransform {
 
-    constructor(private _translate: TranslateService) { }
+    constructor(private _translate: TranslateService) {
+    }
 
     transform(value: string, args: any[]): any {
         if (!value) return;

@@ -3,9 +3,9 @@
  */
 
 export interface LoginPost {
-    device_id: string,
-    device_type: number,
-    os_version: string,
-    app_version: string,
-    app_build: number
+    //device_id: string,
+    //device_type: number,
+    //os_version: string,
+    //app_version: string,
+    //app_build: number
 }

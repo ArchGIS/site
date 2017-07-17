@@ -7,77 +7,37 @@ import {
 } from '@angular/core';
 import { AppState } from './app.service';
 import {TranslateService} from "../../theme/services/translate/translate.service";
+import {ConstService} from "../../theme/services/http/service-const.service";
+import {Consts} from "../../const/app-const";
 
 
 @Component({
     selector: 'login',
     templateUrl: 'login.component.html',
-    styleUrls: ['src/app/pages/login/login.component.scss' ]
+    styleUrls: ['login.component.scss' ]
 })
 export class LoginComponent {
 
-    constructor(private _translate: TranslateService) {
-        this.supportedLanguages = [
-            {display: 'English', value: 'en'},
-            {display: 'Русский', value: 'ru'},
-        ];
+    constructor(private _translate: TranslateService,
+                private constService: ConstService) {
     }
 
-    public listTopB: Array<{ link: string, label: string }> = [
-        {
-            link: '',
-            label: 'Arch Gic'
-        },
-        {
-            link: 'about',
-            label: 'О системе'
-        },
-        {
-            link: '',
-            label: 'Административная панель'
-        },
-        {
-            link: '',
-            label: 'Загрузка данных'
-        },
-        {
-            link: '',
-            label: 'Внесение данных'
-        },
-        {
-            link: '',
-            label: 'Выгрузка данных'
-        },
-        {
-            link: '',
-            label: 'Выборки'
-        },
-        {
-            link: '',
-            label: 'Расширенный поиск'
-        },
-        {
-            link: '',
-            label: 'Быстрый поиск'
-        },
-        {
-            link: '',
-            label: 'Команда'
-        },
-    ];
-
-    public supportedLanguages: Array<{ display: string, value: string }>;
-
-    public selectLang(lang: string) {
-        this._translate.use(lang);
+    public postSub(code: string, password: string): void {
+        let item: postLogin = <postLogin> {
+            code: code,
+            password: password
+        };
+        let url = `${Consts.baseURL}/login`;
+        this.constService.post<postLogin, any>(url, item)
+            .then(res=>{
+                debugger;
+            })
     }
 
 }
 
-/**
- * Please review the https://github.com/AngularClass/angular2-examples/ repo for
- * more angular app examples that you may copy/paste
- * (The examples may not be updated as quickly. Please open an issue on github for us to update it)
- * For help or questions please contact us at @AngularClass on twitter
- * or our chat on Slack at https://AngularClass.com/slack-join
- */
+
+export interface postLogin{
+    code: string,
+    password: string
+}

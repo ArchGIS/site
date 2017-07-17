@@ -10,8 +10,6 @@ import { Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/mergeMap';
 import { Observable } from "rxjs/Observable";
-import {EmptyAnswer} from "../../manager/http/answer";
-import {Consts} from "../app-const";
 import {Cookie} from "ng2-cookies";
 import {TokenService} from "../token/token.serviece";
 import {Answer} from "../../model/answer";

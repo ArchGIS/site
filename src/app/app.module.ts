@@ -31,14 +31,12 @@ import '../styles/headings.css';
 import {TRANSLATION_PROVIDERS} from "./theme/translation/translations";
 import {TranslateService} from "./theme/services/translate/translate.service";
 import {TranslatePipe} from "./theme/pipes/translate/translate.pipe";
-import {TopBarComponent} from "./pages/top-bar/top-bar.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "@angular/material";
-import {AboutComponent} from "./theme/components/about/about.component";
 import {TokenService} from "./theme/services/token/token.serviece";
 import {ConstService} from "./theme/services/http/service-const.service";
 import {MainService} from "./theme/services/main/main.service";
-import {GUID} from "./theme/services/guid/guid";
+import {LoginComponent} from "./pages/login/login.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -60,7 +58,6 @@ const HTTP_CONST = [
   TokenService,
   ConstService,
   MainService,
-  GUID
 ];
 
 
@@ -72,8 +69,7 @@ const HTTP_CONST = [
   declarations: [
     AppComponent,
     NoContentComponent,
-    TopBarComponent,
-    AboutComponent
+    LoginComponent
   ],
   /**
    * Import Angular's modules.

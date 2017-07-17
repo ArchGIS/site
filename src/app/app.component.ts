@@ -22,7 +22,6 @@ import { AppState } from './app.service';
     
         
     <main>
-        <top-bar></top-bar>
       <router-outlet></router-outlet>
     </main>
 
