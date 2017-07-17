@@ -9,6 +9,7 @@ import { AppState } from './app.service';
 import {TranslateService} from "../../theme/services/translate/translate.service";
 import {ConstService} from "../../theme/services/http/service-const.service";
 import {Consts} from "../../const/app-const";
+import {LoginService} from "../../theme/services/login/login.service";
 
 
 @Component({
@@ -19,25 +20,24 @@ import {Consts} from "../../const/app-const";
 export class LoginComponent {
 
     constructor(private _translate: TranslateService,
+                private service: LoginService,
                 private constService: ConstService) {
     }
 
     public postSub(code: string, password: string): void {
         let item: postLogin = <postLogin> {
-            code: code,
+            username: code,
             password: password
         };
-        let url = `${Consts.baseURL}/login`;
-        this.constService.post<postLogin, any>(url, item)
+        this.service.postLogin(item)
             .then(res=>{
                 debugger;
             })
     }
-
 }
 
 
 export interface postLogin{
-    code: string,
+    username: string,
     password: string
 }

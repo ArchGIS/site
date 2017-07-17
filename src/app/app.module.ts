@@ -37,6 +37,7 @@ import {TokenService} from "./theme/services/token/token.serviece";
 import {ConstService} from "./theme/services/http/service-const.service";
 import {MainService} from "./theme/services/main/main.service";
 import {LoginComponent} from "./pages/login/login.component";
+import {LoginService} from "./theme/services/login/login.service";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -58,6 +59,7 @@ const HTTP_CONST = [
   TokenService,
   ConstService,
   MainService,
+  LoginService
 ];
 
 

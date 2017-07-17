@@ -9,7 +9,6 @@ import {ConstService} from "../../services/http/service-const.service";
 import {MainService} from "../../services/main/main.service";
 import {AboutComponent} from "../../components/about/about.component";
 import {TopBarComponent} from "../../../pages/top-bar/top-bar.component";
-import {NoContentComponent} from "../../../no-content/no-content.component";
 import {MainRoutingModule} from "./main-routing.module";
 import {TranslateService} from "ng2-translate";
 import {MainComponent} from "./main.component";
@@ -17,7 +16,6 @@ import {MainComponent} from "./main.component";
 const mainComponent =[
   TopBarComponent,
   AboutComponent,
-  NoContentComponent,
   MainComponent
 ];
 

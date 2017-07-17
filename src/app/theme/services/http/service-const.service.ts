@@ -25,7 +25,7 @@ export class ConstService {
     get<T>(url: string): Promise<Answer<T>> {
         return this.tokenService.token()
             .map(token => new Headers({
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain; charset=utf-8',
                 'Authorization': 'Bearer ' + token
             }))
             .mergeMap(headers => this.http
@@ -40,7 +40,7 @@ export class ConstService {
     post<T, G>(url: string, item: T): Promise<G> {
         return this.tokenService.token()
             .map(token => new Headers({
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain; charset=utf-8',
                 'Authorization': 'Bearer ' + token
             }))
             .mergeMap(headers => this.http.post(url,
@@ -54,7 +54,7 @@ export class ConstService {
     put<T>(url: string, item: T): Promise<T> {
         return this.tokenService.token()
             .map(token => new Headers({
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain; charset=utf-8',
                 'Authorization': 'Bearer ' + token
             }))
             .mergeMap(headers =>
@@ -69,7 +69,7 @@ export class ConstService {
     postSingle<T>(url: string): Promise<Answer<T>> {
         return this.tokenService.token()
             .map(token => new Headers({
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain; charset=utf-8',
                 'Authorization': 'Bearer ' + token
             }))
             .mergeMap(headers => this.http
@@ -83,7 +83,7 @@ export class ConstService {
     delete(url: string) {
         return this.tokenService.token()
             .map(token => new Headers({
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain; charset=utf-8',
                 'Authorization': 'Bearer ' + token
             }))
             .mergeMap(headers => this.http
