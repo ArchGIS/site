@@ -16,6 +16,7 @@
             <input mdInput
                    type="password"
                    #password
+                   (keyup.enter)="postSub(login.value, password.value)"
                    placeholder="Введите пароль">
         </md-input-container>
     </div>

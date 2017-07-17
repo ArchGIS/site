@@ -38,6 +38,9 @@ import {ConstService} from "./theme/services/http/service-const.service";
 import {MainService} from "./theme/services/main/main.service";
 import {LoginComponent} from "./pages/login/login.component";
 import {LoginService} from "./theme/services/login/login.service";
+import {AuthGuard} from "./theme/guard/auth-guard.service";
+import {AuthGuardLogin} from "./theme/guard/LoginGuard";
+import {AuthService} from "./theme/guard/auth.service";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -93,7 +96,10 @@ const HTTP_CONST = [
     TRANSLATION_PROVIDERS,
     TranslateService,
     Pipes,
-    HTTP_CONST
+    HTTP_CONST,
+    AuthGuard,
+    AuthGuardLogin,
+    AuthService
   ]
 })
 export class AppModule {

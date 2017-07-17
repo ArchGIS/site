@@ -21,12 +21,11 @@ export class LoginService {
     private headers = new Headers({
         'Content-Type': 'application/json'});
 
-    postLogin(item: postLogin): Promise<any> {
-        let url = `${Consts.baseURL}login`;
+    postLogin(item: postLogin): Promise<getLogin> {
+        let url: string = `${Consts.baseURL}login`;
         return this.http.post(url, item, {headers: this.headers})
             .map(a => {
-                debugger;
-                return a;
+                return a.json();
             })
             .toPromise()
             .catch(this.handleError);
@@ -44,4 +43,10 @@ export class LoginService {
         console.log(errMsg);
         return Observable.throw(errMsg);
     }
+}
+
+
+export interface getLogin{
+    token: string,
+    expired: string
 }
