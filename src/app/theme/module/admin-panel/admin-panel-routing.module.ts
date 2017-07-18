@@ -3,6 +3,7 @@ import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {AdminPanelComponent} from "./admin-panel.component";
 import {AboutComponent} from "../../components/about/about.component";
+import {AdminPanelIComponent} from "../../components/admin-panel/admin-panel.component";
 
 
 const adminPanelRoutes: Routes = [
@@ -15,6 +16,7 @@ const adminPanelRoutes: Routes = [
         path: '',
         //canActivateChild: [AuthGuard],
         children: [
+            {path: '', component: AdminPanelIComponent}
         ]
       }
     ]

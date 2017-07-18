@@ -10,9 +10,11 @@ import {MainService} from "../../services/main/main.service";
 import {DataEntryRoutingModule} from "./data-entry-routing.module";
 import {TranslateService} from "ng2-translate";
 import {DataEntryComponent} from "./data-entry.component";
+import {DataEntryIComponent} from "../../components/data-entry/data-entry.component";
 
 const dataEntryComponent =[
   DataEntryComponent,
+  DataEntryIComponent
 ];
 
 

@@ -10,9 +10,11 @@ import {MainService} from "../../services/main/main.service";
 import {DataDownlandRoutingModule} from "./data-download-routing.module";
 import {TranslateService} from "ng2-translate";
 import {DataDownlandComponent} from "./data-download.component";
+import {DataDownloadIComponent} from "../../components/data-download/data-download.component";
 
 const dataDownlandComponent =[
-  DataDownlandComponent
+  DataDownlandComponent,
+  DataDownloadIComponent
 ];
 
 

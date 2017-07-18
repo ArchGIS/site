@@ -2,6 +2,7 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import { UploadingDataComponent} from "./uploading-data.component";
+import {UploadingDataIComponent} from "../../components/uploading-data/uploading-data.component";
 
 
 const UploadingDataRoutes: Routes = [
@@ -14,6 +15,7 @@ const UploadingDataRoutes: Routes = [
         path: '',
         //canActivateChild: [AuthGuard],
         children: [
+            {path: '', component: UploadingDataIComponent}
         ]
       }
     ]

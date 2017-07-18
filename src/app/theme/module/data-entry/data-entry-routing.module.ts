@@ -2,6 +2,7 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {DataEntryComponent} from "./data-entry.component";
+import {DataEntryIComponent} from "../../components/data-entry/data-entry.component";
 
 const DataEntryRoutes: Routes = [
   {
@@ -13,6 +14,7 @@ const DataEntryRoutes: Routes = [
         path: '',
         //canActivateChild: [AuthGuard],
         children: [
+            {path: '', component: DataEntryIComponent}
         ]
       }
     ]

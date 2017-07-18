@@ -2,6 +2,7 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {DataDownlandComponent} from "./data-download.component";
+import {DataDownloadIComponent} from "../../components/data-download/data-download.component";
 
 
 const DataDownlandRoutes: Routes = [
@@ -14,6 +15,7 @@ const DataDownlandRoutes: Routes = [
         path: '',
         //canActivateChild: [AuthGuard],
         children: [
+            {path: '', component: DataDownloadIComponent}
         ]
       }
     ]

@@ -10,9 +10,11 @@ import {MainService} from "../../services/main/main.service";
 import { SamplingRoutingModule} from "./sampling-routing.module";
 import {TranslateService} from "ng2-translate";
 import {SamplingComponent} from "./sampling.component";
+import {SamplingIComponent} from "../../components/sampling/sampling.component";
 
 const samplingComponent =[
   SamplingComponent,
+  SamplingIComponent
 ];
 
 

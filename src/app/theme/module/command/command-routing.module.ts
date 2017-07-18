@@ -2,6 +2,7 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {CommandComponent} from "./command.component";
+import {CommandIComponent} from "../../components/command/command.component";
 
 
 const commandRoutes: Routes = [
@@ -14,6 +15,7 @@ const commandRoutes: Routes = [
         path: '',
         //canActivateChild: [AuthGuard],
         children: [
+            {path: '', component: CommandIComponent}
         ]
       }
     ]

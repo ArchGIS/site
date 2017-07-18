@@ -2,6 +2,7 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import { SamplingComponent} from "./sampling.component";
+import {SamplingIComponent} from "../../components/sampling/sampling.component";
 
 const SamplingRoutes: Routes = [
   {
@@ -13,6 +14,7 @@ const SamplingRoutes: Routes = [
         path: '',
         //canActivateChild: [AuthGuard],
         children: [
+            {path: '', component: SamplingIComponent}
         ]
       }
     ]

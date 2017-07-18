@@ -14,6 +14,7 @@ const AdvancedSearchRoutes: Routes = [
         path: '',
         //canActivateChild: [AuthGuard],
         children: [
+            {path: '', component: SamplingIComponent}
         ]
       }
     ]
