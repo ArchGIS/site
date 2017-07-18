@@ -41,6 +41,7 @@ import {LoginService} from "./theme/services/login/login.service";
 import {AuthGuard} from "./theme/guard/auth-guard.service";
 import {AuthGuardLogin} from "./theme/guard/LoginGuard";
 import {AuthService} from "./theme/guard/auth.service";
+import {PreoladSpinner} from "./theme/services/preload/preolad.service";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -99,7 +100,8 @@ const HTTP_CONST = [
     HTTP_CONST,
     AuthGuard,
     AuthGuardLogin,
-    AuthService
+    AuthService,
+    PreoladSpinner
   ]
 })
 export class AppModule {

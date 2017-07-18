@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { AppState } from './app.service';
 import {TranslateService} from "ng2-translate";
+import {MainService} from "../../services/main/main.service";
 
 
 @Component({
@@ -14,10 +15,18 @@ import {TranslateService} from "ng2-translate";
     templateUrl: 'main.component.html',
     styleUrls: ['main.component.scss' ]
 })
-export class MainComponent {
+export class MainCountComponent {
 
-    constructor(private _translate: TranslateService) {
+    constructor(private service: MainService) {
+        this.service.getMainCount()
+            .then(res=>{
+                debugger;
+                this.list = res;
+            })
     }
+
+    list: any;
+
 
 
 }

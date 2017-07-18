@@ -3,6 +3,7 @@ import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import { MainComponent} from "./main.component";
 import {AboutComponent} from "../../components/about/about.component";
+import {MainCountComponent} from "../../components/main/main.component";
 
 
 const MainRoutes: Routes = [
@@ -15,8 +16,9 @@ const MainRoutes: Routes = [
         path: '',
         //canActivateChild: [AuthGuard],
         children: [
-          {path: '', component: AboutComponent},
+          {path: '', component: MainCountComponent},
           {path: 'about', component: AboutComponent},
+          {path: 'info', component: MainCountComponent},
         ]
       }
     ]

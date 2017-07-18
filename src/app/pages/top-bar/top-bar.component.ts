@@ -25,7 +25,7 @@ export class TopBarComponent {
 
     public listTopB: Array<{ link: string, label: string }> = [
         {
-            link: '',
+            link: 'info',
             label: 'Arch Gic'
         },
         {

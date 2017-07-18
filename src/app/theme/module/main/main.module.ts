@@ -12,11 +12,13 @@ import {TopBarComponent} from "../../../pages/top-bar/top-bar.component";
 import {MainRoutingModule} from "./main-routing.module";
 import {TranslateService} from "ng2-translate";
 import {MainComponent} from "./main.component";
+import {MainCountComponent} from "../../components/main/main.component";
 
 const mainComponent =[
   TopBarComponent,
   AboutComponent,
-  MainComponent
+  MainComponent,
+  MainCountComponent
 ];
 
 
@@ -43,7 +45,7 @@ const HTTP_CONST = [
 
   providers: [
     HTTP_CONST,
-    TranslateService
+    TranslateService,
   ],
   entryComponents: [
   ],

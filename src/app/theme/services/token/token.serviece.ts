@@ -25,7 +25,8 @@ export class TokenService {
 
 
   public token(): Observable<String> {
-    this.loginToken = Cookie.get('login_token');
+    debugger;
+    this.loginToken = Cookie.get('token');
     if (this.loginToken !== null && this.loginToken !== "null" && this.loginToken !== undefined) {
       return Observable.of(this.loginToken);
     }
@@ -42,19 +43,6 @@ export class TokenService {
       app_build: 1
     };
 
-
-    return this.http
-        .post(this.tokenUrl, JSON.stringify(params), {headers: this.headers})
-        .map(a => {
-          let response = a.json();
-          if (response.success) {
-            this.tokenPromise = null;
-            return response.data.access_token;
-          }
-          else {
-            return null;
-          }
-        });
   }
 
   saveLoginToken(token: String, expires_in: number): String {
