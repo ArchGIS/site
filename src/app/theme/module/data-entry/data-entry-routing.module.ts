@@ -4,7 +4,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {DataEntryComponent} from "./data-entry.component";
 import {DataEntryIComponent} from "../../components/data-entry/data-entry.component";
 
-const DataEntryRoutes: Routes = [
+const dataEntryRoutes: Routes = [
   {
     path: '',
     component: DataEntryComponent,
@@ -23,7 +23,7 @@ const DataEntryRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(DataEntryRoutes)
+        RouterModule.forChild(dataEntryRoutes)
     ],
     exports: [
         RouterModule

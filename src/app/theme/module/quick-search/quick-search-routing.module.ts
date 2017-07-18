@@ -5,7 +5,7 @@ import { QuickSearchComponent} from "./quick-search.component";
 import {QuickSearchIComponent} from "../../components/quick-search/quick-search.component";
 
 
-const QuickSearchRoutes: Routes = [
+const quickSearchRoutes: Routes = [
   {
     path: '',
     component: QuickSearchComponent,
@@ -24,7 +24,7 @@ const QuickSearchRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(QuickSearchRoutes)
+        RouterModule.forChild(quickSearchRoutes)
     ],
     exports: [
         RouterModule

@@ -5,7 +5,7 @@ import { UploadingDataComponent} from "./uploading-data.component";
 import {UploadingDataIComponent} from "../../components/uploading-data/uploading-data.component";
 
 
-const UploadingDataRoutes: Routes = [
+const uploadingDataRoutes: Routes = [
   {
     path: '',
     component: UploadingDataComponent,
@@ -24,7 +24,7 @@ const UploadingDataRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(UploadingDataRoutes)
+        RouterModule.forChild(uploadingDataRoutes)
     ],
     exports: [
         RouterModule

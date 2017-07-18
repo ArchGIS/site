@@ -7,22 +7,63 @@ import {MainCountComponent} from "../../components/main/main.component";
 
 
 const MainRoutes: Routes = [
-  {
-    path: '',
-    component: MainComponent,
-    //canActivate: [AuthGuard],
-    children: [
-      {
+    {
         path: '',
-        //canActivateChild: [AuthGuard],
+        component: MainComponent,
+        //canActivate: [AuthGuard],
         children: [
-          {path: '', component: MainCountComponent},
-          {path: 'about', component: AboutComponent},
-          {path: 'info', component: MainCountComponent},
+            {
+                path: '',
+                //canActivateChild: [AuthGuard],
+                children: [
+                    {
+                        path: '',
+                        component: MainCountComponent
+                    },
+                    {
+                        path: 'about',
+                        component: AboutComponent
+                    },
+                    {
+                        path: 'info',
+                        component: MainCountComponent
+                    },
+                    {
+                        path: 'admin-panel',
+                        loadChildren: 'app/theme/module/admin-panel/admin-panel.module#AdminPanelModule',
+                    },
+                    {
+                        path: 'data-download',
+                        loadChildren: 'app/theme/module/data-download/data-download.module#DataDownlandModule',
+                    },
+                    {
+                        path: 'data-entry',
+                        loadChildren: 'app/theme/module/data-entry/data-entry.module#DataEntryModule',
+                    },
+                    {
+                        path: 'uploading-data',
+                        loadChildren: 'app/theme/module/uploading-data/uploading-data.module#UploadingDataModule',
+                    },
+                    {
+                        path: 'sampling',
+                        loadChildren: 'app/theme/module/sampling/sampling.module#SamplingModule',
+                    },
+                    {
+                        path: 'advanced-search',
+                        loadChildren: 'app/theme/module/advanced-search/advanced-search.module#AdvancedSearchModule',
+                    },
+                    {
+                        path: 'quick-search',
+                        loadChildren: 'app/theme/module/quick-search/quick-search.module#QuickSearchModule',
+                    },
+                    {
+                        path: 'command',
+                        loadChildren: 'app/theme/module/command/command.module#CommandModule',
+                    },
+                ]
+            }
         ]
-      }
-    ]
-  }
+    }
 ];
 
 @NgModule({

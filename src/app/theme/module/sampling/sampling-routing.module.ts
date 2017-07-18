@@ -4,7 +4,7 @@ import {RouterModule, Routes} from "@angular/router";
 import { SamplingComponent} from "./sampling.component";
 import {SamplingIComponent} from "../../components/sampling/sampling.component";
 
-const SamplingRoutes: Routes = [
+const samplingRoutes: Routes = [
   {
     path: '',
     component: SamplingComponent,
@@ -23,7 +23,7 @@ const SamplingRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(SamplingRoutes)
+        RouterModule.forChild(samplingRoutes)
     ],
     exports: [
         RouterModule

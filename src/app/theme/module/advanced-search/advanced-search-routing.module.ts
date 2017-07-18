@@ -2,9 +2,10 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {AdvancedSearchComponent} from "./advanced-search.component";
+import {AdvancedSearchIComponent} from "../../components/advanced-search/advanced-search.component";
 
 
-const AdvancedSearchRoutes: Routes = [
+const advancedSearchRoutes: Routes = [
   {
     path: '',
     component: AdvancedSearchComponent,
@@ -14,7 +15,7 @@ const AdvancedSearchRoutes: Routes = [
         path: '',
         //canActivateChild: [AuthGuard],
         children: [
-            {path: '', component: SamplingIComponent}
+            {path: '', component: AdvancedSearchIComponent}
         ]
       }
     ]
@@ -23,7 +24,7 @@ const AdvancedSearchRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(AdvancedSearchRoutes)
+        RouterModule.forChild(advancedSearchRoutes)
     ],
     exports: [
         RouterModule

@@ -48,6 +48,6 @@ const HTTP_CONST = [
 
   exports: []
 })
-export class MainModule {}
+export class DataEntryModule {}
 
 

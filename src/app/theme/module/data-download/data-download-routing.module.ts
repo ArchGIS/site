@@ -5,7 +5,7 @@ import {DataDownlandComponent} from "./data-download.component";
 import {DataDownloadIComponent} from "../../components/data-download/data-download.component";
 
 
-const DataDownlandRoutes: Routes = [
+const dataDownlandRoutes: Routes = [
   {
     path: '',
     component: DataDownlandComponent,
@@ -24,7 +24,7 @@ const DataDownlandRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(DataDownlandRoutes)
+        RouterModule.forChild(dataDownlandRoutes)
     ],
     exports: [
         RouterModule

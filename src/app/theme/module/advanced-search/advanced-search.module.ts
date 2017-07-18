@@ -9,8 +9,12 @@ import {ConstService} from "../../services/http/service-const.service";
 import {MainService} from "../../services/main/main.service";
 import {AdvancedSearchRoutingModule} from "./advanced-search-routing.module";
 import {TranslateService} from "ng2-translate";
+import {AdvancedSearchComponent} from "./advanced-search.component";
+import {AdvancedSearchIComponent} from "../../components/advanced-search/advanced-search.component";
 
-const AdvancedSearchComponent =[
+const advancedSearchComponent =[
+  AdvancedSearchComponent,
+  AdvancedSearchIComponent
 ];
 
 
@@ -32,7 +36,7 @@ const HTTP_CONST = [
     AdvancedSearchRoutingModule
   ],
   declarations: [
-    AdvancedSearchComponent
+    advancedSearchComponent
   ],
 
   providers: [
