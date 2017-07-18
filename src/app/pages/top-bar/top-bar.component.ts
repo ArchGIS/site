@@ -33,35 +33,35 @@ export class TopBarComponent {
             label: 'О системе'
         },
         {
-            link: '',
+            link: 'admin-panel',
             label: 'Административная панель'
         },
         {
-            link: '',
+            link: 'data-download',
             label: 'Загрузка данных'
         },
         {
-            link: '',
+            link: 'data-entry',
             label: 'Внесение данных'
         },
         {
-            link: '',
+            link: 'uploading-data',
             label: 'Выгрузка данных'
         },
         {
-            link: '',
+            link: 'sampling',
             label: 'Выборки'
         },
         {
-            link: '',
+            link: 'advanced-search',
             label: 'Расширенный поиск'
         },
         {
-            link: '',
+            link: 'quick-search',
             label: 'Быстрый поиск'
         },
         {
-            link: '',
+            link: 'command',
             label: 'Команда'
         },
     ];

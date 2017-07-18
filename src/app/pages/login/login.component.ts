@@ -32,8 +32,8 @@ export class LoginComponent {
             password: password
         };
         self.service.postLogin(item)
-            .then(res=>{
-                self.saveLoginToken(res.token,res.expired );
+            .then(res => {
+                self.saveLoginToken(res.token, res.expired);
                 debugger;
             })
     }
