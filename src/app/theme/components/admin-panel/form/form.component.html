@@ -1,0 +1,26 @@
+<div class="main">
+    <div class="title">
+        <h1>Административная панель</h1>
+    </div>
+    <div class="form">
+        <md-select placeholder="Сущность">
+            <md-option *ngFor="let essence of entities" [value]="essence">
+                {{ essence }}
+            </md-option>
+        </md-select>
+    </div>
+    <div class="form">
+        <md-input-container>
+            <md-icon mdPrefix>search &nbsp;</md-icon>
+            <input mdInput
+                   placeholder="Фильтр по названию"
+                   type="text">
+        </md-input-container>
+    </div>
+    <div class="form">
+        <button md-raised-button color="primary">
+            <md-icon>settings</md-icon>Найти
+        </button>
+    </div>
+
+</div>

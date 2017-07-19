@@ -7,6 +7,14 @@
 }
 
 
+nav{
+  display: flex;
+  justify-content: center;
+  a{
+    min-width: auto !important;
+  }
+}
+
 .main-tabs{
   background-color: #F8F8F8;
 }
@@ -33,9 +41,7 @@
   color: #333333;
 }
 
-a{
-  min-width: auto !important;
-}
+
 
 .lg-button{
   display: flex;

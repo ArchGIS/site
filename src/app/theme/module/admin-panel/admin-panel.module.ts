@@ -11,10 +11,13 @@ import {AdminPanelRoutingModule} from "./admin-panel-routing.module";
 import {TranslateService} from "ng2-translate";
 import {AdminPanelIComponent} from "../../components/admin-panel/admin-panel.component";
 import {AdminPanelComponent} from "./admin-panel.component";
+import {FormAdminPanelComponent} from "../../components/admin-panel/form/form.component";
+import {TableDataModule} from "../table-data/table-data.module";
 
 const adminPanelComponent =[
   AdminPanelComponent,
-  AdminPanelIComponent
+  AdminPanelIComponent,
+  FormAdminPanelComponent
 ];
 
 
@@ -25,6 +28,10 @@ const HTTP_CONST = [
 ];
 
 
+const MODULE_CUSTOM = [
+  TableDataModule
+];
+
 @NgModule({
   imports: [
     FormsModule,
@@ -33,7 +40,8 @@ const HTTP_CONST = [
     ReactiveFormsModule,
     CommonModule,
     MaterialModule,
-    AdminPanelRoutingModule
+    AdminPanelRoutingModule,
+    MODULE_CUSTOM
   ],
   declarations: [
     adminPanelComponent

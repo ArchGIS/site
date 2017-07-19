@@ -28,7 +28,7 @@ export class PreoladSpinner {
     public hide(delay:number = 0):void {
         setTimeout(() => {
             this._element.style['display'] = 'none';
-            document.body.style.background = '#ffffff'
+            document.body.style.background = '#FAFAFA';
         }, delay);
     }
 
