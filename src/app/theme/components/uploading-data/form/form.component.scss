@@ -1,0 +1,22 @@
+@import "../../../style/const-scss";
+
+.main{
+  h1{
+    text-align: center;
+  }
+  md-select, md-input-container{
+    width: 250px;
+    height: 50px;
+  }
+  .form{
+    display: flex;
+    justify-content: center;
+    padding: .5em;
+  }
+  button{
+    width: 150px;
+  }
+  table md-input-container{
+    width: 125px;
+  }
+}
