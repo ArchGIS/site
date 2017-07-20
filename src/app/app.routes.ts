@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home';
-import { NoContentComponent } from './no-content';
-import {LoginComponent} from "./pages/login/login.component";
+import { NoContentComponent } from './theme/components/no-content';
+import {LoginComponent} from "./theme/components/login/login.component";
 import {AuthGuardLogin} from "./theme/guard/LoginGuard";
 import {AuthGuard} from "./theme/guard/auth-guard.service";
 

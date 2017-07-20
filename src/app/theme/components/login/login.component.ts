@@ -6,10 +6,10 @@ import {
     Component,
 } from '@angular/core';
 import { AppState } from './app.service';
-import {TranslateService} from "../../theme/services/translate/translate.service";
-import {ConstService} from "../../theme/services/http/service-const.service";
-import {Consts} from "../../const/app-const";
-import {LoginService} from "../../theme/services/login/login.service";
+import {TranslateService} from "../../services/translate/translate.service";
+import {ConstService} from "../../services/http/service-const.service";
+import {Consts} from "../../../const/app-const";
+import {LoginService} from "../../services/login/login.service";
 import {Cookie} from "ng2-cookies";
 
 

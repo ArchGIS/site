@@ -6,7 +6,7 @@ import {Injectable} from "@angular/core";
 import {ConstService} from "../http/service-const.service";
 import {Router} from "@angular/router";
 import {Consts} from "../../../const/app-const";
-import {postLogin} from "../../../pages/login/login.component";
+import {postLogin} from "../../components/login/login.component";
 import {Http,Headers,Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 

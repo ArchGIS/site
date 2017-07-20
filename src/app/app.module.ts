@@ -24,7 +24,7 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
-import { NoContentComponent } from './no-content';
+import { NoContentComponent } from './theme/components/no-content';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -36,7 +36,7 @@ import {MaterialModule} from "@angular/material";
 import {TokenService} from "./theme/services/token/token.serviece";
 import {ConstService} from "./theme/services/http/service-const.service";
 import {MainService} from "./theme/services/main/main.service";
-import {LoginComponent} from "./pages/login/login.component";
+import {LoginComponent} from "./theme/components/login/login.component";
 import {LoginService} from "./theme/services/login/login.service";
 import {AuthGuard} from "./theme/guard/auth-guard.service";
 import {AuthGuardLogin} from "./theme/guard/LoginGuard";

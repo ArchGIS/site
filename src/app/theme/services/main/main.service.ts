@@ -13,10 +13,27 @@ export class MainService {
                 private router: Router) {
     }
 
-    getMainCount(): Promise<any> {
+    getMainCount(): Promise<CountItem[]> {
         let url = `${Consts.baseURL}search/count`;
-        return this.service.get(url);
+        let item: any = '{"counts":["Heritage","Monument","Research","Artifact","Radiocarbon","Report","Monography","Article","ArchiveDoc","Author"]} Name';
+        return this.service.post<any, CountItem[]>(url, item);
     }
 
-
 }
+
+export interface CountItem{
+    name: string,
+    count: string
+}
+
+
+export interface OCN{
+    title: string[];
+    item: ocn_item[];
+}
+export interface ocn_item{
+    id: number;
+    item: string[];
+}
+
+

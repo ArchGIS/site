@@ -7,27 +7,30 @@ import {
 } from '@angular/core';
 import { AppState } from './app.service';
 import {TranslateService} from "ng2-translate";
-import {MainService} from "../../services/main/main.service";
+import {CountItem, MainService} from "../../services/main/main.service";
 
 
 @Component({
     selector: 'main',
     templateUrl: 'main.component.html',
-    styleUrls: ['main.component.scss' ]
+    styleUrls: ['main.component.scss']
 })
 export class MainCountComponent {
 
     constructor(private service: MainService) {
+        this.getMainCount();
+    }
+
+
+    private getMainCount(): void {
         this.service.getMainCount()
-            .then(res=>{
+            .then(res => {
                 debugger;
                 this.list = res;
             })
     }
 
-    list: any;
 
-
-
+    list: CountItem[];
 }
 
