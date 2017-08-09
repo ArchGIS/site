@@ -1,0 +1,15 @@
+<div class="team-member">
+    <figure class="snip red">
+        <img src='assets/img/angular-logo.png'
+             onerror="this.src='assets/img/angularclass-avatar.png'">
+        <figcaption>
+            <h2>{{ item.name }}</h2>
+        </figcaption>
+        <a href="#"></a>
+    </figure>
+    <div class="team-member-info">
+        <p *ngFor="let string of item.desc">
+            {{ string }}
+        </p>
+    </div>
+</div>

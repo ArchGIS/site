@@ -1,0 +1,30 @@
+<div class="command-body">
+    <div class="command-top">
+        Команда
+    </div>
+
+    <section>
+        <h2 class="section__title">
+            <span>Директор проекта</span>
+        </h2>
+        <div class="team-list">
+           <command-item *ngFor="let item of data.director" [item]="item"></command-item>
+        </div>
+    </section>
+    <section>
+        <h2 class="section__title">
+            <span>Команда разработки</span>
+        </h2>
+        <div class="team-list">
+            <command-item *ngFor="let item of data.developers" [item]="item"></command-item>
+        </div>
+    </section>
+    <section>
+        <h2 class="section__title">
+            <span>Команда наполнения</span>
+        </h2>
+        <div class="team-list">
+            <command-item *ngFor="let item of data.content" [item]="item"></command-item>
+        </div>
+    </section>
+</div>

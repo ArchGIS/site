@@ -12,6 +12,7 @@ import {TranslateService} from "ng2-translate";
 import {CommandIComponent} from "../../components/command/command.component";
 import {CommandComponent} from "./command.component";
 import {TranslateModule} from "@ngx-translate/core";
+import {CommandItemComponent} from "../../components/command/item/item.component";
 
 const commandComponent =[
   CommandComponent,
@@ -38,7 +39,8 @@ const HTTP_CONST = [
     TranslateModule.forRoot()
   ],
   declarations: [
-    commandComponent
+    commandComponent,
+    CommandItemComponent
   ],
 
   providers: [

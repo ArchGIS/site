@@ -34,7 +34,7 @@ const RE_ENDS_WITH_BS = /\/$/;
  * createTag('link', { rel: "manifest", href: "/assets/manifest.json" })
  * // <link rel="manifest" href="/assets/manifest.json">
  * @param tagName The name of the tag
- * @param attrMap A Map of attribute names (keys) and their values.
+ * @param attrMap A Map of attribute item (keys) and their values.
  * @param publicPath a path to add to eh start of static asset url
  * @returns {string}
  */
