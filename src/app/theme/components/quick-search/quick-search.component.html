@@ -1,0 +1,42 @@
+<div class="main">
+    <div class="left">
+        <div class="form">
+            <h2>Быстрый поиск</h2>
+            <md-select placeholder="Что ищем?">
+                <md-option *ngFor="let type of typeSearch"
+                           [value]="type.id">
+                    {{ type.name }}
+                </md-option>
+            </md-select>
+            <h3>Критерии поиска</h3>
+
+            <md-input-container >
+                <input mdInput placeholder="Название">
+            </md-input-container>
+
+            <md-select placeholder="Эпоха">
+                <md-option *ngFor="let type of typeSearch"
+                           [value]="type.id">
+                    {{ type.name }}
+                </md-option>
+            </md-select>
+
+            <md-select placeholder="Тип">
+                <md-option *ngFor="let type of typeSearch"
+                           [value]="type.id">
+                    {{ type.name }}
+                </md-option>
+            </md-select>
+
+            <button md-raised-button color="primary">
+                <md-icon>search</md-icon>
+                Показать результаты
+            </button>
+        </div>
+    </div>
+    <div class="right">
+        <div leaflet style="height: 100%;"
+             [leafletOptions]="options">
+        </div>
+    </div>
+</div>

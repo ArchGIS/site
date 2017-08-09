@@ -30,7 +30,6 @@ import '../styles/styles.scss';
 import '../styles/headings.css';
 import {TRANSLATION_PROVIDERS} from "./theme/translation/translations";
 import {TranslateService} from "./theme/services/translate/translate.service";
-import {TranslatePipe} from "./theme/pipes/translate/translate.pipe";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "@angular/material";
 import {TokenService} from "./theme/services/token/token.serviece";
@@ -56,7 +55,6 @@ type StoreType = {
 };
 
 const Pipes = [
-  TranslatePipe
 ];
 
 const HTTP_CONST = [
