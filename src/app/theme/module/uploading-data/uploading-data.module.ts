@@ -11,11 +11,13 @@ import { UploadingDataRoutingModule} from "./uploading-data-routing.module";
 import {TranslateService} from "ng2-translate";
 import { UploadingDataComponent} from "./uploading-data.component";
 import {UploadingDataIComponent} from "../../components/uploading-data/uploading-data.component";
-import {TranslateModule} from "@ngx-translate/core";
+import {FormUploadPanelComponent} from "../../components/uploading-data/form/form.component";
+import {TableDataModule} from "../table-data/table-data.module";
 
 const uploadingDataComponent =[
   UploadingDataComponent,
-  UploadingDataIComponent
+  UploadingDataIComponent,
+  FormUploadPanelComponent
 ];
 
 
@@ -25,6 +27,9 @@ const HTTP_CONST = [
   MainService,
 ];
 
+const MODULE_CUSTOM = [
+  TableDataModule
+];
 
 @NgModule({
   imports: [
@@ -35,7 +40,7 @@ const HTTP_CONST = [
     CommonModule,
     MaterialModule,
     UploadingDataRoutingModule,
-    TranslateModule.forRoot()
+    MODULE_CUSTOM
   ],
   declarations: [
     uploadingDataComponent
