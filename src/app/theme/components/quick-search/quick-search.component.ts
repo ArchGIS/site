@@ -1,6 +1,7 @@
 
 
 import { Component, OnInit } from "@angular/core";
+import {SearchService} from "../../services/search/search.service";
 
 @Component({
   templateUrl: 'quick-search.component.html',
@@ -9,8 +10,8 @@ import { Component, OnInit } from "@angular/core";
 
 export class QuickSearchIComponent {
 
-  constructor(){
-    this.typeSearch = [
+  constructor(private service: SearchService){
+    this.typeS = [
       {
         id: 1,
         name: 'Памятник',
@@ -19,8 +20,41 @@ export class QuickSearchIComponent {
         id: 2,
         name: 'Иследование',
       },
-    ]
+      {
+        id: 3,
+        name: 'Автор',
+      },
+      {
+        id: 4,
+        name: 'Отчёт',
+      },
+      {
+        id: 5,
+        name: 'ОКН',
+      },
+      {
+        id: 6,
+        name: 'Вскрытие',
+      },
+      {
+        id: 7,
+        name: 'Радиоуглеродная датировка',
+      },
+    ];
+    this.service.getEpoch('ru')
+        .then(res=>{
+          this.typeEpoch = res.epochs;
+        });
+    this.service.getSiteTypes('ru')
+        .then(res=>{
+          this.typeSearch = res.siteTypes;
+        })
   }
+
+  public typeEpoch: TypeSearch[];
+  public typeName: string = '';
+
+  public typeS: TypeSearch[];
 
   public typeSearch: TypeSearch[];
 
@@ -52,6 +86,11 @@ export class QuickSearchIComponent {
     zoom: this.optionsSpec.zoom,
     center: L.latLng({ lat: this.optionsSpec.center[0], lng: this.optionsSpec.center[1] })
   };
+
+
+  getSearch(){
+    //this.service.getSearch(this.typeName)
+  }
 
 
 }
