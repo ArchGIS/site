@@ -11,6 +11,7 @@ import {DataDownlandRoutingModule} from "./data-download-routing.module";
 import {TranslateService} from "ng2-translate";
 import {DataDownlandComponent} from "./data-download.component";
 import {DataDownloadIComponent} from "../../components/data-download/data-download.component";
+import {TranslateModule} from "@ngx-translate/core";
 
 const dataDownlandComponent =[
   DataDownlandComponent,
@@ -33,7 +34,8 @@ const HTTP_CONST = [
     ReactiveFormsModule,
     CommonModule,
     MaterialModule,
-    DataDownlandRoutingModule
+    DataDownlandRoutingModule,
+    TranslateModule.forRoot()
   ],
   declarations: [
     dataDownlandComponent

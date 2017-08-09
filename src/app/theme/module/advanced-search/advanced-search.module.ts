@@ -11,6 +11,7 @@ import {AdvancedSearchRoutingModule} from "./advanced-search-routing.module";
 import {TranslateService} from "ng2-translate";
 import {AdvancedSearchComponent} from "./advanced-search.component";
 import {AdvancedSearchIComponent} from "../../components/advanced-search/advanced-search.component";
+import {TranslateModule} from "@ngx-translate/core";
 
 const advancedSearchComponent =[
   AdvancedSearchComponent,
@@ -33,7 +34,8 @@ const HTTP_CONST = [
     ReactiveFormsModule,
     CommonModule,
     MaterialModule,
-    AdvancedSearchRoutingModule
+    AdvancedSearchRoutingModule,
+    TranslateModule.forRoot()
   ],
   declarations: [
     advancedSearchComponent

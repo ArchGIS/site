@@ -17,7 +17,7 @@ import {Router} from "@angular/router";
             width: 100%;
             top: 0;
             position: fixed;
-            z-index: 9999999;
+            z-index: 999;
             background-color: white;
         }
 

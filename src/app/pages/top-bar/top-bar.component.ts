@@ -18,8 +18,8 @@ export class TopBarComponent {
 
     constructor(private _translate: TranslateService) {
         this.supportedLanguages = [
-            {display: 'English', value: 'en'},
-            {display: 'Русский', value: 'ru'},
+            {display: 'English', value: 'en', icon: 'assets/icon/ru.png'},
+            {display: 'Русский', value: 'ru', icon: 'assets/icon/en.png'},
         ];
     }
 
@@ -66,11 +66,8 @@ export class TopBarComponent {
         },
     ];
 
-    public supportedLanguages: Array<{ display: string, value: string }>;
+    public supportedLanguages: Array<{ display: string, value: string, icon: string }>;
 
-    public selectLang(lang: string) {
-        this._translate.use(lang);
-    }
 
 }
 

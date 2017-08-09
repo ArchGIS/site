@@ -1,0 +1,15 @@
+@import "../../../const/css/material";
+
+.main-img{
+  background-image: url(../../../../assets/img/main_grey.jpg);
+  /* height: calc(100vh - 49px); */
+  width: 100%;
+  background-size: cover;
+  position: absolute;
+  height: 100vh;
+}
+
+.container-material{
+  background: rgba(255, 255, 255, 0.77) !important;
+  padding: 3rem 5rem 1rem;
+}

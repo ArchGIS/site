@@ -8,7 +8,7 @@ import {TokenService} from "../../services/token/token.serviece";
 import {ConstService} from "../../services/http/service-const.service";
 import {MainService} from "../../services/main/main.service";
 import {AdminPanelRoutingModule} from "./admin-panel-routing.module";
-import {TranslateService} from "ng2-translate";
+import {TranslateModule, TranslateService} from "ng2-translate";
 import {AdminPanelIComponent} from "../../components/admin-panel/admin-panel.component";
 import {AdminPanelComponent} from "./admin-panel.component";
 import {FormAdminPanelComponent} from "../../components/admin-panel/form/form.component";
@@ -29,7 +29,8 @@ const HTTP_CONST = [
 
 
 const MODULE_CUSTOM = [
-  TableDataModule
+  TableDataModule,
+  TranslateModule.forRoot()
 ];
 
 @NgModule({
@@ -49,7 +50,6 @@ const MODULE_CUSTOM = [
 
   providers: [
     HTTP_CONST,
-    TranslateService,
   ],
   entryComponents: [
   ],

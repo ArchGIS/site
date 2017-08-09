@@ -13,6 +13,7 @@ import {MainRoutingModule} from "./main-routing.module";
 import {TranslateService} from "ng2-translate";
 import {MainComponent} from "./main.component";
 import {MainCountComponent} from "../../components/main/main.component";
+import {TranslateModule} from "@ngx-translate/core";
 
 const mainComponent =[
   TopBarComponent,
@@ -37,7 +38,9 @@ const HTTP_CONST = [
     ReactiveFormsModule,
     CommonModule,
     MaterialModule,
-    MainRoutingModule
+    MainRoutingModule,
+    TranslateModule.forRoot()
+
   ],
   declarations: [
     mainComponent

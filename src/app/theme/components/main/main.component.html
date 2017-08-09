@@ -1,7 +1,14 @@
-<div class="main">
-    <h2>Информационная система учета данных археологических исследований "ArchGIS"</h2>
-    <div>На текущий момент в системе учтены:</div>
-    <div *ngFor="let item of list">
-        <span>{{item.name}}</span> - {{item.count}}
+<div class="main-img" *ngIf="list">
+    <div class="container-material">
+            <h2>Информационная система учета данных археологических исследований "ArchGIS"</h2>
+            <div>На текущий момент в системе учтены:</div>
+            <div *ngFor="let item of list">
+                <span>{{item.name}}</span> - {{item.count}}
+            </div>
     </div>
 </div>
+
+
+
+
+

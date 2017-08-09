@@ -13,10 +13,11 @@ export class MainService {
                 private router: Router) {
     }
 
-    getMainCount(): Promise<CountItem[]> {
-        let url = `${Consts.baseURL}search/count`;
-        let item: any = '{"counts":["Heritage","Monument","Research","Artifact","Radiocarbon","Report","Monography","Article","ArchiveDoc","Author"]} Name';
-        return this.service.post<any, CountItem[]>(url, item);
+    getMainCount(): Promise<any> {
+        let url = `${Consts.baseURL}api/counts`;
+        //let item: any = '{"counts":["Heritage","Monument","Research","Artifact","Radiocarbon","Report","Monography","Article","ArchiveDoc","Author"]} Name';
+        //return this.service.post<any, CountItem[]>(url, item);
+        return this.service.get(url);
     }
 
 }

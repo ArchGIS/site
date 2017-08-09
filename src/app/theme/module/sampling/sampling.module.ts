@@ -11,6 +11,7 @@ import { SamplingRoutingModule} from "./sampling-routing.module";
 import {TranslateService} from "ng2-translate";
 import {SamplingComponent} from "./sampling.component";
 import {SamplingIComponent} from "../../components/sampling/sampling.component";
+import {TranslateModule} from "@ngx-translate/core";
 
 const samplingComponent =[
   SamplingComponent,
@@ -33,7 +34,8 @@ const HTTP_CONST = [
     ReactiveFormsModule,
     CommonModule,
     MaterialModule,
-    SamplingRoutingModule
+    SamplingRoutingModule,
+    TranslateModule.forRoot()
   ],
   declarations: [
     samplingComponent

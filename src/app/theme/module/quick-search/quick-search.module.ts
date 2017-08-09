@@ -11,6 +11,7 @@ import { QuickSearchRoutingModule} from "./quick-search-routing.module";
 import {TranslateService} from "ng2-translate";
 import { QuickSearchComponent} from "./quick-search.component";
 import {QuickSearchIComponent} from "../../components/quick-search/quick-search.component";
+import {TranslateModule} from "@ngx-translate/core";
 
 const quickSearchComponent =[
   QuickSearchComponent,
@@ -33,7 +34,8 @@ const HTTP_CONST = [
     ReactiveFormsModule,
     CommonModule,
     MaterialModule,
-    QuickSearchRoutingModule
+    QuickSearchRoutingModule,
+    TranslateModule.forRoot()
   ],
   declarations: [
     quickSearchComponent

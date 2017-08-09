@@ -25,8 +25,7 @@ export class MainCountComponent {
     private getMainCount(): void {
         this.service.getMainCount()
             .then(res => {
-                debugger;
-                this.list = res;
+                this.list = res.counts;
             })
     }
 

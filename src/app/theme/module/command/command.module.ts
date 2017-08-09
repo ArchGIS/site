@@ -11,6 +11,7 @@ import {CommandRoutingModule} from "./command-routing.module";
 import {TranslateService} from "ng2-translate";
 import {CommandIComponent} from "../../components/command/command.component";
 import {CommandComponent} from "./command.component";
+import {TranslateModule} from "@ngx-translate/core";
 
 const commandComponent =[
   CommandComponent,
@@ -33,7 +34,8 @@ const HTTP_CONST = [
     ReactiveFormsModule,
     CommonModule,
     MaterialModule,
-    CommandRoutingModule
+    CommandRoutingModule,
+    TranslateModule.forRoot()
   ],
   declarations: [
     commandComponent

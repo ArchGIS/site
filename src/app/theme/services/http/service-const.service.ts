@@ -31,7 +31,6 @@ export class ConstService {
             .mergeMap(headers => this.http
                 .get(url, {headers: headers})
                 .map(res => {
-                    debugger;
                     return res.json();
                 }))
             .toPromise()

@@ -25,7 +25,6 @@ export class TokenService {
 
 
   public token(): Observable<String> {
-    debugger;
     this.loginToken = Cookie.get('token');
     if (this.loginToken !== null && this.loginToken !== "null" && this.loginToken !== undefined) {
       return Observable.of(this.loginToken);
