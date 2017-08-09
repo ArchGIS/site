@@ -13,6 +13,7 @@ import { QuickSearchComponent} from "./quick-search.component";
 import {QuickSearchIComponent} from "../../components/quick-search/quick-search.component";
 import {TranslateModule} from "@ngx-translate/core";
 import { LeafletModule } from "@asymmetrik/angular2-leaflet";
+import {SearchService} from "../../services/search/search.service";
 
 const quickSearchComponent =[
   QuickSearchComponent,
@@ -46,6 +47,7 @@ const HTTP_CONST = [
   providers: [
     HTTP_CONST,
     TranslateService,
+    SearchService
   ],
   entryComponents: [
   ],
