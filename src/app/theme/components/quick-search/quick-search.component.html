@@ -2,7 +2,8 @@
     <div class="left">
         <div class="form">
             <h2>Быстрый поиск</h2>
-            <md-select placeholder="Что ищем?">
+            <md-select placeholder="Что ищем?"
+                       [(ngModel)]="typeSID">
                 <md-option *ngFor="let type of typeS"
                            [value]="type.id">
                     {{ type.name }}
@@ -16,17 +17,20 @@
                        [(ngModel)]="typeName">
             </md-input-container>
 
-            <md-select placeholder="Эпоха">
-                <md-option *ngFor="let type of typeEpoch"
-                           [value]="type.id">
-                    {{ type.name }}
+            <md-select placeholder="Эпоха"
+                       *ngIf="typeEpoch"
+                       [(ngModel)]="typeEpochID">
+                <md-option *ngFor="let typeE of typeEpoch"
+                           [value]="typeE.id">
+                    {{ typeE.name }}
                 </md-option>
             </md-select>
 
-            <md-select placeholder="Тип">
-                <md-option *ngFor="let type of typeSearch"
-                           [value]="type.id">
-                    {{ type.name }}
+            <md-select placeholder="Тип"
+                       [(ngModel)]="typeSearchID">
+                <md-option *ngFor="let typeSe of typeSearch"
+                           [value]="typeSe.id">
+                    {{ typeSe.name }}
                 </md-option>
             </md-select>
 

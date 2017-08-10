@@ -19,4 +19,5 @@ export class FormAdminPanelComponent {
 
   entities: any;
   filter: any;
+
 }

@@ -4,14 +4,16 @@ import { Component, OnInit } from "@angular/core";
 import {SearchService} from "../../services/search/search.service";
 
 @Component({
+  selector: 'quick-search',
   templateUrl: 'quick-search.component.html',
   styleUrls: ['quick-search.component.scss'],
 })
 
 export class QuickSearchIComponent {
 
-  constructor(private service: SearchService){
-    this.typeS = [
+  constructor(private service: SearchService) {
+    let self = this;
+    self.typeS = [
       {
         id: 1,
         name: 'Памятник',
@@ -41,22 +43,28 @@ export class QuickSearchIComponent {
         name: 'Радиоуглеродная датировка',
       },
     ];
-    this.service.getEpoch('ru')
-        .then(res=>{
-          this.typeEpoch = res.epochs;
+    self.service.getEpoch('ru')
+        .then(res => {
+          self.typeEpoch = res.epochs;
         });
-    this.service.getSiteTypes('ru')
-        .then(res=>{
-          this.typeSearch = res.siteTypes;
+    self.service.getSiteTypes('ru')
+        .then(res => {
+          self.typeSearch = res.siteTypes;
         })
   }
 
   public typeEpoch: TypeSearch[];
+  private typeEpochID: number = 0;
+
+
+
   public typeName: string = '';
 
   public typeS: TypeSearch[];
+  public typeSID: number;
 
-  public typeSearch: TypeSearch[];
+  private typeSearch: TypeSearch[];
+  private typeSearchID: number = 0;
 
   optionsSpec: {
     layers: any[],
@@ -89,7 +97,12 @@ export class QuickSearchIComponent {
 
 
   getSearch(){
-    //this.service.getSearch(this.typeName)
+    let self = this;
+    debugger;
+    self.service.getSearch(encodeURIComponent(self.typeName), self.typeEpochID, self.typeSearchID, 'ru')
+        .then(res=>{
+          debugger;
+        })
   }
 
 
