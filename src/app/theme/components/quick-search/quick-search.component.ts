@@ -2,6 +2,8 @@
 
 import { Component, OnInit } from "@angular/core";
 import {SearchService} from "../../services/search/search.service";
+import * as L from 'leaflet';
+
 
 @Component({
   selector: 'quick-search',
@@ -55,8 +57,7 @@ export class QuickSearchIComponent {
 
   public typeEpoch: TypeSearch[];
   private typeEpochID: number = 0;
-
-
+  bool: boolean = false;
 
   public typeName: string = '';
 
@@ -66,84 +67,124 @@ export class QuickSearchIComponent {
   private typeSearch: TypeSearch[];
   private typeSearchID: number = 0;
 
-  optionsSpec: {
-    layers: any[],
-    zoom: number,
-    center: number[]
-  } = {
-    layers: [
-      {
-        url: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',
-        maxZoom: 18,
-        attribution: 'Open Cycle Map'
-      },
-      {
-        url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        maxZoom: 18,
-        attribution: 'Open Street Map'
-      },
-    ],
-    zoom: 5,
-    center: [ 46.879966, -121.726909 ]
+  // Open Street Map and Open Cycle Map definitions
+  LAYER_OCM = {
+    id: 'opencyclemap',
+    name: 'Open Cycle Map',
+    enabled: true,
+    layer: L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: 'Open Cycle Map'
+    })
+  };
+  LAYER_OSM = {
+    id: 'openstreetmap',
+    name: 'Open Street Map',
+    enabled: false,
+    layer: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: 'Open Street Map'
+    })
   };
 
-  // Fields for managing the form inputs and binding to leaflet zoom/center
-  model = new LeafletCoreDemoModel(
-      this.optionsSpec.center[0],
-      this.optionsSpec.center[1],
-      this.optionsSpec.zoom
-  );
-  zoom: number;
-  center: L.LatLng;
 
-  /*
-   * This are the leaflet map options that we're going to use for input binding
-   */
-
-  options = {
-    layers: this.optionsSpec.layers.map((l) => {
-      return L.tileLayer(l.url, { maxZoom: l.maxZoom, attribution: l.attribution });
+  marker = {
+    id: 'marker',
+    name: 'Marker',
+    enabled: true,
+    layer: L.marker([46.879966, -121.726909], {
+      icon: L.icon({
+        iconSize: [25, 41],
+        iconAnchor: [13, 41],
+        iconUrl: 'assets/icon/apple-icon.png',
+        shadowUrl: '44a526eed258222515aa21eaffd14a96.png'
+      })
     }),
-    zoom: this.optionsSpec.zoom,
-    center: L.latLng({ lat: this.optionsSpec.center[0], lng: this.optionsSpec.center[1] })
   };
 
-  fitBoundsOptions = {
-    padding: 100,
-    maxZoom: 10,
-    animate: true,
-    duration: 1
+
+  // Form model object
+  model:LeafletLayersDemoModel= new LeafletLayersDemoModel(
+          [this.LAYER_OSM, this.LAYER_OCM],
+          this.LAYER_OCM.id,
+          [this.marker]
+      );
+
+
+  // Values to bind to Leaflet Directive
+  layers: L.Layer[];
+  layersControl: any;
+  options = {
+    zoom: 10,
+    center: L.latLng([46.879966, -121.726909])
   };
 
-  panOptions = {
-    animate: true,
-    duration: 1
-  };
-
-  zoomOptions = {
-    animate: true,
-    duration: 1
-  };
-
-  zoomPanOptions = {
-    animate: true,
-    duration: 1
-  };
 
   onApply() {
-    this.zoom = this.model.zoom;
-    this.center = L.latLng([ this.model.latitude, this.model.longitude]);
+
+    // Get the active base layer
+    let baseLayer = this.model.baseLayers.find((l) => {
+      return l.id === this.model.baseLayer;
+    });
+
+    // Get all the active overlay layers
+    let newLayers = this.model.overlayLayers
+        .filter((l) => {
+          return l.enabled;
+        })
+        .map((l) => {
+          return l.layer;
+        });
+    newLayers.unshift(baseLayer.layer);
+
+    this.layers = newLayers;
+    this.layersControl = {
+      baseLayers: {
+        'Open Street Map': this.LAYER_OSM.layer,
+        'Open Cycle Map': this.LAYER_OCM.layer
+      },
+      overlays: {
+        Marker: this.marker.layer,
+      }
+    };
 
     return false;
   }
 
 
-  getSearch(){
+  getSearch() {
     let self = this;
-    debugger;
     self.service.getSearch(encodeURIComponent(self.typeName), self.typeEpochID, self.typeSearchID, 'ru')
-        .then(res=>{
-          debugger;
+        .then(res => {
+          self.model = new LeafletLayersDemoModel(
+              [this.LAYER_OSM, this.LAYER_OCM],
+              this.LAYER_OCM.id,
+              [this.marker]
+          );
+          let marker;
+          res.sites.map(item=>{
+            let title: string = '';
+            item.item.site_name.map(rr=>{
+              title+=rr;
+            })
+            marker = {
+              id: 'asd',
+              name: 'Marker',
+              enabled: true,
+              layer: L.marker([item.coordinates.x, item.coordinates.y], {
+                icon: L.icon({
+                  iconSize: [25, 41],
+                  iconAnchor: [13, 41],
+                  iconUrl: 'assets/icon/apple-icon.png',
+                  shadowUrl: '44a526eed258222515aa21eaffd14a96.png'
+                }),
+                title: title,
+              }),
+            };
+            self.model.overlayLayers.push(marker)
+          });
+        self.onApply();
+        self.bool = true;
         })
   }
 
@@ -165,3 +206,52 @@ export class LeafletCoreDemoModel {
   ) { }
 
 }
+
+export class LeafletLayersDemoModel {
+
+  constructor(public baseLayers: {
+                id: string,
+                name: string,
+                enabled: boolean,
+                layer: L.Layer
+              }[],
+              public baseLayer: string,
+              public overlayLayers: {
+                id: string,
+                name: string,
+                enabled: boolean,
+                layer: L.Layer
+              }[] = []) {
+  }
+
+}
+
+
+export declare module SitesInterface {
+
+  export interface Item {
+    site_name: string[];
+    research_name: string[];
+    epoch: string;
+    type: string;
+  }
+
+  export interface Coordinates {
+    date: number;
+    x: number;
+    y: number;
+    type: string;
+  }
+
+  export interface Site {
+    id: any;
+    item: Item;
+    coordinates: Coordinates;
+  }
+
+  export interface Sites {
+    sites: Site[];
+  }
+
+}
+

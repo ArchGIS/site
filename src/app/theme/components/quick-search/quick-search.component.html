@@ -44,13 +44,10 @@
     </div>
     <div class="right">
         <div leaflet style="height: 100%;"
+             *ngIf="bool"
              [leafletOptions]="options"
-             [leafletPanOptions]="panOptions"
-             [leafletZoomOptions]="zoomOptions"
-             [leafletZoomPanOptions]="zoomPanOptions"
-             [leafletFitBoundsOptions]="fitBoundsOptions"
-             [leafletZoom]="zoom"
-             [leafletCenter]="center">
+             [leafletLayers]="layers"
+             [leafletLayersControl]="layersControl">
         </div>
     </div>
 </div>
