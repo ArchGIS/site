@@ -166,7 +166,7 @@ export class QuickSearchIComponent {
             let title: string = '';
             item.item.site_name.map(rr=>{
               title+=rr;
-            })
+            });
             marker = {
               id: 'asd',
               name: 'Marker',
@@ -179,6 +179,7 @@ export class QuickSearchIComponent {
                   shadowUrl: '44a526eed258222515aa21eaffd14a96.png'
                 }),
                 title: title,
+                clickable: true
               }),
             };
             self.model.overlayLayers.push(marker)
