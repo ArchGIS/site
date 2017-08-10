@@ -44,7 +44,13 @@
     </div>
     <div class="right">
         <div leaflet style="height: 100%;"
-             [leafletOptions]="options">
+             [leafletOptions]="options"
+             [leafletPanOptions]="panOptions"
+             [leafletZoomOptions]="zoomOptions"
+             [leafletZoomPanOptions]="zoomPanOptions"
+             [leafletFitBoundsOptions]="fitBoundsOptions"
+             [leafletZoom]="zoom"
+             [leafletCenter]="center">
         </div>
     </div>
 </div>
