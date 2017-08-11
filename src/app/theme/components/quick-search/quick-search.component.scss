@@ -8,6 +8,15 @@
     position: relative;
     width: 50%;
   }
+  .left-search{
+    width: 100% !important;
+    .form{
+      width: 25% !important;
+    }
+  }
+  .right-search{
+    margin-left: -50%;
+  }
   .left{
     position: relative;
     width: 50%;

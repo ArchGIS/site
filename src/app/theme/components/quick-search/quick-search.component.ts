@@ -57,7 +57,7 @@ export class QuickSearchIComponent {
 
   private typeSearch: TypeSearch[];
   private typeSearchID: number = 0;
-
+  public search: boolean = true;
 
   onResult(event: any, type: number){
     let self = this;
@@ -90,8 +90,8 @@ export class QuickSearchIComponent {
       };
       self.model.overlayLayers.push(marker)
     });
-    self.onApply();
     self.bool = true;
+    self.onApply();
   }
 
 
@@ -177,8 +177,7 @@ export class QuickSearchIComponent {
         Marker: this.marker.layer,
       }
     };
-
-    return false;
+    this.search = false;
   }
 
 

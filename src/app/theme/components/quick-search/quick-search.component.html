@@ -1,6 +1,8 @@
 <div class="main">
-    <div class="left">
-        <div class="form">
+    <div class="left"
+         [class.left-search]="search">
+        <div class="form"
+             *ngIf="search">
             <h2>Быстрый поиск</h2>
             <md-select placeholder="Что ищем?"
                        [(ngModel)]="typeSID">
@@ -33,13 +35,15 @@
                 <template [ngSwitchCase]="7">
                     <quick-search-radiocarbon-dating class="form-children"></quick-search-radiocarbon-dating>
                 </template>
+
             </div>
 
         </div>
     </div>
-    <div class="right">
-        <div leaflet style="height: 100%;"
-             *ngIf="bool"
+    <div class="right"
+         [class.right-search]="!bool">
+        <div leaflet style="height: 100%; width:100%;"
+             *ngIf="!search"
              [leafletOptions]="options"
              [leafletLayers]="layers"
              [leafletLayersControl]="layersControl">
