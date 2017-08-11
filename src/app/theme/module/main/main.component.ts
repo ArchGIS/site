@@ -24,7 +24,7 @@ import {Router} from "@angular/router";
         .router {
             position: absolute;
             width: 100%;
-            height: 100%;
+            height: calc(100vh - 49px);
             margin-top: 49px;
         }
         ::-webkit-scrollbar {

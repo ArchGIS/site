@@ -1,6 +1,9 @@
 .main {
   display: flex;
   flex-direction: row;
+  max-height: calc(100vh - 49px);
+  min-height: calc(100vh - 49px);
+  overflow: hidden;
   .left, .right {
     position: relative;
     width: 50%;
