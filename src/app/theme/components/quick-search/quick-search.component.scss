@@ -20,6 +20,11 @@
       padding: 50px;
       background-color: #ffffff;
       box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.15);
+      .form-children{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
       md-select{
         padding: 15px 5px 5px 0;
       }

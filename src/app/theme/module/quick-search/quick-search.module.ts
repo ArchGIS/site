@@ -14,10 +14,24 @@ import {QuickSearchIComponent} from "../../components/quick-search/quick-search.
 import {TranslateModule} from "@ngx-translate/core";
 import { LeafletModule } from "@asymmetrik/angular2-leaflet";
 import {SearchService} from "../../services/search/search.service";
+import {QuickSearchAuthorComponent} from "../../components/quick-search/author/author.component";
+import {QuickSearchStudyComponent} from "../../components/quick-search/study/study.component";
+import {QuickSearchReportComponent} from "../../components/quick-search/report/report.component";
+import {QuickSearchRadiocarbonDatingComponent} from "../../components/quick-search/radiocarbon-dating/radiocarbon-dating.component";
+import {QuickSearchOpeningComponent} from "../../components/quick-search/opening/opening.component";
+import {QuickSearchOCNComponent} from "../../components/quick-search/OCN/OCN.component";
+import {QuickSearchMonumentComponent} from "../../components/quick-search/monument/monument.component";
 
 const quickSearchComponent =[
   QuickSearchComponent,
-  QuickSearchIComponent
+  QuickSearchIComponent,
+  QuickSearchAuthorComponent,
+  QuickSearchStudyComponent,
+  QuickSearchReportComponent,
+  QuickSearchRadiocarbonDatingComponent,
+  QuickSearchOpeningComponent,
+  QuickSearchOCNComponent,
+  QuickSearchMonumentComponent,
 ];
 
 

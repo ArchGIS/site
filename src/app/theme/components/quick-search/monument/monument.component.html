@@ -1,0 +1,30 @@
+
+<md-input-container >
+    <input mdInput
+           placeholder="Название"
+           [(ngModel)]="typeName">
+</md-input-container>
+
+<md-select placeholder="Эпоха"
+           *ngIf="typeEpoch"
+           [(ngModel)]="typeEpochID">
+    <md-option *ngFor="let typeE of typeEpoch"
+               [value]="typeE.id">
+            {{ typeE.name }}
+    </md-option>
+</md-select>
+
+<md-select placeholder="Тип"
+           [(ngModel)]="typeSearchID">
+    <md-option *ngFor="let typeSe of typeSearch"
+               [value]="typeSe.id">
+        {{ typeSe.name }}
+    </md-option>
+</md-select>
+
+<button md-raised-button
+        (click)="getSearch()"
+        color="primary">
+    <md-icon>search</md-icon>
+    Показать результаты
+</button>

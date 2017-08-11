@@ -10,36 +10,30 @@
                 </md-option>
             </md-select>
             <h3>Критерии поиска</h3>
+            <div [ngSwitch]="typeSID">
+                <template [ngSwitchCase]="1">
+                    <quick-search-monument class="form-children"></quick-search-monument>
+                </template>
+                <template [ngSwitchCase]="2">
+                    <quick-search-study class="form-children"></quick-search-study>
+                </template>
+                <template [ngSwitchCase]="3">
+                    <quick-search-author class="form-children"></quick-search-author>
+                </template>
+                <template [ngSwitchCase]="4">
+                    <quick-search-report class="form-children"></quick-search-report>
+                </template>
+                <template [ngSwitchCase]="5">
+                    <quick-search-OCN class="form-children"></quick-search-OCN>
+                </template>
+                <template [ngSwitchCase]="6">
+                    <quick-search-opening class="form-children"></quick-search-opening>
+                </template>
+                <template [ngSwitchCase]="7">
+                    <quick-search-radiocarbon-dating class="form-children"></quick-search-radiocarbon-dating>
+                </template>
+            </div>
 
-            <md-input-container >
-                <input mdInput
-                       placeholder="Название"
-                       [(ngModel)]="typeName">
-            </md-input-container>
-
-            <md-select placeholder="Эпоха"
-                       *ngIf="typeEpoch"
-                       [(ngModel)]="typeEpochID">
-                <md-option *ngFor="let typeE of typeEpoch"
-                           [value]="typeE.id">
-                    {{ typeE.name }}
-                </md-option>
-            </md-select>
-
-            <md-select placeholder="Тип"
-                       [(ngModel)]="typeSearchID">
-                <md-option *ngFor="let typeSe of typeSearch"
-                           [value]="typeSe.id">
-                    {{ typeSe.name }}
-                </md-option>
-            </md-select>
-
-            <button md-raised-button
-                    (click)="getSearch()"
-                    color="primary">
-                <md-icon>search</md-icon>
-                Показать результаты
-            </button>
         </div>
     </div>
     <div class="right">
