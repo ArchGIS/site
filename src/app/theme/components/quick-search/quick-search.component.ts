@@ -45,17 +45,8 @@ export class QuickSearchIComponent {
         name: 'Радиоуглеродная датировка',
       },
     ];
-    self.service.getEpoch('ru')
-        .then(res => {
-          self.typeEpoch = res.epochs;
-        });
-    self.service.getSiteTypes('ru')
-        .then(res => {
-          self.typeSearch = res.siteTypes;
-        })
   }
 
-  public typeEpoch: TypeSearch[];
   private typeEpochID: number = 0;
   bool: boolean = false;
 
@@ -66,6 +57,44 @@ export class QuickSearchIComponent {
 
   private typeSearch: TypeSearch[];
   private typeSearchID: number = 0;
+
+
+  onResult(event: any, type: number){
+    let self = this;
+    debugger;
+    self.model = new LeafletLayersDemoModel(
+        [this.LAYER_OSM, this.LAYER_OCM],
+        this.LAYER_OCM.id,
+        [this.marker]
+    );
+    let marker;
+    event.sites.map(item=>{
+      let title: string = '';
+      item.item.site_name.map(rr=>{
+        title+=rr;
+      });
+      marker = {
+        id: 'asd',
+        name: 'Marker',
+        enabled: true,
+        layer: L.marker([item.coordinates.x, item.coordinates.y], {
+          icon: L.icon({
+            iconSize: [25, 41],
+            iconAnchor: [13, 41],
+            iconUrl: 'assets/icon/apple-icon.png',
+            shadowUrl: '44a526eed258222515aa21eaffd14a96.png'
+          }),
+          title: title,
+          clickable: true
+        }),
+      };
+      self.model.overlayLayers.push(marker)
+    });
+    self.onApply();
+    self.bool = true;
+  }
+
+
 
   // Open Street Map and Open Cycle Map definitions
   LAYER_OCM = {
@@ -120,6 +149,7 @@ export class QuickSearchIComponent {
   };
 
 
+
   onApply() {
 
     // Get the active base layer
@@ -156,36 +186,7 @@ export class QuickSearchIComponent {
     let self = this;
     self.service.getSearch(encodeURIComponent(self.typeName), self.typeEpochID, self.typeSearchID, 'ru')
         .then(res => {
-          self.model = new LeafletLayersDemoModel(
-              [this.LAYER_OSM, this.LAYER_OCM],
-              this.LAYER_OCM.id,
-              [this.marker]
-          );
-          let marker;
-          res.sites.map(item=>{
-            let title: string = '';
-            item.item.site_name.map(rr=>{
-              title+=rr;
-            });
-            marker = {
-              id: 'asd',
-              name: 'Marker',
-              enabled: true,
-              layer: L.marker([item.coordinates.x, item.coordinates.y], {
-                icon: L.icon({
-                  iconSize: [25, 41],
-                  iconAnchor: [13, 41],
-                  iconUrl: 'assets/icon/apple-icon.png',
-                  shadowUrl: '44a526eed258222515aa21eaffd14a96.png'
-                }),
-                title: title,
-                clickable: true
-              }),
-            };
-            self.model.overlayLayers.push(marker)
-          });
-        self.onApply();
-        self.bool = true;
+
         })
   }
 
@@ -227,10 +228,8 @@ export declare module SitesInterface {
   }
 
   export interface Coordinates {
-    date: number;
     x: number;
     y: number;
-    type: string;
   }
 
   export interface Site {

@@ -1,7 +1,9 @@
 
 
-import { Component, OnInit } from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {SearchService} from "../../../services/search/search.service";
+import {SitesInterface} from "../quick-search.component";
+import Sites = SitesInterface.Sites;
 
 
 @Component({
@@ -26,15 +28,12 @@ export class QuickSearchMonumentComponent {
 
   public typeEpoch: TypeSearch[];
   private typeEpochID: number = 0;
-  bool: boolean = false;
 
   public typeName: string = '';
 
-  public typeS: TypeSearch[];
-  public typeSID: number;
-
   private typeSearch: TypeSearch[];
   private typeSearchID: number = 0;
+  @Output() result = new EventEmitter<Sites>();
 
 
 
@@ -42,6 +41,8 @@ export class QuickSearchMonumentComponent {
     let self = this;
     self.service.getSearch(encodeURIComponent(self.typeName), self.typeEpochID, self.typeSearchID, 'ru')
         .then(res => {
+          debugger;
+          self.result.emit(res);
         })
   }
 

@@ -12,7 +12,8 @@
             <h3>Критерии поиска</h3>
             <div [ngSwitch]="typeSID">
                 <template [ngSwitchCase]="1">
-                    <quick-search-monument class="form-children"></quick-search-monument>
+                    <quick-search-monument class="form-children"
+                                            (result)="onResult($event, 1)"></quick-search-monument>
                 </template>
                 <template [ngSwitchCase]="2">
                     <quick-search-study class="form-children"></quick-search-study>
