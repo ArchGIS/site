@@ -8,14 +8,17 @@ import {TokenService} from "../../services/token/token.serviece";
 import {ConstService} from "../../services/http/service-const.service";
 import {MainService} from "../../services/main/main.service";
 import {AdvancedSearchRoutingModule} from "./advanced-search-routing.module";
-import {TranslateService} from "ng2-translate";
+import {TranslateModule, TranslateService} from "ng2-translate";
 import {AdvancedSearchComponent} from "./advanced-search.component";
 import {AdvancedSearchIComponent} from "../../components/advanced-search/advanced-search.component";
-import {TranslateModule} from "@ngx-translate/core";
+import {CriteriaIComponent} from "../../components/advanced-search/criteria/criteria.component";
+import {LeafletModule} from "@asymmetrik/angular2-leaflet";
+import {SearchService} from "../../services/search/search.service";
 
 const advancedSearchComponent =[
   AdvancedSearchComponent,
-  AdvancedSearchIComponent
+  AdvancedSearchIComponent,
+  CriteriaIComponent
 ];
 
 
@@ -25,6 +28,9 @@ const HTTP_CONST = [
   MainService,
 ];
 
+const MODULE_CUSTOM = [
+  TranslateModule.forRoot()
+];
 
 @NgModule({
   imports: [
@@ -35,7 +41,9 @@ const HTTP_CONST = [
     CommonModule,
     MaterialModule,
     AdvancedSearchRoutingModule,
-    TranslateModule.forRoot()
+    TranslateModule.forRoot(),
+    LeafletModule,
+    MODULE_CUSTOM
   ],
   declarations: [
     advancedSearchComponent
@@ -44,6 +52,7 @@ const HTTP_CONST = [
   providers: [
     HTTP_CONST,
     TranslateService,
+    SearchService
   ],
   entryComponents: [
   ],
