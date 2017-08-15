@@ -1,4 +1,4 @@
-<md-select placeholder="Критерий №{{num}}" [(ngModel)]="critNum">
+<md-select placeholder="{{ 'criteria.count' | translate}}{{num}}" [(ngModel)]="critNum">
     <md-option *ngFor="let type of typeS"
                [value]="type.id" >
         {{ type.name | translate }}
@@ -6,13 +6,13 @@
 </md-select>
 
 <div [ngSwitch]="true">
-    <md-select *ngSwitchCase="critNum === 32" placeholder="Эпоха" class="type-select">
+    <md-select *ngSwitchCase="critNum === 32" placeholder="{{ 'common.epoch' | translate}}" class="type-select">
         <md-option *ngFor="let type of typeEpoch"
                    [value]="type.id" >
             {{ type.name }}
         </md-option>
     </md-select>
-    <md-select *ngSwitchCase="critNum === 27" placeholder="Тип памятника" class="type-select">
+    <md-select *ngSwitchCase="critNum === 27" placeholder="{{ 'common.site-type' | translate}}" class="type-select">
         <md-option *ngFor="let type of typeSite"
                    [value]="type.id" >
             {{ type.name }}
@@ -20,7 +20,7 @@
     </md-select>
     <md-input-container *ngSwitchDefault>
         <input mdInput
-               placeholder="Значение"
+               placeholder="{{ 'common.value' | translate}}"
                [(ngModel)]="typeName">
     </md-input-container>
 </div>

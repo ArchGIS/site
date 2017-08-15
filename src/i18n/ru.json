@@ -1,4 +1,19 @@
 {
+  "common": {
+    "epoch": "Эпоха",
+    "siteType": "Тип памятника",
+    "value": "Значение",
+    "site": "Памятник",
+    "research": "Исследование",
+    "author": "Автор"
+  },
+  "search": {
+    "advanced": "Расширенный поиск",
+    "subject": "Что ищем?",
+    "criteria": "Критерии поиска",
+    "add-criterion": "Добавить критерий",
+    "search": "Поиск"
+  },
   "TOP-BAR":{
 
   },
@@ -9,6 +24,7 @@
     "BUTTON": "Найти"
   },
   "criteria": {
+    "count": "Критерий №",
     "author-name": "Автор: имя",
     "author-job": "Автор: место работы",
     "artifact-category": "Артефакт: категория",

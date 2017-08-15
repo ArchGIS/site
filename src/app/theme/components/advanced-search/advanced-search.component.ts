@@ -15,15 +15,15 @@ export class AdvancedSearchIComponent {
     this.typeS = [
       {
         id: 1,
-        name: 'Памятник',
+        name: 'common.site',
       },
       {
         id: 2,
-        name: 'Иследование',
+        name: 'common.research',
       },
       {
         id: 3,
-        name: 'Автор',
+        name: 'common.author',
       }
     ];
 

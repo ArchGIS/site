@@ -1,5 +1,21 @@
 {
+  "common": {
+    "epoch": "Epoch",
+    "site-type": "Type of archaeological site",
+    "value": "Value",
+    "site": "Archaeological site",
+    "research": "Research",
+    "author": "Author"
+  },
+  "search": {
+    "advanced": "Advanced search",
+    "subject": "Search subject",
+    "criteria": "Search filters",
+    "add-criterion": "Add filter",
+    "search": "Search"
+  }
   "criteria": {
+    "count": "Criterion #",
     "author-name": "Author: name",
     "author-job":  "Author: institute affiliation",
     "artifact-category": "Artifact: category",

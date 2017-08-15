@@ -1,29 +1,29 @@
 <div class="main">
     <div class="left">
         <div class="form">
-            <h2>Расширенный поиск</h2>
-            <md-select placeholder="Что ищем?">
+            <h2>{{ 'search.advanced' | translate }}</h2>
+            <md-select placeholder="{{ 'search.subject' | translate }}">
                 <md-option *ngFor="let type of typeS"
                            [value]="type.id">
-                    {{ type.name }}
+                    {{ type.name | translate}}
                 </md-option>
             </md-select>
 
-            <h3>Критерии поиска</h3>
+            <h3>{{ 'search.criteria' | translate }}</h3>
             <search-criteria [num]="crit" *ngFor="let crit of criteriaCount"></search-criteria>
 
             <button md-raised-button
                     (click)="addCriteria()"
                     color="primary">
                 <md-icon>search</md-icon>
-                Добавить критерий
+                {{ 'search.add-criterion' | translate }}
             </button>
 
             <button md-raised-button
                     (click)="getSearch()"
                     color="primary">
                 <md-icon>search</md-icon>
-                Поиск
+                {{ 'search.search' | translate }}
             </button>
         </div>
     </div>
