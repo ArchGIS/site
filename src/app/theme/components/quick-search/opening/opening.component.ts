@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit } from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {SearchService} from "../../../services/search/search.service";
 
 
@@ -17,10 +17,17 @@ export class QuickSearchOpeningComponent {
   }
 
   public typeName: string = '';
-  public typeYear: number = 0;
+  public typeYear: number;
+
+  @Output() result = new EventEmitter<any>();
 
   getSearch() {
     let self = this;
+    self.service.getSearchOpening(this.typeName, this.typeYear, 'ru')
+        .then(res => {
+          debugger;
+          self.result.emit(res);
+        })
   }
 
 

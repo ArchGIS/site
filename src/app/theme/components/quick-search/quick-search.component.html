@@ -18,25 +18,33 @@
                                             (result)="onResult($event, 1)"></quick-search-monument>
                 </template>
                 <template [ngSwitchCase]="2">
-                    <quick-search-study class="form-children"></quick-search-study>
+                    <quick-search-study class="form-children"
+                                        (result)="onResult($event, 2)"></quick-search-study>
                 </template>
                 <template [ngSwitchCase]="3">
-                    <quick-search-author class="form-children"></quick-search-author>
+                    <quick-search-author class="form-children"
+                                         (result)="onResult($event, 3)"></quick-search-author>
                 </template>
                 <template [ngSwitchCase]="4">
-                    <quick-search-report class="form-children"></quick-search-report>
+                    <quick-search-report class="form-children"
+                                         (result)="onResult($event, 4)"></quick-search-report>
                 </template>
                 <template [ngSwitchCase]="5">
-                    <quick-search-OCN class="form-children"></quick-search-OCN>
+                    <quick-search-OCN class="form-children"
+                                      (result)="onResult($event, 5)"></quick-search-OCN>
                 </template>
                 <template [ngSwitchCase]="6">
-                    <quick-search-opening class="form-children"></quick-search-opening>
+                    <quick-search-opening class="form-children"
+                                          (result)="onResult($event, 6)"></quick-search-opening>
                 </template>
                 <template [ngSwitchCase]="7">
-                    <quick-search-radiocarbon-dating class="form-children"></quick-search-radiocarbon-dating>
+                    <quick-search-radiocarbon-dating class="form-children"
+                                                     (result)="onResult($event, 7)"></quick-search-radiocarbon-dating>
                 </template>
-
             </div>
+
+        </div>
+        <div class="table">
 
         </div>
     </div>

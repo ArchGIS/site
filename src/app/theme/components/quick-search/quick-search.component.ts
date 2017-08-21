@@ -3,6 +3,8 @@
 import { Component, OnInit } from "@angular/core";
 import {SearchService} from "../../services/search/search.service";
 import * as L from 'leaflet';
+import {MonumentInterface} from "../../model/quick-search";
+import Monuments = MonumentInterface.Monuments;
 
 
 @Component({
@@ -58,6 +60,13 @@ export class QuickSearchIComponent {
   private typeSearch: TypeSearch[];
   private typeSearchID: number = 0;
   public search: boolean = true;
+  public table: string[] = [];
+
+
+  onMonument(event: Monuments): void{
+
+  }
+
 
   onResult(event: any, type: number){
     let self = this;
@@ -68,11 +77,18 @@ export class QuickSearchIComponent {
         [this.marker]
     );
     let marker;
+    let epoch: string = '';
+    self.table = [];
     event.sites.map(item=>{
       let title: string = '';
       item.item.site_name.map(rr=>{
         title+=rr;
       });
+
+      item.item.research_name.map(rr=>{
+        epoch+=rr;
+      });
+
       marker = {
         id: 'asd',
         name: 'Marker',
@@ -126,7 +142,6 @@ export class QuickSearchIComponent {
         iconSize: [25, 41],
         iconAnchor: [13, 41],
         iconUrl: 'assets/icon/apple-icon.png',
-        shadowUrl: '44a526eed258222515aa21eaffd14a96.png'
       })
     }),
   };
@@ -181,15 +196,6 @@ export class QuickSearchIComponent {
   }
 
 
-  getSearch() {
-    let self = this;
-    self.service.getSearch(encodeURIComponent(self.typeName), self.typeEpochID, self.typeSearchID, 'ru')
-        .then(res => {
-
-        })
-  }
-
-
 }
 
 export interface TypeSearch{
@@ -212,33 +218,6 @@ export class LeafletLayersDemoModel {
                 enabled: boolean,
                 layer: L.Layer
               }[] = []) {
-  }
-
-}
-
-
-export declare module SitesInterface {
-
-  export interface Item {
-    site_name: string[];
-    research_name: string[];
-    epoch: string;
-    type: string;
-  }
-
-  export interface Coordinates {
-    x: number;
-    y: number;
-  }
-
-  export interface Site {
-    id: any;
-    item: Item;
-    coordinates: Coordinates;
-  }
-
-  export interface Sites {
-    sites: Site[];
   }
 
 }

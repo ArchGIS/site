@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit } from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {SearchService} from "../../../services/search/search.service";
 
 
@@ -18,8 +18,15 @@ export class QuickSearchRadiocarbonDatingComponent {
 
   public typeName: string = '';
 
+  @Output() result = new EventEmitter<any>();
+
   getSearch() {
     let self = this;
+    self.service.getSearchRadicarbonDating(this.typeName, 'ru')
+        .then(res => {
+          debugger;
+          self.result.emit(res);
+        })
   }
 
 
