@@ -21,6 +21,7 @@ import {QuickSearchRadiocarbonDatingComponent} from "../../components/quick-sear
 import {QuickSearchOpeningComponent} from "../../components/quick-search/opening/opening.component";
 import {QuickSearchOCNComponent} from "../../components/quick-search/OCN/OCN.component";
 import {QuickSearchMonumentComponent} from "../../components/quick-search/monument/monument.component";
+import {LeafletMarkerClusterModule} from "@asymmetrik/angular2-leaflet-markercluster";
 
 const quickSearchComponent =[
   QuickSearchComponent,
@@ -52,7 +53,8 @@ const HTTP_CONST = [
     MaterialModule,
     QuickSearchRoutingModule,
     TranslateModule.forRoot(),
-    LeafletModule
+    LeafletModule.forRoot(),
+    LeafletMarkerClusterModule,
   ],
   declarations: [
     quickSearchComponent

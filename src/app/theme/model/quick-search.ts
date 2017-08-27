@@ -12,8 +12,8 @@ export declare module MonumentInterface {
     export interface Item {
         site_name: string[];
         research_name: string[];
-        epoch: string;
-        type: string;
+        epoch: number;
+        type: number;
     }
 
     export interface Site {

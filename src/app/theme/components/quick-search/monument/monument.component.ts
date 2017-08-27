@@ -2,8 +2,8 @@
 
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {SearchService} from "../../../services/search/search.service";
-import {MonumentInterface} from "../quick-search.component";
 import Monuments = MonumentInterface.Monuments;
+import {MonumentInterface} from "../../../model/quick-search";
 
 
 @Component({

@@ -3,6 +3,7 @@
 import { Component, OnInit } from "@angular/core";
 import {SearchService} from "../../services/search/search.service";
 import * as L from 'leaflet';
+import 'leaflet.markercluster';
 import {MonumentInterface} from "../../model/quick-search";
 import Monuments = MonumentInterface.Monuments;
 
@@ -57,48 +58,43 @@ export class QuickSearchIComponent {
   public typeS: TypeSearch[];
   public typeSID: number = 1;
 
-  private typeSearch: TypeSearch[];
-  private typeSearchID: number = 0;
   public search: boolean = true;
   public table: string[] = [];
+  private epochS: string[]= ['Новое время', 'Средневековье', "Эпоха Великого перенаселения", "Ранний железный век",
+      "Эпоха палеометалла", "Неолит", "Палеолит/Мезолит", "Не определена"];
+  private type: string[] = ['Укрепленное поселение (городище)', 'Неукрепленное поселение (стоянка/селище)',
+  'Местонахождение', 'Грунтовый могильник','Курганный могильник','Производственный',
+  'Комплексный','Памятник архитектуры','Надгробие','Святилище (жертвенное место)',
+  'Клад', 'Не задано'];
 
 
-  onMonument(event: Monuments): void{
-
-  }
-
-
-  onResult(event: any, type: number){
+  onMonument(event: Monuments): void {
     let self = this;
-    debugger;
     self.model = new LeafletLayersDemoModel(
         [this.LAYER_OSM, this.LAYER_OCM],
         this.LAYER_OCM.id,
         [this.marker]
     );
     let marker;
-    let epoch: string = '';
     self.table = [];
-    event.sites.map(item=>{
+    event.sites.map(item => {
       let title: string = '';
-      item.item.site_name.map(rr=>{
-        title+=rr;
+      item.item.site_name.map(rr => {
+        title += rr;
       });
-
-      item.item.research_name.map(rr=>{
-        epoch+=rr;
-      });
-
+      let epoch: string = self.epochS[item.item.epoch - 1];
+      let type: string = self.type[item.item.type - 1];
+      self.table.push(`${title} (${epoch}, ${type})`);
+      let marker_url: string = 'assets/icon/monTypes/monType' + item.item.epoch + '_' + item.item.type + '.png';
       marker = {
         id: 'asd',
         name: 'Marker',
         enabled: true,
         layer: L.marker([item.coordinates.x, item.coordinates.y], {
           icon: L.icon({
-            iconSize: [25, 41],
-            iconAnchor: [13, 41],
-            iconUrl: 'assets/icon/apple-icon.png',
-            shadowUrl: '44a526eed258222515aa21eaffd14a96.png'
+            iconSize: [25, 25],
+            iconAnchor: [25, 25],
+            iconUrl: marker_url,
           }),
           title: title,
           clickable: true
@@ -110,6 +106,26 @@ export class QuickSearchIComponent {
     self.onApply();
   }
 
+
+  onResult(event: any, type: number){
+    let self = this;
+    switch (type){
+      case 1:
+        self.onMonument(event);
+    }
+  }
+
+
+
+  markerClusterGroup: L.MarkerClusterGroup;
+  markerClusterData: any[] = [];
+  markerClusterOptions: L.MarkerClusterGroupOptions;
+
+  markerClusterReady(group: L.MarkerClusterGroup) {
+
+    this.markerClusterGroup = group;
+
+  }
 
 
   // Open Street Map and Open Cycle Map definitions
@@ -165,15 +181,15 @@ export class QuickSearchIComponent {
 
 
 
-  onApply() {
-
+  onApply(): void {
+    let self = this;
     // Get the active base layer
-    let baseLayer = this.model.baseLayers.find((l) => {
-      return l.id === this.model.baseLayer;
+    let baseLayer = self.model.baseLayers.find((l) => {
+      return l.id === self.model.baseLayer;
     });
 
     // Get all the active overlay layers
-    let newLayers = this.model.overlayLayers
+    let newLayers = self.model.overlayLayers
         .filter((l) => {
           return l.enabled;
         })
@@ -182,8 +198,8 @@ export class QuickSearchIComponent {
         });
     newLayers.unshift(baseLayer.layer);
 
-    this.layers = newLayers;
-    this.layersControl = {
+    self.layers = newLayers;
+    self.layersControl = {
       baseLayers: {
         'Open Street Map': this.LAYER_OSM.layer,
         'Open Cycle Map': this.LAYER_OCM.layer
@@ -192,11 +208,14 @@ export class QuickSearchIComponent {
         Marker: this.marker.layer,
       }
     };
-    this.search = false;
+    self.search = false;
+    self.markerClusterData = self.model.overlayLayers;
   }
 
 
 }
+
+
 
 export interface TypeSearch{
   id: number;

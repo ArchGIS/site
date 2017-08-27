@@ -45,7 +45,9 @@
 
         </div>
         <div class="table">
-
+            <div *ngFor="let tab of table">
+                <a>{{tab}}</a>
+            </div>
         </div>
     </div>
     <div class="right"
@@ -54,7 +56,11 @@
              *ngIf="!search"
              [leafletOptions]="options"
              [leafletLayers]="layers"
-             [leafletLayersControl]="layersControl">
+             [leafletLayersControl]="layersControl"
+
+             [leafletMarkerCluster]="markerClusterData"
+             [leafletMarkerClusterOptions]="markerClusterOptions"
+             (leafletMarkerClusterReady)="markerClusterReady($event)">
         </div>
     </div>
 </div>
