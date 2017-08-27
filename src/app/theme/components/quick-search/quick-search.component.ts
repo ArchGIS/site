@@ -85,7 +85,7 @@ export class QuickSearchIComponent {
       let epoch: string = self.epochS[item.item.epoch - 1];
       let type: string = self.type[item.item.type - 1];
       self.table.push(`${title} (${epoch}, ${type})`);
-      let marker_url: string = 'assets/icon/monTypes/monType' + item.item.epoch + '_' + item.item.type + '.png';
+      let marker_url: string = 'assets/icon/monTypes/monType' + item.item.type + '_' + item.item.epoch + '.png';
       marker = {
         id: 'asd',
         name: 'Marker',
@@ -167,7 +167,7 @@ export class QuickSearchIComponent {
   model:LeafletLayersDemoModel= new LeafletLayersDemoModel(
           [this.LAYER_OSM, this.LAYER_OCM],
           this.LAYER_OCM.id,
-          [this.marker]
+          []
       );
 
 
@@ -175,8 +175,8 @@ export class QuickSearchIComponent {
   layers: L.Layer[];
   layersControl: any;
   options = {
-    zoom: 10,
-    center: L.latLng([46.879966, -121.726909])
+    zoom: 3,
+    center: L.latLng([55.798551, 49.106324])
   };
 
 
