@@ -24,7 +24,7 @@ export class QuickSearchStudyComponent {
 
   getSearch() {
     let self = this;
-    self.service.getSearchStudy(this.typeName, this.typeYear, 'ru')
+    self.service.getSearchStudy(this.typeName, this.typeYear, 'ru',0, 10000)
         .then(res => {
           debugger;
           self.result.emit(res);

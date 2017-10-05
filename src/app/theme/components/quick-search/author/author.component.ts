@@ -21,7 +21,7 @@ export class QuickSearchAuthorComponent {
 
   getSearch() {
     let self = this;
-    self.service.getSearchAuthor(this.typeName, 'ru')
+    self.service.getSearchAuthor(this.typeName, 'ru', 0, 10000)
         .then(res => {
           debugger;
           self.result.emit(res);

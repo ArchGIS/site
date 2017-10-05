@@ -22,6 +22,16 @@ export class ConstService {
                 private tokenService: TokenService) {
     }
 
+
+    public offsetAndLimit(url: string, offset: number, limit: number): string{
+        return url = url + `&offset=${offset}&limit=${limit}`;
+    }
+
+    public lang(url: string, lang: string): string{
+        return url = url + `&lang=${lang}`;
+    }
+
+
     get<T>(url: string): Promise<Answer<T>> {
         return this.tokenService.token()
             .map(token => new Headers({

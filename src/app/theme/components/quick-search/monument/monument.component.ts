@@ -39,7 +39,7 @@ export class QuickSearchMonumentComponent {
 
   getSearch() {
     let self = this;
-    self.service.getSearchMonument(encodeURIComponent(self.typeName), self.typeEpochID, self.typeSearchID, 'ru')
+    self.service.getSearchMonument(encodeURIComponent(self.typeName), self.typeEpochID, self.typeSearchID, 'ru',0, 10000)
         .then(res => {
           debugger;
           self.result.emit(res);

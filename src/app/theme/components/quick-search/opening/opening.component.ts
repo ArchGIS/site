@@ -23,7 +23,7 @@ export class QuickSearchOpeningComponent {
 
   getSearch() {
     let self = this;
-    self.service.getSearchOpening(this.typeName, this.typeYear, 'ru')
+    self.service.getSearchOpening(this.typeName, this.typeYear, '','ru',0, 10000)
         .then(res => {
           debugger;
           self.result.emit(res);

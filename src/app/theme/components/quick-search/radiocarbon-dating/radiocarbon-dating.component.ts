@@ -22,7 +22,7 @@ export class QuickSearchRadiocarbonDatingComponent {
 
   getSearch() {
     let self = this;
-    self.service.getSearchRadicarbonDating(this.typeName, 'ru')
+    self.service.getSearchRadicarbonDating(this.typeName, 'ru',0, 10000)
         .then(res => {
           debugger;
           self.result.emit(res);

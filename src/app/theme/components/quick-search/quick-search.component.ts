@@ -6,6 +6,8 @@ import * as L from 'leaflet';
 import 'leaflet.markercluster';
 import {MonumentInterface} from "../../model/quick-search";
 import Monuments = MonumentInterface.Monuments;
+import {DataSource} from "@angular/cdk/collections";
+import {Observable} from "rxjs/Observable";
 
 
 @Component({
@@ -48,6 +50,15 @@ export class QuickSearchIComponent {
         name: 'Радиоуглеродная датировка',
       },
     ];
+    this.markerClusterOptions = <L.MarkerClusterGroupOptions>{
+      showCoverageOnHover: true,
+      zoomToBoundsOnClick: true,
+      spiderfyOnMaxZoom: true,
+      animate: true,
+      animateAddingMarkers: true,
+      removeOutsideVisibleBounds: true,
+      chunkedLoading: true
+    }
   }
 
   private typeEpochID: number = 0;
@@ -148,6 +159,9 @@ export class QuickSearchIComponent {
     })
   };
 
+  baseLayers = {
+    'Open Street Map': this.LAYER_OSM.layer
+  };
 
   marker = {
     id: 'marker',
@@ -180,36 +194,22 @@ export class QuickSearchIComponent {
   };
 
 
+  reset(): void{
+    this.search = true;
+    this.bool = false;
+    this.table = [];
+  }
+
 
   onApply(): void {
     let self = this;
     // Get the active base layer
-    let baseLayer = self.model.baseLayers.find((l) => {
-      return l.id === self.model.baseLayer;
+    let data: any[] = [];
+    self.model.overlayLayers.map(item=>{
+     data.push(item.layer);
     });
-
-    // Get all the active overlay layers
-    let newLayers = self.model.overlayLayers
-        .filter((l) => {
-          return l.enabled;
-        })
-        .map((l) => {
-          return l.layer;
-        });
-    newLayers.unshift(baseLayer.layer);
-
-    self.layers = newLayers;
-    self.layersControl = {
-      baseLayers: {
-        'Open Street Map': this.LAYER_OSM.layer,
-        'Open Cycle Map': this.LAYER_OCM.layer
-      },
-      overlays: {
-        Marker: this.marker.layer,
-      }
-    };
     self.search = false;
-    self.markerClusterData = self.model.overlayLayers;
+    self.markerClusterData = data;
   }
 
 
