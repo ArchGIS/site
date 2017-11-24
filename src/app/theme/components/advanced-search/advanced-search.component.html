@@ -1,0 +1,24 @@
+<div class="container-fluid" style="margin-bottom: 30px;">
+
+
+
+            <!-- Map -->
+            <div class="col-md-12" style="margin-top:16px;">
+
+                <div leaflet
+                     id="map"
+                     style="height: 400px;"
+                     [leafletOptions]="options"
+                     [leafletBaseLayers]="baseLayers"
+                     [leafletLayersControlOptions]="layersControlOptions"
+                     [leafletLayers]="zoom<6?layers:layersEmpty"
+
+                     [leafletMarkerCluster]="markerClusterData"
+                     [leafletMarkerClusterOptions]="markerClusterOptions"
+                     (leafletMarkerClusterReady)="markerClusterReady($event)">
+                </div>
+
+            </div>
+
+
+        </div>

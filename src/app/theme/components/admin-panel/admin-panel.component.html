@@ -1,2 +1,3 @@
-<admin-panel-form></admin-panel-form>
-<table-data></table-data>
+<admin-panel-form *ngIf='bool'
+                  (asd)="onSelect()"></admin-panel-form>
+<table-data *ngIf="!bool"></table-data>

@@ -3,6 +3,8 @@ import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {AdminPanelComponent} from "./admin-panel.component";
 import {AdminPanelIComponent} from "../../components/admin-panel/admin-panel.component";
+import {MonumentShowIComponent} from "../../components/show/monument/monument.component";
+import {ShowIComponent} from "../../components/show/show.component";
 
 
 const adminPanelRoutes: Routes = [
@@ -15,7 +17,8 @@ const adminPanelRoutes: Routes = [
         path: '',
         //canActivateChild: [AuthGuard],
         children: [
-            {path: '', component: AdminPanelIComponent}
+            {path: '', component: AdminPanelIComponent},
+            {path: 'show', component: ShowIComponent}
         ]
       }
     ]

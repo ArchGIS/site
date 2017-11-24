@@ -1,0 +1,15 @@
+<div class="main">
+    <div class="left"
+         [class.left-search]="search">
+        <div class="form">
+            <show-monument></show-monument>
+        </div>
+    </div>
+    <div class="right"
+         [class.right-search]="!bool">
+        <div leaflet style="height: 100%; width:100%;"
+             [leafletOptions]="options"
+             [leafletLayersControl]="layersControl">>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 <div class="main">
     <div class="title">
-        <h1>{{'ADMIN-PANEL.TITLE' | translate}}</h1>
+        <h2>{{'ADMIN-PANEL.TITLE' | translate}}</h2>
     </div>
     <div class="form">
         <md-select placeholder="{{'ADMIN-PANEL.SELECT' | translate}}">
@@ -18,7 +18,9 @@
         </md-input-container>
     </div>
     <div class="form">
-        <button md-raised-button color="primary">
+        <button md-raised-button
+                (click)="onSelect()"
+                color="primary">
             <md-icon>settings</md-icon>{{'ADMIN-PANEL.BUTTON' | translate}}
         </button>
     </div>

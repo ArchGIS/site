@@ -1,6 +1,7 @@
 
 
 import {Component, Input, OnInit} from "@angular/core";
+import {SearchService} from "../../../services/search/search.service";
 
 @Component({
   selector: 'table-data',
@@ -9,7 +10,11 @@ import {Component, Input, OnInit} from "@angular/core";
 })
 export class TableDataComponent {
 
-    constructor() {
+    constructor(private service: SearchService) {
+        this.service.getItems()
+            .then(res=>{
+                debugger;
+            });
         this.items = ['asd','asd','zxc']
     }
 

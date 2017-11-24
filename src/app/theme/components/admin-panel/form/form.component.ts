@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit } from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {TranslateService} from "ng2-translate";
 
 @Component({
@@ -17,7 +17,13 @@ export class FormAdminPanelComponent {
     translate.use(browserLang.match(/en|ru/) ? browserLang : 'ru');
   }
 
-  entities: any;
+  entities: string[] = ['Автор', "Исследование", 'Памятник', 'Артефакт', 'Радиоуглеродная датировка', 'Раскоп', 'ОКН', 'Эпоха', 'Культура', 'Отчёт', 'Публикация', 'Город', 'Организация'];
   filter: any;
+
+  @Output() asd = new EventEmitter<boolean>();
+
+  onSelect() {
+    this.asd.emit();
+  }
 
 }

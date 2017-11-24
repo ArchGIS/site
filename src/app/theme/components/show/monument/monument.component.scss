@@ -9,8 +9,8 @@
     flex-direction: column;
     justify-content: center;
     padding: 50px;
-    margin: 7em;
     background-color: #ffffff;
+    margin-top: 25px;
     box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.15);
     .item-main{
       margin-top: 36px;
@@ -23,13 +23,6 @@
     }
     md-input-container, md-select{
       width: 375px;
-    }
-    .button{
-      display: flex;
-      justify-content: center;
-    }
-    h3{
-      text-align: center  ;
     }
   }
 }

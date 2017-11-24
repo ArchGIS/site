@@ -13,11 +13,18 @@ import {AdminPanelIComponent} from "../../components/admin-panel/admin-panel.com
 import {AdminPanelComponent} from "./admin-panel.component";
 import {FormAdminPanelComponent} from "../../components/admin-panel/form/form.component";
 import {TableDataModule} from "../table-data/table-data.module";
+import {SearchService} from "../../services/search/search.service";
+import {ShowIComponent} from "../../components/show/show.component";
+import {MonumentShowIComponent} from "../../components/show/monument/monument.component";
+import {LeafletMarkerClusterModule} from "@asymmetrik/angular2-leaflet-markercluster";
+import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 
 const adminPanelComponent =[
   AdminPanelComponent,
   AdminPanelIComponent,
-  FormAdminPanelComponent
+  FormAdminPanelComponent,
+  ShowIComponent,
+  MonumentShowIComponent
 ];
 
 
@@ -42,7 +49,9 @@ const MODULE_CUSTOM = [
     CommonModule,
     MaterialModule,
     AdminPanelRoutingModule,
-    MODULE_CUSTOM
+    MODULE_CUSTOM,
+    LeafletModule.forRoot(),
+    LeafletMarkerClusterModule,
   ],
   declarations: [
     adminPanelComponent
@@ -50,6 +59,7 @@ const MODULE_CUSTOM = [
 
   providers: [
     HTTP_CONST,
+      SearchService
   ],
   entryComponents: [
   ],

@@ -10,4 +10,9 @@ import { Component, OnInit } from "@angular/core";
 export class AdminPanelIComponent {
 
   items: any;
+  bool: boolean = true;
+
+  onSelect(){
+    this.bool = false;
+  }
 }

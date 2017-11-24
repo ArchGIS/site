@@ -4,14 +4,28 @@
 import {Injectable} from '@angular/core';
 import {ConstService} from "../http/service-const.service";
 import {Consts} from "../../../const/app-const";
+import {Http} from "@angular/http";
 
 @Injectable()
 export class SearchService {
 
 
-    constructor(private service: ConstService) {
+    constructor(private service: ConstService,
+                private http: Http) {
 
     }
+
+
+    getItems() {
+        let url = 'http://185.147.81.8:8181/v1/graphql';
+        return this.http
+            .post(url, '{"query": "{Site(id:11284)  {knowledges  {research  { id name}}}}"}')
+            .map(res => {
+                res.json();
+                debugger;
+            }).toPromise()
+    }
+
 
     getSearchMonument(name: string, epochID: number, typeID: number, lang?: string, offset?: number, limit?: number): Promise<any> {
         let url = `${Consts.baseURL}api/sites?site_name=${name}&epochID=${epochID}&type_id=${typeID}`;
