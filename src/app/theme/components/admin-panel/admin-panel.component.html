@@ -1,3 +1,5 @@
 <admin-panel-form *ngIf='bool'
+                  (entitiesID)="onSelectEntities($event)"
                   (asd)="onSelect()"></admin-panel-form>
-<table-data *ngIf="!bool"></table-data>
+<table-data *ngIf="!bool"
+            [itemsID]="entitiesID"></table-data>

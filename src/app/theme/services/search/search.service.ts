@@ -4,8 +4,10 @@
 import {Injectable} from '@angular/core';
 import {ConstService} from "../http/service-const.service";
 import {Consts} from "../../../const/app-const";
-import {Http} from "@angular/http";
-
+import {Http, Response} from "@angular/http";
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/mergeMap';
+import { Observable } from "rxjs/Observable";
 @Injectable()
 export class SearchService {
 
@@ -24,6 +26,17 @@ export class SearchService {
                 res.json();
                 debugger;
             }).toPromise()
+    }
+
+    getItemsAuthor() {
+        let url = `${Consts.baseURL}v1/graphql`;
+        return this.http
+            .post(url,
+                '{"query": "{Site  {knowledges  {research  {  author{id name researches{name}}}}}}"}')
+            .map(res=>{
+                return res.json();
+            })
+            .toPromise();
     }
 
 
@@ -152,5 +165,16 @@ export class SearchService {
         return this.service.get<any>(url)
     }
 
-
+    private handleError(error: Response | any) {
+        let errMsg: string;
+        if (error instanceof Response) {
+            const body = error.json() || '';
+            const err = body.error || JSON.stringify(body);
+            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        } else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.log(errMsg);
+        return Observable.throw(errMsg);
+    }
 }

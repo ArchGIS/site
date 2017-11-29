@@ -9,8 +9,14 @@ import { Component, OnInit } from "@angular/core";
 
 export class AdminPanelIComponent {
 
-  items: any;
   bool: boolean = true;
+
+
+  entitiesID: number;
+
+  onSelectEntities(id: number): void{
+    this.entitiesID = id;
+  }
 
   onSelect(){
     this.bool = false;
