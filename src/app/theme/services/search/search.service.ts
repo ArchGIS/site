@@ -39,6 +39,16 @@ export class SearchService {
             .toPromise();
     }
 
+    getAuthorID(id: number) {
+        let url = `${Consts.baseURL}v1/graphql`;
+        return this.http
+            .post(url, `{"query": "{Author(id:${id}{name researches{name}}}"}`)
+            .map(res => {
+                return res.json();
+            })
+            .toPromise();
+    }
+
 
     getSearchMonument(name: string, epochID: number, typeID: number, lang?: string, offset?: number, limit?: number): Promise<any> {
         let url = `${Consts.baseURL}api/sites?site_name=${name}&epochID=${epochID}&type_id=${typeID}`;

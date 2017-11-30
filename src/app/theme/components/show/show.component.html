@@ -2,7 +2,9 @@
     <div class="left"
          [class.left-search]="search">
         <div class="form">
-            <show-monument></show-monument>
+            <show-author *ngIf="1"
+                         [id]="id"></show-author>
+            <show-monument *ngIf="2"></show-monument>
         </div>
     </div>
     <div class="right"

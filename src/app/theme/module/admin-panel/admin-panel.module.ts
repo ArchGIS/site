@@ -18,13 +18,15 @@ import {ShowIComponent} from "../../components/show/show.component";
 import {MonumentShowIComponent} from "../../components/show/monument/monument.component";
 import {LeafletMarkerClusterModule} from "@asymmetrik/angular2-leaflet-markercluster";
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
+import {AuthorShowIComponent} from "../../components/show/author/author.component";
 
 const adminPanelComponent =[
   AdminPanelComponent,
   AdminPanelIComponent,
   FormAdminPanelComponent,
   ShowIComponent,
-  MonumentShowIComponent
+  MonumentShowIComponent,
+  AuthorShowIComponent
 ];
 
 

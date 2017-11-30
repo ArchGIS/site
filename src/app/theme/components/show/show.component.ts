@@ -9,6 +9,8 @@ import Monuments = MonumentInterface.Monuments;
 import {DataSource} from "@angular/cdk/collections";
 import {Observable} from "rxjs/Observable";
 import {circle, latLng, polygon, tileLayer} from "leaflet";
+import {Subscription} from "rxjs/Subscription";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -19,11 +21,27 @@ import {circle, latLng, polygon, tileLayer} from "leaflet";
 
 export class ShowIComponent {
 
-  constructor(private service: SearchService) {
+  constructor(private service: SearchService,
+              private activateRoute: ActivatedRoute) {
     let self = this;
-
-
+    this.subscription = activateRoute.params.subscribe(params=> {
+      this.id = params['id'];
+      this.entities = params['entities'];
+    });
+    switch (this.entities){
+      case 'author':
+        this.entitiesID = 1;
+        break;
+      default:
+        break;
+    }
+    debugger;
   }
+
+  private entities: string;
+  private entitiesID: number;
+  private id: number;
+  private subscription: Subscription;
 
   private typeEpochID: number = 0;
   bool: boolean = false;

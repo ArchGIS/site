@@ -18,7 +18,7 @@ const adminPanelRoutes: Routes = [
         //canActivateChild: [AuthGuard],
         children: [
             {path: '', component: AdminPanelIComponent},
-            {path: 'show', component: ShowIComponent}
+            {path: 'show/:entities/:id', component: ShowIComponent}
         ]
       }
     ]
