@@ -32,7 +32,7 @@ export class SearchService {
         let url = `${Consts.baseURL}v1/graphql`;
         return this.http
             .post(url,
-                '{"query": "{Site  {knowledges  {research  {  author{id name researches{name}}}}}}"}')
+                '{"query": "{Author{id name researches{name}}}"}')
             .map(res => {
                 return res.json();
             })
@@ -42,7 +42,7 @@ export class SearchService {
     getAuthorID(id: number) {
         let url = `${Consts.baseURL}v1/graphql`;
         return this.http
-            .post(url, `{"query": "{Author(id:${id}{name researches{name}}}"}`)
+            .post(url, `{"query": "{Author(id:${id}){name researches{id name knowledges{id name} publication{id name published_at}}}}"}`)
             .map(res => {
                 return res.json();
             })

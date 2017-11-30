@@ -7,11 +7,14 @@ import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule, JsonpModule} from "@angular/http";
 import {MaterialModule} from "@angular/material";
-import {TableDataComponent} from "../../components/#lib/table-data/table-data.component";
+import {DeleteTableDialog, TableDataComponent} from "../../components/#lib/table-data/table-data.component";
 import {SearchService} from "../../services/search/search.service";
 import {MainService} from "../../services/main/main.service";
 import {ConstService} from "../../services/http/service-const.service";
 import {TokenService} from "../../services/token/token.serviece";
+import {RouterModule} from "@angular/router";
+import {LoadComponentComponent} from "../../components/#lib/load-component/load-component.component";
+import {TableDataRoutingModule} from "./table-data-routing.module";
 
 
 const HTTP_CONST = [
@@ -27,10 +30,14 @@ const HTTP_CONST = [
         JsonpModule,
         ReactiveFormsModule,
         CommonModule,
+        RouterModule,
         MaterialModule,
+        TableDataRoutingModule
     ],
     declarations: [
-        TableDataComponent
+        TableDataComponent,
+        LoadComponentComponent,
+        DeleteTableDialog
     ],
 
     providers: [

@@ -19,6 +19,9 @@ import {MonumentShowIComponent} from "../../components/show/monument/monument.co
 import {LeafletMarkerClusterModule} from "@asymmetrik/angular2-leaflet-markercluster";
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 import {AuthorShowIComponent} from "../../components/show/author/author.component";
+import {RouterModule} from "@angular/router";
+import {LoadComponentComponent} from "../../components/#lib/load-component/load-component.component";
+import {PreoladSpinner} from "../../services/preload/preolad.service";
 
 const adminPanelComponent =[
   AdminPanelComponent,
@@ -46,6 +49,7 @@ const MODULE_CUSTOM = [
   imports: [
     FormsModule,
     HttpModule,
+    RouterModule,
     JsonpModule,
     ReactiveFormsModule,
     CommonModule,
@@ -61,7 +65,8 @@ const MODULE_CUSTOM = [
 
   providers: [
     HTTP_CONST,
-      SearchService
+      SearchService,
+    PreoladSpinner
   ],
   entryComponents: [
   ],

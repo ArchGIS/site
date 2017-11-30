@@ -2,16 +2,16 @@
     <div class="left"
          [class.left-search]="search">
         <div class="form">
-            <show-author *ngIf="1"
+            <show-author *ngIf="entitiesID===1"
                          [id]="id"></show-author>
-            <show-monument *ngIf="2"></show-monument>
+            <show-monument *ngIf="entitiesID===2"></show-monument>
         </div>
     </div>
     <div class="right"
          [class.right-search]="!bool">
         <div leaflet style="height: 100%; width:100%;"
              [leafletOptions]="options"
-             [leafletLayersControl]="layersControl">>
+             [leafletLayersControl]="layersControl">
         </div>
     </div>
 </div>

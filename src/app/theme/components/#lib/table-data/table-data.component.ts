@@ -1,9 +1,12 @@
 
 
-import {Component, Input, OnChanges, OnInit} from "@angular/core";
+import {Component, Inject, Input, OnChanges, OnInit} from "@angular/core";
 import {SearchService} from "../../../services/search/search.service";
 import AuthorI = AuthorInter.AuthorI;
 import Knowledge = AuthorInter.Knowledge;
+import Author = AuthorInter.Author;
+import {PreoladSpinner} from "../../../services/preload/preolad.service";
+import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from "@angular/material";
 
 @Component({
   selector: 'table-data',
@@ -13,11 +16,15 @@ import Knowledge = AuthorInter.Knowledge;
 export class TableDataComponent implements OnChanges {
 
 
-    constructor(private service: SearchService) {
+    constructor(private service: SearchService,
+                public dialog: MdDialog,
+                private _state: PreoladSpinner) {
     }
 
     @Input() itemsID: number;
     @Input() textSearch: string;
+    selectedTable: boolean = false;
+    selectedTableCheck: boolean = false;
 
     ngOnChanges() {
         debugger;
@@ -26,35 +33,32 @@ export class TableDataComponent implements OnChanges {
         }
     }
 
-    items: AuthorI[] = undefined;
+    items: Author[] = undefined;
 
+
+    onDeleteItem(item: Author){
+        //this.items = this.items.filter(res=>item.id!==res.id);
+        this.openDialog(item.name);
+    }
+
+    openDialog(name: string): void {
+        let dialogRef = this.dialog.open(DeleteTableDialog, {
+            data: { text: name}
+        });
+    }
 
     onSelect(id: number) {
         let self = this;
         self.service.getItemsAuthor()
             .then(res => {
-                self.items = res.Site;
                 debugger;
-                let temp: AuthorI[] = [];
-                for (let i = 1; i < 20; i++) {
-                    temp.push(self.items[i]);
-                }
-                self.items = temp;
-                console.log(temp);
+                self.items = res.Author;
                 debugger;
-                self.items.map(rr => {
-                    if (rr.knowledges.length!==0){
-                        rr.knowledges.map(r => {
-                            if (r.research !== undefined) {
-                                if (r.research.author !== undefined&&r.research.author !== null) {
-                                    if (r.research.author.researches) {
-                                        r.research.author.researches_string = '';
-                                        r.research.author.researches.map(item => {
-                                            r.research.author.researches_string += item.name;
-                                        })
-                                    }
-                                }
-                            }
+                self.items.map(r => {
+                    if (r.researches) {
+                        r.researches_string = '';
+                        r.researches.map(item => {
+                            r.researches_string += item.name+',';
                         })
                     }
                 });
@@ -62,20 +66,54 @@ export class TableDataComponent implements OnChanges {
             })
     }
 
+    onSelectCheckBox(){
+        this.items.map(res=>{
+            res.active = this.selectedTableCheck;
+        })
+    }
+
+}
+
+@Component({
+    selector: 'dialog-overview-example-dialog',
+    templateUrl: 'delete.html',
+})
+export class DeleteTableDialog {
+
+    constructor(
+        public dialogRef: MdDialogRef<DeleteTableDialog>,
+        @Inject(MD_DIALOG_DATA) public data: any) { }
+
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
+
 }
 
 
-declare module AuthorInter {
+export declare module AuthorInter {
+
+    export interface Publication {
+        id: any;
+        name: string;
+        published_at: number;
+    }
 
     export interface Research2 {
+        id: number;
         name: string;
+        publication: Publication;
+        knowledges: Knowledge[];
     }
 
     export interface Author {
         id: any;
+        link: string;
         name: string;
         researches_string: string;
         researches: Research2[];
+        monument: Monument[];
+        active: boolean;
     }
 
     export interface Research {
@@ -83,7 +121,15 @@ declare module AuthorInter {
     }
 
     export interface Knowledge {
+        id: any;
         research: Research;
+        description: string;
+        name: string;
+    }
+
+    export interface Monument{
+        id: number;
+        name: string;
     }
 
     export interface AuthorI {

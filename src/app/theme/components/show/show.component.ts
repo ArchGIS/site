@@ -35,7 +35,6 @@ export class ShowIComponent {
       default:
         break;
     }
-    debugger;
   }
 
   private entities: string;

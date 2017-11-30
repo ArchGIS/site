@@ -15,6 +15,7 @@ export class AdminPanelIComponent {
   entitiesID: number;
   textSearch: string;
 
+
   onSelectEntities(id: number): void{
     this.entitiesID = id;
   }
