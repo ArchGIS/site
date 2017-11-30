@@ -46,7 +46,8 @@
     </md-tab>
     <md-tab label="Исследования">
         <md-nav-list *ngIf="author">
-            <button md-raised-button>Добавить</button>
+           <!-- <button md-raised-button
+                    (click)="openDialog()">Добавить</button>-->
             <md-list-item *ngFor="let link of author.researches">
                 <md-icon md-list-icon
                          (click)="onDeleteResearches(link)"

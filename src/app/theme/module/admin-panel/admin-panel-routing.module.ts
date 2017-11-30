@@ -5,6 +5,7 @@ import {AdminPanelComponent} from "./admin-panel.component";
 import {AdminPanelIComponent} from "../../components/admin-panel/admin-panel.component";
 import {MonumentShowIComponent} from "../../components/show/monument/monument.component";
 import {ShowIComponent} from "../../components/show/show.component";
+import {AddItemShowIComponent} from "../../components/show/ItemAdd/ItemAdd.component";
 
 
 const adminPanelRoutes: Routes = [
@@ -18,7 +19,8 @@ const adminPanelRoutes: Routes = [
         //canActivateChild: [AuthGuard],
         children: [
             {path: '', component: AdminPanelIComponent},
-            {path: 'show/:entities/:id', component: ShowIComponent}
+            {path: 'show/:entities/:id', component: ShowIComponent},
+            {path: 'addItem', component: AddItemShowIComponent}
         ]
       }
     ]

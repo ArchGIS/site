@@ -8,6 +8,8 @@ import Author = AuthorInter.Author;
 import Monument = AuthorInter.Monument;
 import Research2 = AuthorInter.Research2;
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {AddItemShowIComponent} from "../ItemAdd/ItemAdd.component";
+import {MdDialog} from "@angular/material";
 
 @Component({
   selector: 'show-author',
@@ -35,7 +37,8 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 
 export class AuthorShowIComponent implements OnChanges {
 
-  constructor(private service: SearchService) {
+  constructor(private service: SearchService,
+              public dialog: MdDialog) {
   }
 
   @Input() id: number;
@@ -50,6 +53,13 @@ export class AuthorShowIComponent implements OnChanges {
 
     onDeleteResearches(item: Research2){
         this.author.researches = this.author.researches.filter(res=> item.id!==res.id);
+    }
+
+    openDialog(name: string): void {
+        let dialogRef = this.dialog.open(AddItemShowIComponent, {
+            width: '500px',
+            data: { text: name}
+        });
     }
 
   getAuthorID(id: number) {

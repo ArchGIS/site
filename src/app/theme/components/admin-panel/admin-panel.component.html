@@ -3,5 +3,6 @@
                   (textSearch)="onSelectEntitiesLike($event)"
                   (next)="onSelect()"></admin-panel-form>
 <table-data *ngIf="!bool"
+            (back)="onBack()"
             [textSearch]="textSearch"
             [itemsID]="entitiesID"></table-data>

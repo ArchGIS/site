@@ -22,6 +22,7 @@ import {AuthorShowIComponent} from "../../components/show/author/author.componen
 import {RouterModule} from "@angular/router";
 import {LoadComponentComponent} from "../../components/#lib/load-component/load-component.component";
 import {PreoladSpinner} from "../../services/preload/preolad.service";
+import {AddItemShowIComponent} from "../../components/show/ItemAdd/ItemAdd.component";
 
 const adminPanelComponent =[
   AdminPanelComponent,
@@ -29,7 +30,8 @@ const adminPanelComponent =[
   FormAdminPanelComponent,
   ShowIComponent,
   MonumentShowIComponent,
-  AuthorShowIComponent
+  AuthorShowIComponent,
+  AddItemShowIComponent
 ];
 
 

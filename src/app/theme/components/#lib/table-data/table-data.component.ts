@@ -1,6 +1,6 @@
 
 
-import {Component, Inject, Input, OnChanges, OnInit} from "@angular/core";
+import {Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {SearchService} from "../../../services/search/search.service";
 import AuthorI = AuthorInter.AuthorI;
 import Knowledge = AuthorInter.Knowledge;
@@ -23,6 +23,7 @@ export class TableDataComponent implements OnChanges {
 
     @Input() itemsID: number;
     @Input() textSearch: string;
+    @Output() back = new EventEmitter<boolean>();
     selectedTable: boolean = false;
     selectedTableCheck: boolean = false;
 
@@ -31,6 +32,10 @@ export class TableDataComponent implements OnChanges {
         if (this.itemsID) {
             this.onSelect(this.itemsID);
         }
+    }
+
+    onBack(){
+        this.back.emit();
     }
 
     items: Author[] = undefined;

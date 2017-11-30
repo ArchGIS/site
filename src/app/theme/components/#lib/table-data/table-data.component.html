@@ -11,15 +11,19 @@
 -->
 <div id="main">
 
-    <div *ngIf="!bool" class="top-bar">
+    <div  class="top-bar">
+        <button md-raised-button
+                (click)="onBack()"><md-icon>arrow_back</md-icon></button>
         <button md-raised-button
                 (click)="selectedTable=!selectedTable">Выделение</button>
+        <span *ngIf="selectedTable">
         <button md-raised-button
-                (click)="selectedTable=!selectedTable">Редактировать</button>
+                >Редактировать</button>
         <button md-raised-button
-                (click)="selectedTable=!selectedTable">Объединение</button>
+                >Объединение</button>
         <button md-raised-button
-                (click)="selectedTable=!selectedTable">Разделение</button>
+                >Разделение</button>
+        </span>
     </div>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
@@ -30,7 +34,6 @@
                              [(ngModel)]="selectedTableCheck"
                              (change)="onSelectCheckBox()"></md-checkbox>
             </th>
-            <th class="mdl-data-table__cell--non-numeric">ID</th>
             <th>Имя</th>
             <th>Исследования</th>
         </tr>
@@ -40,9 +43,6 @@
             <td *ngIf="selectedTable">
                 <md-checkbox color="primary"
                              [(ngModel)]="item.active"></md-checkbox>
-            </td>
-            <td  class="mdl-data-table__cell--non-numeric">
-                {{item.id}}
             </td>
             <td>{{item.name}}</td>
             <td>{{item.researches_string}}</td>

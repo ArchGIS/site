@@ -39,6 +39,17 @@ export class SearchService {
             .toPromise();
     }
 
+    getResearches() {
+        let url = `${Consts.baseURL}v1/graphql`;
+        return this.http
+            .post(url,
+                '{"query": "{Research{id name }}"}')
+            .map(res => {
+                return res.json();
+            })
+            .toPromise();
+    }
+
     getAuthorID(id: number) {
         let url = `${Consts.baseURL}v1/graphql`;
         return this.http
