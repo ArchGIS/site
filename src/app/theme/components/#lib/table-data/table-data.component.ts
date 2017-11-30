@@ -2,7 +2,8 @@
 
 import {Component, Input, OnChanges, OnInit} from "@angular/core";
 import {SearchService} from "../../../services/search/search.service";
-import Author = AuthorInter.AuthorI;
+import AuthorI = AuthorInter.AuthorI;
+import Knowledge = AuthorInter.Knowledge;
 
 @Component({
   selector: 'table-data',
@@ -11,10 +12,12 @@ import Author = AuthorInter.AuthorI;
 })
 export class TableDataComponent implements OnChanges {
 
+
     constructor(private service: SearchService) {
     }
 
     @Input() itemsID: number;
+    @Input() textSearch: string;
 
     ngOnChanges() {
         debugger;
@@ -23,7 +26,7 @@ export class TableDataComponent implements OnChanges {
         }
     }
 
-    items: Author = undefined;
+    items: AuthorI[] = undefined;
 
 
     onSelect(id: number) {
@@ -31,17 +34,30 @@ export class TableDataComponent implements OnChanges {
         self.service.getItemsAuthor()
             .then(res => {
                 self.items = res.Site;
-                if (self.items.knowledges)
-                    self.items.knowledges.map(rr => {
-                        if (rr.research) {
-                            if (rr.research.author){
-                                rr.research.author.researches_string = '';
-                                rr.research.author.researches.map(item => {
-                                    rr.research.author.researches_string += item.name;
-                                })
+                debugger;
+                let temp: AuthorI[] = [];
+                for (let i = 1; i < 20; i++) {
+                    temp.push(self.items[i]);
+                }
+                self.items = temp;
+                console.log(temp);
+                debugger;
+                self.items.map(rr => {
+                    if (rr.knowledges.length!==0){
+                        rr.knowledges.map(r => {
+                            if (r.research !== undefined) {
+                                if (r.research.author !== undefined&&r.research.author !== null) {
+                                    if (r.research.author.researches) {
+                                        r.research.author.researches_string = '';
+                                        r.research.author.researches.map(item => {
+                                            r.research.author.researches_string += item.name;
+                                        })
+                                    }
+                                }
                             }
-                        }
-                    });
+                        })
+                    }
+                });
                 debugger;
             })
     }

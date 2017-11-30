@@ -28,12 +28,12 @@ export class SearchService {
             }).toPromise()
     }
 
-    getItemsAuthor() {
+    getItemsAuthor(like?: string) {
         let url = `${Consts.baseURL}v1/graphql`;
         return this.http
             .post(url,
                 '{"query": "{Site  {knowledges  {research  {  author{id name researches{name}}}}}}"}')
-            .map(res=>{
+            .map(res => {
                 return res.json();
             })
             .toPromise();

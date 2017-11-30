@@ -13,9 +13,14 @@ export class AdminPanelIComponent {
 
 
   entitiesID: number;
+  textSearch: string;
 
   onSelectEntities(id: number): void{
     this.entitiesID = id;
+  }
+
+  onSelectEntitiesLike(like: string): void{
+    this.textSearch = like;
   }
 
   onSelect(){

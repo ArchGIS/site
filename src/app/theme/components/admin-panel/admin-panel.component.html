@@ -1,5 +1,7 @@
 <admin-panel-form *ngIf='bool'
                   (entitiesID)="onSelectEntities($event)"
-                  (asd)="onSelect()"></admin-panel-form>
+                  (textSearch)="onSelectEntitiesLike($event)"
+                  (next)="onSelect()"></admin-panel-form>
 <table-data *ngIf="!bool"
+            [textSearch]="textSearch"
             [itemsID]="entitiesID"></table-data>
