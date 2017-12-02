@@ -147,6 +147,8 @@ export declare module AuthorInter {
         report: Report[];
         publications: Publication[];
         active: boolean;
+        spatia: Spatial[];
+
     }
 
     export interface Research {
@@ -158,6 +160,7 @@ export declare module AuthorInter {
         research: Research;
         description: string;
         name: string;
+        site: Site;
     }
 
     export interface Monument{
@@ -167,6 +170,31 @@ export declare module AuthorInter {
 
     export interface AuthorI {
         knowledges: Knowledge[];
+    }
+
+    export interface Type {
+        id: number;
+        ru_name: string;
+    }
+
+    export interface Spatial {
+        date: any;
+        type: Type;
+        epoch: Epoch;
+        x: number;
+        y: number;
+        name: string;
+        id: number;
+    }
+    export interface Epoch{
+        id: number;
+        ru_name: string;
+        en_name: string;
+    }
+
+    export interface Site {
+        spatial: Spatial[];
+        epoch: Epoch;
     }
 
 }

@@ -1,6 +1,6 @@
 
 
-import {Component, Input, OnChanges, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {Http} from "@angular/http";
 import {SearchService} from "../../../services/search/search.service";
 import {AuthorInter} from "../../#lib/table-data/table-data.component";
@@ -10,6 +10,7 @@ import Research2 = AuthorInter.Research2;
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {AddItemShowIComponent} from "../ItemAdd/ItemAdd.component";
 import {MdDialog} from "@angular/material";
+import Spatial = AuthorInter.Spatial;
 
 @Component({
   selector: 'show-author',
@@ -42,6 +43,7 @@ export class AuthorShowIComponent implements OnChanges {
     }
 
     @Input() id: number;
+    @Output() coordinats = new EventEmitter<Spatial[]>();
     author: Author;
     editName: boolean = false;
 
@@ -71,10 +73,22 @@ export class AuthorShowIComponent implements OnChanges {
                 temp.monument = [];
                 temp.report = [];
                 temp.publications = [];
+                temp.spatia = [];
                 temp.researches.map(item => {
                     item.knowledges.map(rr => {
                         if (rr !== null && rr !== undefined) {
-                            temp.monument.push(<Monument>{id: rr.id, name: rr.name})
+                            temp.monument.push(<Monument>{id: rr.id, name: rr.name});
+                            rr.site.spatial.map(coordinats => {
+                                temp.spatia.push(
+                                    <Spatial>{
+                                        id: rr.id,
+                                        name: rr.name,
+                                        x: coordinats.x,
+                                        y: coordinats.y,
+                                        type: coordinats.type,
+                                        epoch: rr.site.epoch
+                                    })
+                            })
                         }
                     });
                     if (item.report) {
@@ -85,6 +99,7 @@ export class AuthorShowIComponent implements OnChanges {
                     }
 
                 });
+                self.coordinats.emit(temp.spatia);
                 self.author = temp;
                 debugger;
             })

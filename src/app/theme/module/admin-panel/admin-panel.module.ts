@@ -17,12 +17,12 @@ import {SearchService} from "../../services/search/search.service";
 import {ShowIComponent} from "../../components/show/show.component";
 import {MonumentShowIComponent} from "../../components/show/monument/monument.component";
 import {LeafletMarkerClusterModule} from "@asymmetrik/angular2-leaflet-markercluster";
-import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 import {AuthorShowIComponent} from "../../components/show/author/author.component";
 import {RouterModule} from "@angular/router";
 import {LoadComponentComponent} from "../../components/#lib/load-component/load-component.component";
 import {PreoladSpinner} from "../../services/preload/preolad.service";
 import {AddItemShowIComponent} from "../../components/show/ItemAdd/ItemAdd.component";
+import {LeafletModule} from "@asymmetrik/angular2-leaflet";
 
 const adminPanelComponent =[
   AdminPanelComponent,

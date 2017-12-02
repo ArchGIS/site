@@ -12,6 +12,8 @@ import {TranslateService} from "ng2-translate";
 import {AdvancedSearchComponent} from "./advanced-search.component";
 import {AdvancedSearchIComponent} from "../../components/advanced-search/advanced-search.component";
 import {TranslateModule} from "@ngx-translate/core";
+import {LeafletMarkerClusterModule} from "@asymmetrik/angular2-leaflet-markercluster";
+import {LeafletModule} from "@asymmetrik/angular2-leaflet";
 
 const advancedSearchComponent =[
   AdvancedSearchComponent,
@@ -35,7 +37,9 @@ const HTTP_CONST = [
     CommonModule,
     MaterialModule,
     AdvancedSearchRoutingModule,
-    TranslateModule.forRoot()
+    TranslateModule.forRoot(),
+    LeafletModule.forRoot(),
+    LeafletMarkerClusterModule,
   ],
   declarations: [
     advancedSearchComponent

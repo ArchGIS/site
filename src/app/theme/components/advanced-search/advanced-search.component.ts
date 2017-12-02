@@ -26,13 +26,6 @@ export class AdvancedSearchIComponent implements OnChanges{
 
   ngOnChanges(){
     debugger;
-    if (this.map.getZoom()<6){
-      this.zoom = 5;
-    }
-    else{
-      this.zoom = 10;
-    }
-    console.log(this.map.getZoom());
   }
 
   // Open Street Map Definition
@@ -67,7 +60,6 @@ export class AdvancedSearchIComponent implements OnChanges{
   zoom: number = 18;
 
   ngOnInit() {
-    this.map.getZoom();
     this.generateData();
 
   }

@@ -15,6 +15,8 @@ import {TokenService} from "../../services/token/token.serviece";
 import {RouterModule} from "@angular/router";
 import {LoadComponentComponent} from "../../components/#lib/load-component/load-component.component";
 import {TableDataRoutingModule} from "./table-data-routing.module";
+import {LeafletMarkerClusterModule} from "@asymmetrik/angular2-leaflet-markercluster";
+import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 
 
 const HTTP_CONST = [
@@ -32,7 +34,9 @@ const HTTP_CONST = [
         CommonModule,
         RouterModule,
         MaterialModule,
-        TableDataRoutingModule
+        TableDataRoutingModule,
+        LeafletModule.forRoot(),
+        LeafletMarkerClusterModule,
     ],
     declarations: [
         TableDataComponent,

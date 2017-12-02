@@ -11,6 +11,9 @@ import {Observable} from "rxjs/Observable";
 import {circle, latLng, polygon, tileLayer} from "leaflet";
 import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute} from "@angular/router";
+import {AuthorInter} from "../#lib/table-data/table-data.component";
+import Spatial = AuthorInter.Spatial;
+import {LeafletLayersDemoModel} from "../quick-search/quick-search.component";
 
 
 @Component({
@@ -35,6 +38,25 @@ export class ShowIComponent {
       default:
         break;
     }
+    this.markerClusterOptions = <L.MarkerClusterGroupOptions>{
+      showCoverageOnHover: true,
+      zoomToBoundsOnClick: true,
+      spiderfyOnMaxZoom: true,
+      animate: true,
+      animateAddingMarkers: true,
+      removeOutsideVisibleBounds: true,
+      chunkedLoading: true
+    }
+  }
+
+  markerClusterGroup: L.MarkerClusterGroup;
+  markerClusterData: any[] = [];
+  markerClusterOptions: L.MarkerClusterGroupOptions;
+
+  markerClusterReady(group: L.MarkerClusterGroup) {
+
+    this.markerClusterGroup = group;
+
   }
 
   private entities: string;
@@ -51,27 +73,117 @@ export class ShowIComponent {
   public typeSID: number = 1;
 
   public search: boolean = true;
-  LAYER_OSM = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Open Street Map' });
 
 
-  layersControl = {
-    baseLayers: {
-      'Open Street Map': tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: '...'
-      }),
-      'Open Cycle Map': tileLayer('http://{s}.tile.opencyclemap.org/{z}/{x}/{y}.png', {maxZoom: 18, attribution: '...'})
-    },
-    overlays: {
-      'Big Circle': circle([46.95, -122], {radius: 5000}),
-      'Big Square': polygon([[46.8, -121.55], [46.9, -121.55], [46.9, -121.7], [46.8, -121.7]])
-    }
+
+  onSpatial(spatial: Spatial[]){
+    let self = this;
+    self.model = new LeafletLayersDemoModel(
+        [this.LAYER_OSM, this.LAYER_OCM],
+        this.LAYER_OCM.id,
+        [this.marker]
+    );
+    let marker;
+    spatial.map(item => {
+      let title: string = item.name;
+      let marker_url: string = 'assets/icon/monTypes/monType' + item.type.id + '_' + item.epoch.id + '.png';
+      marker = {
+        id: 'asd',
+        name: 'Marker',
+        enabled: true,
+        layer: L.marker([item.x, item.y], {
+          icon: L.icon({
+            iconSize: [25, 25],
+            iconAnchor: [25, 25],
+            iconUrl: marker_url,
+          }),
+          title: title,
+          clickable: true
+        }),
+      };
+      self.model.overlayLayers.push(marker)
+    });
+    self.bool = true;
+    self.onApply();
   }
-  options = {
-    layers: [ this.LAYER_OSM ],
-    zoom: 10,
-    center: latLng(46.879966, -121.726909)
+
+  onApply(): void {
+    let self = this;
+    // Get the active base layer
+    let data: any[] = [];
+    self.model.overlayLayers.map(item=>{
+      data.push(item.layer);
+    });
+    self.search = false;
+    self.markerClusterData = data;
+  }
+
+
+  onMonument(event: Spatial[]): void {
+
+  }
+
+
+
+  // Open Street Map and Open Cycle Map definitions
+  LAYER_OCM = {
+    id: 'opencyclemap',
+    name: 'Open Cycle Map',
+    enabled: true,
+    layer: L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: 'Open Cycle Map'
+    })
   };
+  LAYER_OSM = {
+    id: 'openstreetmap',
+    name: 'Open Street Map',
+    enabled: false,
+    layer: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: 'Open Street Map'
+    })
+  };
+
+  baseLayers = {
+    'Open Street Map': this.LAYER_OSM.layer
+  };
+
+  marker = {
+    id: 'marker',
+    name: 'Marker',
+    enabled: true,
+    layer: L.marker([46.879966, -121.726909], {
+      icon: L.icon({
+        iconSize: [25, 41],
+        iconAnchor: [13, 41],
+        iconUrl: 'assets/icon/apple-icon.png',
+      })
+    }),
+  };
+
+
+  // Form model object
+  model:LeafletLayersDemoModel= new LeafletLayersDemoModel(
+      [this.LAYER_OSM, this.LAYER_OCM],
+      this.LAYER_OCM.id,
+      []
+  );
+
+
+  // Values to bind to Leaflet Directive
+  layers: L.Layer[];
+  layersControl: any;
+  options = {
+    zoom: 3,
+    center: L.latLng([55.798551, 49.106324])
+  };
+
+
+  reset(): void{
+    this.search = true;
+    this.bool = false;
+  }
 
 
 }

@@ -3,15 +3,21 @@
          [class.left-search]="search">
         <div class="form">
             <show-author *ngIf="entitiesID===1"
+                         (coordinats)="onSpatial($event)"
                          [id]="id"></show-author>
             <show-monument *ngIf="entitiesID===2"></show-monument>
         </div>
     </div>
     <div class="right"
-         [class.right-search]="!bool">
+         [class.right-search]="bool">
         <div leaflet style="height: 100%; width:100%;"
              [leafletOptions]="options"
-             [leafletLayersControl]="layersControl">
+             [leafletBaseLayers]="baseLayers"
+             [leafletLayersControlOptions]="layersControlOptions"
+
+             [leafletMarkerCluster]="markerClusterData"
+             [leafletMarkerClusterOptions]="markerClusterOptions"
+             (leafletMarkerClusterReady)="markerClusterReady($event)">
         </div>
     </div>
 </div>
