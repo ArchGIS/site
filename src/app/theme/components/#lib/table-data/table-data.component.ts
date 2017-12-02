@@ -38,7 +38,7 @@ export class TableDataComponent implements OnChanges {
         this.back.emit();
     }
 
-    items: Author[] = undefined;
+    items: Author[]= undefined;
 
 
     onDeleteItem(item: Author){
@@ -54,19 +54,36 @@ export class TableDataComponent implements OnChanges {
 
     onSelect(id: number) {
         let self = this;
+        switch (id){
+            case 1:
+                self.getAuthor();
+                break;
+            case 2:
+                self.getResearch();
+            default:
+                break;
+        }
+
+    }
+
+    getResearch(){
+
+    }
+    getAuthor(){
+        let self = this;
         self.service.getItemsAuthor()
             .then(res => {
                 debugger;
                 self.items = res.Author;
                 debugger;
-                self.items.map(r => {
-                    if (r.researches) {
-                        r.researches_string = '';
-                        r.researches.map(item => {
-                            r.researches_string += item.name+',';
-                        })
-                    }
-                });
+                    self.items.map(r => {
+                        if (r.researches) {
+                            r.researches_string = '';
+                            r.researches.map(item => {
+                                r.researches_string += item.name+',';
+                            })
+                        }
+                    });
                 debugger;
             })
     }
