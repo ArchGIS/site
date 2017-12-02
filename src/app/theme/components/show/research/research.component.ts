@@ -11,6 +11,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 import {AddItemShowIComponent} from "../ItemAdd/ItemAdd.component";
 import {MdDialog} from "@angular/material";
 import Spatial = AuthorInter.Spatial;
+import Research = AuthorInter.Research;
 
 @Component({
   selector: 'show-research',
@@ -44,8 +45,10 @@ export class ResearchShowIComponent implements OnChanges {
 
     @Input() id: number;
     @Output() coordinats = new EventEmitter<Spatial[]>();
-    author: Author;
+    research: Research = undefined;
     editName: boolean = false;
+    editYear: boolean = false;
+    editDescription: boolean = false;
 
     ngOnChanges() {
         if (this.id) {
@@ -53,9 +56,9 @@ export class ResearchShowIComponent implements OnChanges {
         }
     }
 
-    onDeleteResearches(item: Research2) {
+   /* onDeleteResearches(item: Research2) {
         this.author.researches = this.author.researches.filter(res => item.id !== res.id);
-    }
+    }*/
 
     openDialog(name: string): void {
         let dialogRef = this.dialog.open(AddItemShowIComponent, {
@@ -69,13 +72,11 @@ export class ResearchShowIComponent implements OnChanges {
         self.service.getResearchID(id)
             .then(res => {
                 debugger;
-                let temp: Author = res.Research[0];
+                let temp: Research = res.Research[0];
                 temp.monument = [];
                 temp.report = [];
-                temp.publications = [];
                 temp.spatia = [];
-                temp.researches.map(item => {
-                    item.knowledges.map(rr => {
+                    temp.knowledges.map(rr => {
                         if (rr !== null && rr !== undefined) {
                             temp.monument.push(<Monument>{id: rr.id, name: rr.name});
                             rr.site.spatial.map(coordinats => {
@@ -91,16 +92,8 @@ export class ResearchShowIComponent implements OnChanges {
                             })
                         }
                     });
-                    if (item.report) {
-                        temp.report.push(item.report);
-                    }
-                    if (item.publication) {
-                        temp.publications.push(item.publication);
-                    }
-
-                });
                 self.coordinats.emit(temp.spatia);
-                self.author = temp;
+                self.research = temp;
                 debugger;
             })
     }

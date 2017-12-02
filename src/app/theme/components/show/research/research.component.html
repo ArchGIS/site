@@ -1,107 +1,130 @@
 <md-tab-group>
     <md-tab label="Общие сведения">
-        <md-list *ngIf="author">
+        <md-list *ngIf="research">
+
+            <md-list-item>
+                <p md-line>Автор:</p>
+                <p md-line>
+                    <a [routerLink]="['/main', 'admin-panel', 'show', 'author', research.author.id]">
+                        {{research.author.name}}</a>
+                </p>
+            </md-list-item>
+
+            <span *ngIf="research.coauthors">
+                <md-list-item *ngFor="let author of research.coauthors">
+                    <p md-line>Соавтор:</p>
+                    <p md-line>
+                        <a [routerLink]="['/main', 'admin-panel', 'show', 'author', author.id]">
+                            {{author.name}}</a>
+                    </p>
+                </md-list-item>
+            </span>
 
             <md-list-item *ngIf="!editName">
-                <p md-line>Имя:</p>
+                <p md-line>Название:</p>
                 <p md-line>
-                    {{author.name}}
+                    {{research.name}}
                     <md-icon mdTooltip="Редактировать"
                              (click)="editName=!editName">edit</md-icon>
                 </p>
             </md-list-item>
 
             <md-list-item *ngIf="editName">
-                <p md-line>Имя:</p>
+                <p md-line>Название:</p>
                 <md-input-container md-line>
                     <input mdInput
                            (keyup.enter)="editName=!editName"
-                           [(ngModel)]="author.name">
+                           [(ngModel)]="research.name">
                 </md-input-container>
                 <md-icon class="icon-save"
                          mdTooltip="Сохранить"
                          (click)="editName=!editName">save</md-icon>
             </md-list-item>
 
-            <md-list-item>
-                <p md-line>Год рождения:</p>
-                <p md-line>Не указан
-                    <md-icon mdTooltip="Редактировать">edit</md-icon>
+
+            <md-list-item *ngIf="!editYear">
+                <p md-line>Год проведения исследования:</p>
+                <p md-line>
+                    {{research.year}}
+                    <md-icon mdTooltip="Редактировать"
+                             (click)="editYear=!editYear">edit</md-icon>
                 </p>
-
-
             </md-list-item>
+
+            <md-list-item *ngIf="editYear">
+                <p md-line>Год проведения исследования:</p>
+                <md-input-container md-line>
+                    <input mdInput
+                           (keyup.enter)="editYear=!editYear"
+                           [(ngModel)]="research.year">
+                </md-input-container>
+                <md-icon class="icon-save"
+                         mdTooltip="Сохранить"
+                         (click)="editYear=!editYear">save</md-icon>
+            </md-list-item>
+
+
 
             <md-list-item>
-                <p md-line>Организации:</p>
-                <p md-line>Нет данных
-                    <md-icon mdTooltip="Редактировать">edit</md-icon></p>
+                <p md-line>Тип исследования:</p>
+                <p md-line>Не указан</p>
             </md-list-item>
+
+            <md-list-item *ngIf="!editDescription">
+                <p md-line>Описание:</p>
+                <p md-line>
+                    {{research.description}}
+                    <md-icon mdTooltip="Редактировать"
+                             (click)="editDescription=!editDescription">edit</md-icon>
+                </p>
+            </md-list-item>
+
+            <md-list-item *ngIf="editDescription">
+                <p md-line>Описание:</p>
+                <md-input-container md-line>
+                    <textarea mdInput
+                           (keyup.enter)="editDescription=!editDescription"
+                           [(ngModel)]="research.description">
+                    </textarea>
+                </md-input-container>
+                <md-icon class="icon-save"
+                         mdTooltip="Сохранить"
+                         (click)="editDescription=!editDescription">save</md-icon>
+            </md-list-item>
+
+
             <md-list-item>
-                <p md-line>Биография:</p>
-                <p md-line>Не заполнено
-                    <md-icon mdTooltip="Редактировать">edit</md-icon></p>
+                <p md-line>Публикация:</p>
+                <p md-line> <a [routerLink]="['/main', 'admin-panel', 'publication', 'author', research.publication.id]">
+                    {{research.publication.name}}</a></p>
             </md-list-item>
+
         </md-list>
     </md-tab>
-    <md-tab label="Исследования">
-        <md-nav-list *ngIf="author">
-           <!-- <button md-raised-button
-                    (click)="openDialog()">Добавить</button>-->
-            <md-list-item *ngFor="let link of author.researches">
-                <md-icon md-list-icon
-                         (click)="onDeleteResearches(link)"
-                         mdTooltip="Удалить">delete</md-icon>
-                <a mdLine
-                   [routerLink]="['/main', 'admin-panel', 'show', 'research', link.id]"> {{ link.name }}
-                </a>
-            </md-list-item>
-            <md-list-item *ngIf="author.researches?.length===0">
-                Нет данных
-            </md-list-item>
-        </md-nav-list>
-    </md-tab>
+
     <md-tab label="Памятники">
-        <md-nav-list *ngIf="author">
-                    <md-list-item *ngFor="let link of author.monument">
-                        <md-icon md-list-icon
-                                 *ngIf="link"
-                                 (click)="onDeleteResearches(link)"
-                                 mdTooltip="Удалить">delete</md-icon>
-                        <a mdLine
-                           *ngIf="link"
-                           [routerLink]="['/main', 'admin-panel', 'show', 'monument', link.id]"> {{ link.name }}</a>
-                    </md-list-item>
-            <md-list-item *ngIf="author.monument?.length===0">
-                Нет данных
-            </md-list-item>
-        </md-nav-list>
+
     </md-tab>
-    <md-tab label="Отчёты">
-        <md-nav-list *ngIf="author">
-            <md-list-item *ngFor="let link of author.report">
-                <md-icon md-list-icon
-                         *ngIf="link"
-                         mdTooltip="Удалить">delete</md-icon>
-                <a mdLine
-                   *ngIf="link"
-                   [routerLink]="['/main', 'admin-panel', 'show', 'report', link.id]"> {{ link.name }}
-                </a>
-            </md-list-item>
-        </md-nav-list>
+
+    <md-tab label="ОКН">
+
     </md-tab>
-    <md-tab label="Публикации">
-        <md-nav-list *ngIf="author">
-            <md-list-item *ngFor="let link of author.publications">
-                <md-icon md-list-icon
-                         *ngIf="link"
-                         (click)="onDeleteResearches(link)"
-                         mdTooltip="Удалить">delete</md-icon>
-                <a mdLine
-                   *ngIf="link"
-                   [routerLink]="['/main', 'admin-panel', 'show', 'publication', link.id]"> {{ link.name }}
-                </a>
-            </md-list-item>
-        </md-nav-list>
+
+    <md-tab label="Вскрытия">
+
+    </md-tab>
+    <md-tab label="Топопланы">
+
+    </md-tab>
+
+    <md-tab label="Артефакты">
+
+    </md-tab>
+
+    <md-tab label="Радиоуглеродные датировки">
+
+    </md-tab>
+    <md-tab label="Культуры">
+
     </md-tab>
 </md-tab-group>

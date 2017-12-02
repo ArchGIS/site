@@ -158,17 +158,20 @@ export declare module AuthorInter {
 
     export interface Research {
         author: Author;
-        coauthors: any[];
+        coauthors: Author[];
         description: string;
-        excavations: any[];
+        excavations: any;
         id: number;
         knowledges: Knowledge[];
         name: string;
         publication: Publication;
         radiocarbons: Radiocarbon[];
-        report?: any;
+        report?: Report[];
         type: Type2;
         year: number;
+        active: boolean;
+        spatia: Spatial[];
+        monument: Monument[];
     }
 
     export interface Knowledge {
