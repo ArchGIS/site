@@ -60,6 +60,16 @@ export class SearchService {
             .toPromise();
     }
 
+    getResearchID(id: number) {
+        let url = `${Consts.baseURL}v1/graphql`;
+        return this.http
+            .post(url, `{"query": "{Research(id:${id}){id name year description type{id ru_name} author{id name} report{id  year name} publication{id name published_at} excavations{id name area boss artifacts{id name depth excRegion}} radiocarbons{id name date s sampleDesc bcadSecondTop bcadSecondBot } coauthors{id name} knowledges{ id name description excavations_count artifacts_count site{epoch{id ru_name}  spatial{ date x y type{id ru_name  }}}} }}"}`)
+            .map(res => {
+                return res.json();
+            })
+            .toPromise();
+    }
+
 
     getSearchMonument(name: string, epochID: number, typeID: number, lang?: string, offset?: number, limit?: number): Promise<any> {
         let url = `${Consts.baseURL}api/sites?site_name=${name}&epochID=${epochID}&type_id=${typeID}`;

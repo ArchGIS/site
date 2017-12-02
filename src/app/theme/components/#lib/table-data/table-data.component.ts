@@ -67,7 +67,7 @@ export class TableDataComponent implements OnChanges {
     }
 
     getResearch(){
-
+debugger;
     }
     getAuthor(){
         let self = this;
@@ -151,8 +151,24 @@ export declare module AuthorInter {
 
     }
 
+    export interface Type2 {
+        id: number;
+        ru_name: string;
+    }
+
     export interface Research {
         author: Author;
+        coauthors: any[];
+        description: string;
+        excavations: any[];
+        id: number;
+        knowledges: Knowledge[];
+        name: string;
+        publication: Publication;
+        radiocarbons: Radiocarbon[];
+        report?: any;
+        type: Type2;
+        year: number;
     }
 
     export interface Knowledge {
@@ -161,6 +177,18 @@ export declare module AuthorInter {
         description: string;
         name: string;
         site: Site;
+        artifacts_count: number;
+        excavations_count: number;
+    }
+
+    export interface Radiocarbon {
+        bcadSecondBot: number;
+        bcadSecondTop: number;
+        date: number;
+        id: number;
+        name: string;
+        s: number;
+        sampleDesc: string;
     }
 
     export interface Monument{

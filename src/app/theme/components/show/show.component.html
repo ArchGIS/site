@@ -5,7 +5,10 @@
             <show-author *ngIf="entitiesID===1"
                          (coordinats)="onSpatial($event)"
                          [id]="id"></show-author>
-            <show-monument *ngIf="entitiesID===2"></show-monument>
+            <show-research *ngIf="entitiesID===2"
+                           (coordinats)="onSpatial($event)"
+                           [id]="id"></show-research>
+            <show-monument *ngIf="entitiesID===3"></show-monument>
         </div>
     </div>
     <div class="right"

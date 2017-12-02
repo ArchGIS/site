@@ -31,9 +31,12 @@ export class ShowIComponent {
       this.id = params['id'];
       this.entities = params['entities'];
     });
-    switch (this.entities){
+    switch (this.entities) {
       case 'author':
         this.entitiesID = 1;
+        break;
+      case 'research':
+        this.entitiesID = 2;
         break;
       default:
         break;
