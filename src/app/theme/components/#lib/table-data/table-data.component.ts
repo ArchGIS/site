@@ -115,6 +115,14 @@ export class DeleteTableDialog {
 
 export declare module AuthorInter {
 
+    export interface Report {
+        code?: any;
+        fileid?: any;
+        id: any;
+        name: string;
+        year: number;
+    }
+
     export interface Publication {
         id: any;
         name: string;
@@ -126,6 +134,7 @@ export declare module AuthorInter {
         name: string;
         publication: Publication;
         knowledges: Knowledge[];
+        report: Report;
     }
 
     export interface Author {
@@ -135,6 +144,8 @@ export declare module AuthorInter {
         researches_string: string;
         researches: Research2[];
         monument: Monument[];
+        report: Report[];
+        publications: Publication[];
         active: boolean;
     }
 

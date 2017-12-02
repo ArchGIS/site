@@ -37,46 +37,57 @@ import {MdDialog} from "@angular/material";
 
 export class AuthorShowIComponent implements OnChanges {
 
-  constructor(private service: SearchService,
-              public dialog: MdDialog) {
-  }
-
-  @Input() id: number;
-  author: Author;
-  editName: boolean = false;
-
-  ngOnChanges() {
-    if (this.id) {
-      this.getAuthorID(this.id)
+    constructor(private service: SearchService,
+                public dialog: MdDialog) {
     }
-  }
 
-    onDeleteResearches(item: Research2){
-        this.author.researches = this.author.researches.filter(res=> item.id!==res.id);
+    @Input() id: number;
+    author: Author;
+    editName: boolean = false;
+
+    ngOnChanges() {
+        if (this.id) {
+            this.getAuthorID(this.id)
+        }
+    }
+
+    onDeleteResearches(item: Research2) {
+        this.author.researches = this.author.researches.filter(res => item.id !== res.id);
     }
 
     openDialog(name: string): void {
         let dialogRef = this.dialog.open(AddItemShowIComponent, {
             width: '500px',
-            data: { text: name}
+            data: {text: name}
         });
     }
 
-  getAuthorID(id: number) {
-    let self = this;
-    self.service.getAuthorID(id)
-        .then(res => {
-          let temp = res.Author[0];
-          temp.monument = [];
-          temp.researches.map(item=>{
-            item.knowledges.map(rr=>{
-              if (rr!==null&&rr!==undefined){
-                temp.monument.push(<Monument>{id: rr.id, name: rr.name})
-              }
+    getAuthorID(id: number) {
+        let self = this;
+        self.service.getAuthorID(id)
+            .then(res => {
+                debugger;
+                let temp: Author = res.Author[0];
+                temp.monument = [];
+                temp.report = [];
+                temp.publications = [];
+                temp.researches.map(item => {
+                    item.knowledges.map(rr => {
+                        if (rr !== null && rr !== undefined) {
+                            temp.monument.push(<Monument>{id: rr.id, name: rr.name})
+                        }
+                    });
+                    if (item.report) {
+                        temp.report.push(item.report);
+                    }
+                    if (item.publication) {
+                        temp.publications.push(item.publication);
+                    }
+
+                });
+                self.author = temp;
+                debugger;
             })
-          });
-          self.author = temp;
-          debugger;
-        })
-  }
+    }
+
 }

@@ -78,18 +78,28 @@
         </md-nav-list>
     </md-tab>
     <md-tab label="Отчёты">
-
+        <md-nav-list *ngIf="author">
+            <md-list-item *ngFor="let link of author.report">
+                <md-icon md-list-icon
+                         *ngIf="link"
+                         mdTooltip="Удалить">delete</md-icon>
+                <a mdLine
+                   *ngIf="link"
+                   [routerLink]="['/main', 'admin-panel', 'show', 'report', link.id]"> {{ link.name }}
+                </a>
+            </md-list-item>
+        </md-nav-list>
     </md-tab>
     <md-tab label="Публикации">
         <md-nav-list *ngIf="author">
-            <md-list-item *ngFor="let link of author.researches">
+            <md-list-item *ngFor="let link of author.publications">
                 <md-icon md-list-icon
-                         *ngIf="link.publication"
+                         *ngIf="link"
                          (click)="onDeleteResearches(link)"
                          mdTooltip="Удалить">delete</md-icon>
                 <a mdLine
-                   *ngIf="link.publication"
-                   [routerLink]="['/main', 'admin-panel', 'show', 'publication', link.publication?.id]"> {{ link.publication?.name }}
+                   *ngIf="link"
+                   [routerLink]="['/main', 'admin-panel', 'show', 'publication', link.id]"> {{ link.name }}
                 </a>
             </md-list-item>
         </md-nav-list>
