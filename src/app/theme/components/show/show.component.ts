@@ -32,11 +32,12 @@ export class ShowIComponent implements OnChanges {
               private ngZone: NgZone,
               private activateRoute: ActivatedRoute) {
     let self = this;
+
     router.events.subscribe((val) => {
-      // see also
-      debugger;
+
       console.log(val instanceof NavigationEnd)
     });
+
     platformLocation.onPopState(() => {
       debugger;
       if(platformLocation.pathname.startsWith("/currentRoute")) {
@@ -46,24 +47,23 @@ export class ShowIComponent implements OnChanges {
         });
       }
     });
-    self.entitiesID = undefined;
     this.subscription = activateRoute.params.subscribe(params=> {
       this.id = params['id'];
-      this.entities = params['entities'];
+      switch (params['entities']) {
+        case 'author':
+          this.entitiesID = 1;
+          break;
+        case 'research':
+          this.entitiesID = 2;
+          break;
+        case 'monument':
+          this.entitiesID = 3;
+          break;
+        default:
+          break;
+      }
     });
-    switch (this.entities) {
-      case 'author':
-        this.entitiesID = 1;
-        break;
-      case 'research':
-        this.entitiesID = 2;
-        break;
-      case 'monument':
-        this.entitiesID = 3;
-        break;
-      default:
-        break;
-    }
+
     this.markerClusterOptions = <L.MarkerClusterGroupOptions>{
       showCoverageOnHover: true,
       zoomToBoundsOnClick: true,
