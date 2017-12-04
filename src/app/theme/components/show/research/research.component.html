@@ -1,36 +1,36 @@
 <md-tab-group>
     <md-tab label="Общие сведения">
-        <md-list *ngIf="research">
+        <div *ngIf="research">
 
-            <md-list-item>
-                <p md-line>Автор:</p>
-                <p md-line>
+            <div class="block">
+                <div class="request-name">Автор:</div>
+                <div class="request-name-main">
                     <a [routerLink]="['/main', 'admin-panel', 'show', 'author', research.author.id]">
                         {{research.author.name}}</a>
-                </p>
-            </md-list-item>
+                </div>
+            </div>
 
-            <span *ngIf="research.coauthors">
-                <md-list-item *ngFor="let author of research.coauthors">
-                    <p md-line>Соавтор:</p>
-                    <p md-line>
+            <div *ngIf="research.coauthors">
+                <div class="block" *ngFor="let author of research.coauthors">
+                    <div class="request-name">Соавтор:</div>
+                    <div class="request-name-main">
                         <a [routerLink]="['/main', 'admin-panel', 'show', 'author', author.id]">
                             {{author.name}}</a>
-                    </p>
-                </md-list-item>
-            </span>
+                    </div>
+                </div>
+            </div>
 
-            <md-list-item *ngIf="!editName">
-                <p md-line>Название:</p>
-                <p md-line>
+            <div class="block" *ngIf="!editName">
+                <div class="request-name">Название:</div>
+                <div class="request-name-main">
                     {{research.name}}
                     <md-icon mdTooltip="Редактировать"
                              (click)="editName=!editName">edit</md-icon>
-                </p>
-            </md-list-item>
+                </div>
+            </div>
 
-            <md-list-item *ngIf="editName">
-                <p md-line>Название:</p>
+            <div class="block" *ngIf="editName">
+                <div class="request-name">Название:</div>
                 <md-input-container md-line>
                     <input mdInput
                            (keyup.enter)="editName=!editName"
@@ -39,20 +39,20 @@
                 <md-icon class="icon-save"
                          mdTooltip="Сохранить"
                          (click)="editName=!editName">save</md-icon>
-            </md-list-item>
+            </div>
 
 
-            <md-list-item *ngIf="!editYear">
-                <p md-line>Год проведения исследования:</p>
-                <p md-line>
+            <div class="block" *ngIf="!editYear">
+                <div class="request-name">Год проведения исследования:</div>
+                <div class="request-name-main">
                     {{research.year}}
                     <md-icon mdTooltip="Редактировать"
                              (click)="editYear=!editYear">edit</md-icon>
-                </p>
-            </md-list-item>
+                </div>
+            </div>
 
-            <md-list-item *ngIf="editYear">
-                <p md-line>Год проведения исследования:</p>
+            <div class="block" *ngIf="editYear">
+                <div class="request-name">Год проведения исследования:</div>
                 <md-input-container md-line>
                     <input mdInput
                            (keyup.enter)="editYear=!editYear"
@@ -61,26 +61,26 @@
                 <md-icon class="icon-save"
                          mdTooltip="Сохранить"
                          (click)="editYear=!editYear">save</md-icon>
-            </md-list-item>
+            </div>
 
 
 
-            <md-list-item>
-                <p md-line>Тип исследования:</p>
-                <p md-line>Не указан</p>
-            </md-list-item>
+            <div class="block">
+                <div class="request-name">Тип исследования:</div>
+                <div class="request-name-main">Не указан</div>
+            </div>
 
-            <md-list-item *ngIf="!editDescription">
-                <p md-line>Описание:</p>
-                <p md-line>
+            <div class="block" *ngIf="!editDescription">
+                <div class="request-name">Описание:</div>
+                <div class="request-name-main">
                     {{research.description}}
                     <md-icon mdTooltip="Редактировать"
                              (click)="editDescription=!editDescription">edit</md-icon>
-                </p>
-            </md-list-item>
+                </div>
+            </div>
 
-            <md-list-item *ngIf="editDescription">
-                <p md-line>Описание:</p>
+            <div class="block" *ngIf="editDescription">
+                <div class="request-name">Описание:</div>
                 <md-input-container md-line>
                     <textarea mdInput
                            (keyup.enter)="editDescription=!editDescription"
@@ -90,20 +90,36 @@
                 <md-icon class="icon-save"
                          mdTooltip="Сохранить"
                          (click)="editDescription=!editDescription">save</md-icon>
-            </md-list-item>
+            </div>
 
 
-            <md-list-item>
-                <p md-line>Публикация:</p>
-                <p md-line> <a [routerLink]="['/main', 'admin-panel', 'publication', 'author', research.publication.id]">
-                    {{research.publication.name}}</a></p>
-            </md-list-item>
-
-        </md-list>
+            <div class="block">
+                <div class="request-name">Публикация:</div>
+                <div class="request-name-main"> <a [routerLink]="['/main', 'admin-panel', 'publication', 'author', research.publication.id]">
+                    {{research.publication.name}}</a></div>
+            </div>
+        </div>
     </md-tab>
 
     <md-tab label="Памятники">
-
+        <div *ngIf="research">
+            <div *ngFor="let block of research.monument; let i=index">
+                <div class="expansion-panel"
+                     (click)="block.active = !block.active">
+                    <div class="title">
+                        Памятник №{{i+1}}: {{block.name}}
+                        <md-icon *ngIf="!block.active"
+                                 style="font-size: 24px">keyboard_arrow_down</md-icon>
+                        <md-icon *ngIf="block.active"
+                                style="font-size: 24px">keyboard_arrow_up</md-icon>
+                    </div>
+                    <div    *ngIf="block.active"
+                            class="main-block">
+                        <show-monument-item [monument]="block"></show-monument-item>
+                    </div>
+                </div>
+            </div>
+        </div>
     </md-tab>
 
     <md-tab label="ОКН">

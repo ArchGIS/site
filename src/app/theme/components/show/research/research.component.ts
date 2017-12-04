@@ -78,7 +78,11 @@ export class ResearchShowIComponent implements OnChanges {
                 temp.spatia = [];
                     temp.knowledges.map(rr => {
                         if (rr !== null && rr !== undefined) {
-                            temp.monument.push(<Monument>{id: rr.id, name: rr.name});
+                            temp.monument.push(<Monument>{
+                                id: rr.id,
+                                name: rr.name,
+                                knowledge: rr
+                            });
                             rr.site.spatial.map(coordinats => {
                                 temp.spatia.push(
                                     <Spatial>{

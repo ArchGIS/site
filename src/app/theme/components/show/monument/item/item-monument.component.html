@@ -1,0 +1,79 @@
+<div class="block">
+    <div class="request-name-main">
+        <a [routerLink]="['/main', 'admin-panel', 'show', 'monument', monument.id]">
+            Перейти к памятнику
+        </a>
+    </div>
+</div>
+
+<div class="block" *ngIf="!editName">
+    <div class="request-name">Название:</div>
+    <div class="request-name-main">
+        {{monument.name}}
+        <md-icon mdTooltip="Редактировать"
+                 (click)="editName=!editName">edit</md-icon>
+    </div>
+</div>
+<div class="block" *ngIf="editName">
+    <div class="request-name">Название:</div>
+    <md-input-container md-line>
+        <input mdInput
+               (keyup.enter)="editName=!editName"
+               [(ngModel)]="monument.name">
+    </md-input-container>
+    <md-icon class="icon-save"
+             mdTooltip="Сохранить"
+             (click)="editName=!editName">save</md-icon>
+</div>
+
+<div class="block">
+    <div class="request-name">Эпоха:</div>
+    <div class="request-name-main">
+        {{monument.knowledge.site.epoch.ru_name}}
+    </div>
+</div>
+
+<div class="block">
+    <div class="request-name">Культурная принадлежность, определенная исследователем:</div>
+    <div class="request-name-main">
+        <a [routerLink]="['/main', 'admin-panel', 'show', 'culture', monument.knowledge.culture.id]">
+            {{monument.knowledge.culture.ru_name}}
+        </a>
+    </div>
+</div>
+
+<div class="block" *ngIf="!editDescription">
+    <div class="request-name">Описание памятника:</div>
+    <div class="request-name-main">
+        {{monument.knowledge.description}}
+        <md-icon mdTooltip="Редактировать"
+                 (click)="editDescription=!editDescription">edit</md-icon>
+    </div>
+</div>
+<div class="block" *ngIf="editDescription">
+    <div class="request-name">Описание памятника:</div>
+    <md-input-container md-line>
+                    <textarea mdInput
+                              (keyup.enter)="editDescription=!editDescription"
+                              [(ngModel)]="monument.knowledge.description">
+                    </textarea>
+    </md-input-container>
+    <md-icon class="icon-save"
+             mdTooltip="Сохранить"
+             (click)="editDescription=!editDescription">save</md-icon>
+</div>
+
+<div class="block">
+    <div class="request-name">Найденные артефакты:
+    </div>
+    <div class="request-name-main">
+        Нет данных
+    </div>
+</div>
+
+<div class="block">
+    <div class="request-name">Археологические вскрытия:</div>
+    <div class="request-name-main">
+        Нет данных
+    </div>
+</div>

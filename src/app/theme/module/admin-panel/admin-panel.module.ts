@@ -24,6 +24,7 @@ import {PreoladSpinner} from "../../services/preload/preolad.service";
 import {AddItemShowIComponent} from "../../components/show/ItemAdd/ItemAdd.component";
 import {LeafletModule} from "@asymmetrik/angular2-leaflet";
 import {ResearchShowIComponent} from "../../components/show/research/research.component";
+import {ItemMonumentShowIComponent} from "../../components/show/monument/item/item-monument.component";
 
 const adminPanelComponent =[
   AdminPanelComponent,
@@ -33,7 +34,8 @@ const adminPanelComponent =[
   MonumentShowIComponent,
   AuthorShowIComponent,
   AddItemShowIComponent,
-  ResearchShowIComponent
+  ResearchShowIComponent,
+  ItemMonumentShowIComponent
 ];
 
 

@@ -21,7 +21,7 @@
     .form{
       flex-direction: column;
       justify-content: center;
-      width: 75%;
+      width: 85%;
       margin-top: 25px;
       padding: 50px;
       background-color: #ffffff;
@@ -50,5 +50,18 @@
         font-size: 14px;
       }
     }
+  }
+}
+
+.block{
+  margin: 10px;
+  .request-name{
+    color: #3e5b78;
+    font-size: 13px;
+  }
+
+  .request-name-main{
+    font-size: 16px;
+    word-break: break-word;
   }
 }

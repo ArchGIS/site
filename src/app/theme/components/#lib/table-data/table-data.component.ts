@@ -182,6 +182,7 @@ export declare module AuthorInter {
         site: Site;
         artifacts_count: number;
         excavations_count: number;
+        culture: Culture;
     }
 
     export interface Radiocarbon {
@@ -197,6 +198,8 @@ export declare module AuthorInter {
     export interface Monument{
         id: number;
         name: string;
+        active: boolean;
+        knowledge: Knowledge;
     }
 
     export interface AuthorI {
@@ -204,6 +207,11 @@ export declare module AuthorInter {
     }
 
     export interface Type {
+        id: number;
+        ru_name: string;
+    }
+
+    export interface Culture {
         id: number;
         ru_name: string;
     }

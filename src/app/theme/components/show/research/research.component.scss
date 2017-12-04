@@ -1,3 +1,5 @@
+@import "../show.component";
+
 .main {
   display: flex;
   flex-direction: row;
@@ -22,7 +24,7 @@
       margin-bottom: -15px;
     }
     md-input-container, md-select{
-      width: 375px;
+      width: 90% !important;
     }
   }
 }
@@ -37,4 +39,28 @@ md-icon{
 
 md-input-container{
   margin-top: -13px !important;
+  width: 90% !important;
 }
+
+.expansion-panel {
+  background: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 8px;
+  padding: 8px;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.12); */
+  box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.15);
+
+  .title{
+    display: flex;
+    justify-content: space-between;
+  }
+  .main-block{
+
+  }
+}
+
+.expansion-panel:hover{
+  background: rgba(0,0,0,.04);
+}
+
