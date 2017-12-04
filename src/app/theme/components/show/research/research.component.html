@@ -1,6 +1,7 @@
 <md-tab-group>
     <md-tab label="Общие сведения">
-        <div *ngIf="research">
+        <div *ngIf="research"
+             class="block-max">
 
             <div class="block">
                 <div class="request-name">Автор:</div>
@@ -102,7 +103,8 @@
     </md-tab>
 
     <md-tab label="Памятники">
-        <div *ngIf="research">
+        <div *ngIf="research"
+                class="block-max">
             <div *ngFor="let block of research.monument; let i=index">
                 <div class="expansion-panel"
                      (click)="block.active = !block.active">
