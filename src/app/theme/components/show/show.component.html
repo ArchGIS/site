@@ -8,7 +8,9 @@
             <show-research *ngIf="entitiesID===2"
                            (coordinats)="onSpatial($event)"
                            [id]="id"></show-research>
-            <show-monument *ngIf="entitiesID===3"></show-monument>
+            <show-monument *ngIf="entitiesID===3"
+                           (coordinats)="onSpatial($event)"
+                           [id]="id"></show-monument>
         </div>
     </div>
     <div class="right"

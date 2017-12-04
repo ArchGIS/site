@@ -77,18 +77,26 @@ export class AuthorShowIComponent implements OnChanges {
                 temp.researches.map(item => {
                     item.knowledges.map(rr => {
                         if (rr !== null && rr !== undefined) {
-                            temp.monument.push(<Monument>{id: rr.id, name: rr.name});
-                            rr.site.spatial.map(coordinats => {
-                                temp.spatia.push(
-                                    <Spatial>{
-                                        id: rr.id,
-                                        name: rr.name,
-                                        x: coordinats.x,
-                                        y: coordinats.y,
-                                        type: coordinats.type,
-                                        epoch: rr.site.epoch
-                                    })
-                            })
+                            if (rr.site!==undefined && rr.site !==null)  {
+                                if (rr.site.spatial !== undefined && rr.site.spatial !== null) {
+                                    if (rr.site.spatial[0]!==null && rr.site.spatial[0]!== undefined)
+                                    {
+                                        temp.monument.push(<Monument>{id: rr.id, name: rr.name});
+                                        rr.site.spatial.map(coordinats => {
+                                            temp.spatia.push(
+                                                <Spatial>{
+                                                    id: rr.id,
+                                                    name: rr.name,
+                                                    x: coordinats.x,
+                                                    y: coordinats.y,
+                                                    type: coordinats.type,
+                                                    epoch: rr.site.epoch
+                                                })
+                                        })
+                                    }
+
+                                }
+                            }
                         }
                     });
                     if (item.report) {

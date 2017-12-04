@@ -1,3 +1,5 @@
+@import "../research/research.component";
+
 .main {
   display: flex;
   flex-direction: row;
@@ -37,4 +39,11 @@ md-icon{
 
 md-input-container{
   margin-top: -13px !important;
+}
+
+.empty-item{
+  margin: 18px;
+  font-size: 16px;
+  font-weight: 900;
+  text-align: center;
 }

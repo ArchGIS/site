@@ -38,6 +38,9 @@ export class ShowIComponent {
       case 'research':
         this.entitiesID = 2;
         break;
+      case 'monument':
+        this.entitiesID = 3;
+        break;
       default:
         break;
     }
