@@ -71,7 +71,6 @@ export class ResearchShowIComponent implements OnChanges {
         let self = this;
         self.service.getResearchID(id)
             .then(res => {
-                debugger;
                 let temp: Research = res.Research[0];
                 temp.monument = [];
                 temp.report = [];

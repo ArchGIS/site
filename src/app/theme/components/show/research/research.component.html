@@ -1,4 +1,5 @@
 <md-tab-group>
+
     <md-tab label="Общие сведения">
         <div *ngIf="research"
              class="block-max">
@@ -11,12 +12,12 @@
                 </div>
             </div>
 
-            <div *ngIf="research.coauthors">
+            <div *ngIf="research.coauthors.length!==0">
                 <div class="block" *ngFor="let author of research.coauthors">
                     <div class="request-name">Соавтор:</div>
                     <div class="request-name-main">
-                        <a [routerLink]="['/main', 'admin-panel', 'show', 'author', author.id]">
-                            {{author.name}}</a>
+                        <a [routerLink]="['/main', 'admin-panel', 'show', 'author', author?.id]">
+                            {{author?.name}}</a>
                     </div>
                 </div>
             </div>
@@ -94,10 +95,11 @@
             </div>
 
 
-            <div class="block">
+            <div *ngIf="research.publication"
+                 class="block">
                 <div class="request-name">Публикация:</div>
-                <div class="request-name-main"> <a [routerLink]="['/main', 'admin-panel', 'publication', 'author', research.publication.id]">
-                    {{research.publication.name}}</a></div>
+                <div class="request-name-main"> <a [routerLink]="['/main', 'admin-panel', 'publication', 'author', research.publication?.id]">
+                    {{research.publication?.name}}</a></div>
             </div>
         </div>
     </md-tab>
@@ -115,8 +117,8 @@
                         <md-icon *ngIf="block.active"
                                 style="font-size: 24px">keyboard_arrow_up</md-icon>
                     </div>
-                    <div    *ngIf="block.active"
-                            class="main-block">
+                    <div *ngIf="block.active"
+                         class="main-block">
                         <show-monument-item [monument]="block"></show-monument-item>
                     </div>
                 </div>

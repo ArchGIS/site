@@ -1,6 +1,6 @@
 
 
-import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnChanges, OnInit} from "@angular/core";
 import {SearchService} from "../../services/search/search.service";
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
@@ -10,10 +10,11 @@ import {DataSource} from "@angular/cdk/collections";
 import {Observable} from "rxjs/Observable";
 import {circle, latLng, polygon, tileLayer} from "leaflet";
 import {Subscription} from "rxjs/Subscription";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {AuthorInter} from "../#lib/table-data/table-data.component";
 import Spatial = AuthorInter.Spatial;
 import {LeafletLayersDemoModel} from "../quick-search/quick-search.component";
+import {PlatformLocation} from "@angular/common";
 
 
 @Component({
@@ -22,11 +23,30 @@ import {LeafletLayersDemoModel} from "../quick-search/quick-search.component";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ShowIComponent {
+export class ShowIComponent implements OnChanges {
 
   constructor(private service: SearchService,
+              public router: Router,
+              private cdRef:ChangeDetectorRef,
+              private platformLocation: PlatformLocation,
+              private ngZone: NgZone,
               private activateRoute: ActivatedRoute) {
     let self = this;
+    router.events.subscribe((val) => {
+      // see also
+      debugger;
+      console.log(val instanceof NavigationEnd)
+    });
+    platformLocation.onPopState(() => {
+      debugger;
+      if(platformLocation.pathname.startsWith("/currentRoute")) {
+        this.ngZone.run(() => {
+          debugger;
+          console.log("Reloading component");
+        });
+      }
+    });
+    self.entitiesID = undefined;
     this.subscription = activateRoute.params.subscribe(params=> {
       this.id = params['id'];
       this.entities = params['entities'];
@@ -52,6 +72,26 @@ export class ShowIComponent {
       animateAddingMarkers: true,
       removeOutsideVisibleBounds: true,
       chunkedLoading: true
+    };
+  }
+
+  ngOnChanges() {
+    this.subscription = this.activateRoute.params.subscribe(params=> {
+      this.id = params['id'];
+      this.entities = params['entities'];
+    });
+    switch (this.entities) {
+      case 'author':
+        this.entitiesID = 1;
+        break;
+      case 'research':
+        this.entitiesID = 2;
+        break;
+      case 'monument':
+        this.entitiesID = 3;
+        break;
+      default:
+        break;
     }
   }
 
