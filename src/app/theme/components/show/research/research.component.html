@@ -131,24 +131,116 @@
     </md-tab>
 
     <md-tab label="ОКН">
-
+        <div class="block-max">
+            <md-nav-list *ngIf="research">
+                <md-list-item *ngFor="let link of research.heritages">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'heritage', link.id]">
+                        {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="research.heritage?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
     </md-tab>
 
     <md-tab label="Вскрытия">
-
+        <div class="block-max">
+            <md-nav-list *ngIf="research">
+                <md-list-item *ngFor="let link of research.excavations">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'excavation', link.id]">
+                        {{ link.name }} - {{link.area}}, руководитель работ : {{link.boss}}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="research.excavations?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
     </md-tab>
+
     <md-tab label="Топопланы">
 
     </md-tab>
 
     <md-tab label="Артефакты">
-
+        <div class="block-max">
+            <md-nav-list *ngIf="research">
+                <md-list-item *ngFor="let link of research.artifacts">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'artifact', link.id]">
+                        {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="research.excavations?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
     </md-tab>
 
     <md-tab label="Радиоуглеродные датировки">
-
+        <div class="block-max">
+            <md-nav-list *ngIf="research">
+                <md-list-item *ngFor="let link of research.radiocarbons">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'radiocarbon', link.id]">
+                        {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="research.radiocarbons?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
     </md-tab>
-    <md-tab label="Культуры">
 
+    <md-tab label="Культуры">
+        <div class="block-max">
+            <md-nav-list *ngIf="research">
+                <md-list-item *ngFor="let link of research.cultures">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'culture', link.id]">
+                        {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="research.cultures?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
     </md-tab>
 </md-tab-group>

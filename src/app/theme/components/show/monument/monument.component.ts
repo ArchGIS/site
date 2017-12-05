@@ -29,7 +29,7 @@ export class MonumentShowIComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.id) {
-      this.getResearchID(this.id)
+      //this.getResearchID(this.id)
     }
   }
 
@@ -44,12 +44,12 @@ export class MonumentShowIComponent implements OnChanges {
     });
   }
 
-  getResearchID(id: number) {
+  /*getMonumentID(id: number) {
     let self = this;
-    /*self.service.getResearchID(id)
+    self.service.getMonumentID(id)
         .then(res => {
           debugger;
-          let temp: Research = res.Research[0];
+          let temp: Monument = res.Monument[0];
           temp.monument = [];
           temp.report = [];
           temp.spatia = [];
@@ -76,7 +76,7 @@ export class MonumentShowIComponent implements OnChanges {
           self.coordinats.emit(temp.spatia);
           self.research = temp;
           debugger;
-        })*/
-  }
+        })
+  }*/
 
 }

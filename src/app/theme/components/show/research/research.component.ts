@@ -12,6 +12,10 @@ import {AddItemShowIComponent} from "../ItemAdd/ItemAdd.component";
 import {MdDialog} from "@angular/material";
 import Spatial = AuthorInter.Spatial;
 import Research = AuthorInter.Research;
+import Heritage = AuthorInter.Heritage;
+import Excavation = AuthorInter.Excavation;
+import Artifact = AuthorInter.Artifact;
+import Culture = AuthorInter.Culture;
 
 @Component({
   selector: 'show-research',
@@ -75,26 +79,54 @@ export class ResearchShowIComponent implements OnChanges {
                 temp.monument = [];
                 temp.report = [];
                 temp.spatia = [];
-                    temp.knowledges.map(rr => {
-                        if (rr !== null && rr !== undefined) {
-                            temp.monument.push(<Monument>{
-                                id: rr.id,
-                                name: rr.name,
-                                knowledge: rr
+                temp.heritages = [];
+                temp.artifacts = [];
+                temp.cultures = [];
+                temp.excavations.map(item=>{
+                    item.artifacts.map(rr=>{
+                        temp.artifacts.push(<Artifact>{
+                            id: rr.id,
+                            depth: rr.depth,
+                            excRegion: rr.excRegion,
+                            name: rr.name
+                        })
+                    })
+                });
+                temp.knowledges.map(rr => {
+                    if (rr !== null && rr !== undefined) {
+                        temp.monument.push(<Monument>{
+                            id: rr.id,
+                            name: rr.name,
+                            knowledge: rr
+                        });
+                        if (rr.site.heritages) {
+                            rr.site.heritages.map(hertigage => {
+                                temp.heritages.push(<Heritage>{
+                                    id: hertigage.id,
+                                    name: hertigage.name
+                                })
                             });
-                            rr.site.spatial.map(coordinats => {
-                                temp.spatia.push(
-                                    <Spatial>{
-                                        id: rr.id,
-                                        name: rr.name,
-                                        x: coordinats.x,
-                                        y: coordinats.y,
-                                        type: coordinats.type,
-                                        epoch: rr.site.epoch
-                                    })
+                        }
+                        if (rr.culture) {
+                            temp.cultures.push(<Culture>{
+                                id: rr.culture.id,
+                                ru_name: rr.culture.ru_name
                             })
                         }
-                    });
+
+                        rr.site.spatial.map(coordinats => {
+                            temp.spatia.push(
+                                <Spatial>{
+                                    id: rr.id,
+                                    name: rr.name,
+                                    x: coordinats.x,
+                                    y: coordinats.y,
+                                    type: coordinats.type,
+                                    epoch: rr.site.epoch
+                                })
+                        })
+                    }
+                });
                 self.coordinats.emit(temp.spatia);
                 self.research = temp;
                 debugger;

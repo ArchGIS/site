@@ -160,7 +160,7 @@ export declare module AuthorInter {
         author: Author;
         coauthors: Author[];
         description: string;
-        excavations: any;
+        excavations: Excavation[];
         id: number;
         knowledges: Knowledge[];
         name: string;
@@ -172,6 +172,17 @@ export declare module AuthorInter {
         active: boolean;
         spatia: Spatial[];
         monument: Monument[];
+        heritages: Heritage[];
+        artifacts: Artifact[];
+        cultures: Culture[];
+    }
+
+    export interface Excavation {
+        area: number;
+        artifacts: Artifact[];
+        boss: string;
+        id: number;
+        name: string;
     }
 
     export interface Knowledge {
@@ -225,6 +236,14 @@ export declare module AuthorInter {
         name: string;
         id: number;
     }
+
+    export interface Artifact {
+        depth: string;
+        excRegion: string;
+        id: any;
+        name: string;
+    }
+
     export interface Epoch{
         id: number;
         ru_name: string;
@@ -234,6 +253,12 @@ export declare module AuthorInter {
     export interface Site {
         spatial: Spatial[];
         epoch: Epoch;
+        heritages: Heritage[];
+    }
+
+    export interface Heritage{
+        id: number;
+        name: string;
     }
 
 }
