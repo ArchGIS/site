@@ -29,7 +29,7 @@ export class MonumentShowIComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.id) {
-      //this.getResearchID(this.id)
+      this.getMonumentID(this.id)
     }
   }
 
@@ -44,7 +44,7 @@ export class MonumentShowIComponent implements OnChanges {
     });
   }
 
-  /*getMonumentID(id: number) {
+  getMonumentID(id: number) {
     let self = this;
     self.service.getMonumentID(id)
         .then(res => {
@@ -53,30 +53,22 @@ export class MonumentShowIComponent implements OnChanges {
           temp.monument = [];
           temp.report = [];
           temp.spatia = [];
-          temp.knowledges.map(rr => {
-            if (rr !== null && rr !== undefined) {
-              temp.monument.push(<Monument>{
-                id: rr.id,
-                name: rr.name,
-                knowledge: rr
-              });
-              rr.site.spatial.map(coordinats => {
-                temp.spatia.push(
-                    <Spatial>{
-                      id: rr.id,
-                      name: rr.name,
-                      x: coordinats.x,
-                      y: coordinats.y,
-                      type: coordinats.type,
-                      epoch: rr.site.epoch
-                    })
-              })
-            }
-          });
+          temp.spatia.map(coordinats => {
+            temp.spatia.push(
+                <Spatial>{
+                  id: res.id,
+                  name: res.name,
+                  x: coordinats.x,
+                  y: coordinats.y,
+                  type: coordinats.type,
+                  epoch: res.site.epoch
+                })
+          })
+
           self.coordinats.emit(temp.spatia);
-          self.research = temp;
+          self.monument = temp;
           debugger;
         })
-  }*/
+  }
 
 }

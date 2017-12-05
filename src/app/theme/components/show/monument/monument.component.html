@@ -1,56 +1,13 @@
 <md-tab-group>
-    <md-tab label="Общие сведения">
-        <md-list>
-            <md-list-item>
-                <p md-line>Названия памятника:</p>
-                <p md-line>Погребение в Лихачевке, Лихачевка</p>
-            </md-list-item>
-            <md-list-item>
-                <p md-line>Эпоха:</p>
-                <p md-line>Эпоха Великого переселения</p>
-            </md-list-item>
-            <md-list-item>
-                <p md-line>Тип:</p>
-                <p md-line>Курганный могильник</p>
-            </md-list-item>
-            <md-list-item>
-                <p md-line>Культурная принадлежность:</p>
-                <p md-line>Степные погребения 5-6 вв.: первая группа, не определена</p>
-            </md-list-item>
-            <md-list-item>
-                <p md-line>Исследований:</p>
-                <p md-line>2</p>
-            </md-list-item>
-            <md-list-item>
-                <p md-line>Вскрытий:</p>
-                <p md-line>0; Общая площадь 0 м²</p>
-            </md-list-item>
-            <md-list-item>
-                <p md-line>Артефактов:</p>
-                <p md-line>0</p>
-            </md-list-item>
-            <md-list-item>
-                <p md-line>ОКН:</p>
-                <p md-line>Отсутствует</p>
-            </md-list-item>
-            <md-list-item>
-                <p md-line>Всего культурных слоев:</p>
-                <p md-line>1</p>
-            </md-list-item>
-            <md-list-item>
-                <p md-line>Вышележащие культурные слои</p>
-                <p md-line>Нет</p>
-            </md-list-item>
-            <md-list-item>
-                <p md-line>Культурные слои с близкой стратиграфической позицией</p>
-                <p md-line>Нет</p>
-            </md-list-item>
-            <md-list-item>
-                <p md-line>Нижележащие культурные слои</p>
-                <p md-line>Нет</p>
-            </md-list-item>
-        </md-list>
-    </md-tab>
+   <!-- <md-tab label="Общие сведения">
+        <div class="block">
+            <div class="request-name">Названия памятника:</div>
+            <div class="request-name-main">
+                <a [routerLink]="['/main', 'admin-panel', 'show', 'author', research.author.id]">
+                    {{research.author.name}}</a>
+            </div>
+        </div>
+    </md-tab>-->
     <md-tab label="Исследования">
         <button md-button>Исследование №1: Обломский А.М., Аналитическое, 2004</button>
         <button md-button>Исследование №2: Гавритухин И.О., Аналитическое, 2004</button>

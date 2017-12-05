@@ -62,7 +62,7 @@ export class SearchService {
     getMonumentID(id: number) {
         let url = `${Consts.baseURL}v1/graphql`;
         return this.http
-            .post(url, `{"query": "{Monument(id:${id}){name researches{id name knowledges{id name site{epoch{id ru_name}  spatial{ date x y type{id ru_name  }}}} publication{id name published_at} report{id year name fileid code }}}}"}`)
+            .post(url, `{"query": "{Knowledges(id:${id}){id name site{epoch{id ru_name}  spatial{ date x y type{id ru_name  }}}}}"}`)
             .map(res => {
                 return res.json();
             })

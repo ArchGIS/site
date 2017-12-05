@@ -211,6 +211,13 @@ export declare module AuthorInter {
         name: string;
         active: boolean;
         knowledge: Knowledge;
+        spatia: Spatial[];
+        monument: Monument[];
+        heritages: Heritage[];
+        artifacts: Artifact[];
+        cultures: Culture[];
+        radiocarbons: Radiocarbon[];
+        report?: Report[];
     }
 
     export interface AuthorI {
