@@ -11,6 +11,9 @@
             <show-monument *ngIf="entitiesID===3"
                            (coordinats)="onSpatial($event)"
                            [id]="id"></show-monument>
+            <show-excavation *ngIf="entitiesID===4"
+                           (coordinats)="onSpatial($event)"
+                           [id]="id"></show-excavation>
         </div>
     </div>
     <div class="right"

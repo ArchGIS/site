@@ -183,6 +183,11 @@ export declare module AuthorInter {
         boss: string;
         id: number;
         name: string;
+        spatia: Spatial[];
+        monument: Monument[];
+        radiocarbons: Radiocarbon[];
+        report: Report[];
+        researches: Research[];
     }
 
     export interface Knowledge {

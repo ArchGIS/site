@@ -1,0 +1,123 @@
+ <md-tab-group>
+
+    <md-tab label="Общие сведения">
+        <div *ngIf="excavation"
+             class="block-max">
+
+            <div class="block">
+                <div class="request-name">Исследование:</div>
+
+                    <div class="request-name-main">
+                        <div *ngFor="let item of excavation.researches">
+                            <a [routerLink]="['/main', 'admin-panel', 'show', 'research', item.id]">
+                                {{item.name}}
+                            </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="request-name">Год проведения исследования:</div>
+                <div class="request-name-main">
+                   {{excavation.researches[0]?.year}}
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="request-name">Автор исследования:</div>
+                <div class="request-name-main">
+                    {{excavation.researches[0]?.author.name}}
+                </div>
+
+            </div>
+
+            <div class="block">
+                <div class="request-name">Руководитель работ:</div>
+                <div class="request-name-main">{{excavation.boss}}</div>
+            </div>
+
+             <div class="block">
+                <div class="request-name">Площадь вскрытия:</div>
+                <div class="request-name-main">{{excavation.area}}</div>
+            </div>
+
+             <div class="block">
+                <div class="request-name">Количество артефактов:</div>
+                <div class="request-name-main">{{excavation.artifacts.length}}</div>
+            </div>
+
+        </div>
+
+    </md-tab>
+
+    <md-tab label="Памятники">
+        <div *ngIf="excavation"
+                class="block-max">
+            <div *ngFor="let block of excavation.monument; let i=index">
+                <div class="expansion-panel"
+                     (click)="block.active = !block.active">
+                    <div class="title">
+                        Памятник №{{i+1}}: {{block.name}}
+                        <md-icon *ngIf="!block.active"
+                                 style="font-size: 24px">keyboard_arrow_down</md-icon>
+                        <md-icon *ngIf="block.active"
+                                style="font-size: 24px">keyboard_arrow_up</md-icon>
+                    </div>
+                    <div *ngIf="block.active"
+                         class="main-block">
+                        <show-monument-item [monument]="block"></show-monument-item>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="excavation.monument.length===0"
+                    class="empty-item">
+                Нет данных
+            </div>
+        </div>
+    </md-tab>
+
+    <md-tab label="Артефакты">
+        <div class="block-max">
+            <md-nav-list *ngIf="excavation">
+                <md-list-item *ngFor="let link of excavation.artifacts">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'artifact', link.id]">
+                        {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="excavation.artifacts?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+
+    <md-tab label="Радиоуглеродные датировки">
+        <div class="block-max">
+            <md-nav-list *ngIf="excavation">
+                <md-list-item *ngFor="let link of excavation.radiocarbons">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'radiocarbon', link.id]">
+                        {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="excavation.radiocarbons?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+
+</md-tab-group>

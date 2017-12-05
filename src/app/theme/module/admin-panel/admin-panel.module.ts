@@ -25,6 +25,8 @@ import {AddItemShowIComponent} from "../../components/show/ItemAdd/ItemAdd.compo
 import {LeafletModule} from "@asymmetrik/angular2-leaflet";
 import {ResearchShowIComponent} from "../../components/show/research/research.component";
 import {ItemMonumentShowIComponent} from "../../components/show/monument/item/item-monument.component";
+import {ArtifactShowIComponent} from "../../components/show/artifact/artifact.component";
+import {ExcavationShowIComponent} from "../../components/show/excavation/excavation.component";
 
 const adminPanelComponent =[
   AdminPanelComponent,
@@ -35,7 +37,9 @@ const adminPanelComponent =[
   AuthorShowIComponent,
   AddItemShowIComponent,
   ResearchShowIComponent,
-  ItemMonumentShowIComponent
+  ItemMonumentShowIComponent,
+  ArtifactShowIComponent,
+  ExcavationShowIComponent
 ];
 
 

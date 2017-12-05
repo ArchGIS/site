@@ -59,6 +59,9 @@ export class ShowIComponent implements OnChanges {
         case 'monument':
           this.entitiesID = 3;
           break;
+        case 'excavation':
+          this.entitiesID = 4;
+          break;
         default:
           break;
       }
@@ -89,6 +92,21 @@ export class ShowIComponent implements OnChanges {
         break;
       case 'monument':
         this.entitiesID = 3;
+        break;
+      case 'report':
+        this.entitiesID = 4;
+        break;
+      case 'artifact':
+        this.entitiesID = 5;
+        break;
+      case 'culture':
+        this.entitiesID = 6;
+        break;
+      case 'radiocarbon':
+        this.entitiesID = 6;
+        break;
+      case 'publication':
+        this.entitiesID = 7;
         break;
       default:
         break;

@@ -37,12 +37,22 @@ export class AdvancedSearchIComponent implements OnChanges{
       maxZoom: 18,
       attribution: 'Open Street Map'
     })
+  };// Open Street Map Definition
+  LAYER_OSM_Custom = {
+    id: 'openstreetmapCustom',
+    name: 'Open Street Map Custom',
+    enabled: false,
+    layer: L.tileLayer('http://{s}.tile.cloudmade.com/API-key/997/256/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: 'Open Street Map'
+    })
   };
 
   // Values to bind to Leaflet Directive
   layersControlOptions = { position: 'bottomright' };
   baseLayers = {
-    'Open Street Map': this.LAYER_OSM.layer
+    'Open Street Map': this.LAYER_OSM.layer,
+    'Open Street Map Custom': this.LAYER_OSM_Custom.layer,
   };
   options = {
     zoom: 3,
