@@ -8,10 +8,9 @@ import {TokenService} from "../../services/token/token.serviece";
 import {ConstService} from "../../services/http/service-const.service";
 import {MainService} from "../../services/main/main.service";
 import {CommandRoutingModule} from "./command-routing.module";
-import {TranslateService} from "ng2-translate";
 import {CommandIComponent} from "../../components/command/command.component";
 import {CommandComponent} from "./command.component";
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 const commandComponent =[
   CommandComponent,

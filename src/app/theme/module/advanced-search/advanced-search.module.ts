@@ -8,10 +8,9 @@ import {TokenService} from "../../services/token/token.serviece";
 import {ConstService} from "../../services/http/service-const.service";
 import {MainService} from "../../services/main/main.service";
 import {AdvancedSearchRoutingModule} from "./advanced-search-routing.module";
-import {TranslateService} from "ng2-translate";
 import {AdvancedSearchComponent} from "./advanced-search.component";
 import {AdvancedSearchIComponent} from "../../components/advanced-search/advanced-search.component";
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {LeafletMarkerClusterModule} from "@asymmetrik/angular2-leaflet-markercluster";
 import {LeafletModule} from "@asymmetrik/angular2-leaflet";
 

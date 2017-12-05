@@ -8,10 +8,9 @@ import {TokenService} from "../../services/token/token.serviece";
 import {ConstService} from "../../services/http/service-const.service";
 import {MainService} from "../../services/main/main.service";
 import { UploadingDataRoutingModule} from "./uploading-data-routing.module";
-import {TranslateService} from "ng2-translate";
 import { UploadingDataComponent} from "./uploading-data.component";
 import {UploadingDataIComponent} from "../../components/uploading-data/uploading-data.component";
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 const uploadingDataComponent =[
   UploadingDataComponent,

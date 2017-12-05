@@ -1,9 +1,9 @@
 <div class="main">
     <div class="title">
-        <h2>{{'ADMIN-PANEL.TITLE' | translate}}</h2>
+        <h2>Административная панель</h2>
     </div>
     <div class="form">
-        <md-select placeholder="{{'ADMIN-PANEL.SELECT' | translate}}"
+        <md-select placeholder="Сущность"
                    [(value)]="entitiesIDSelect">
             <md-option *ngFor="let essence of entities"
                        (click)="onSelectEntities(essence.id)"
@@ -17,7 +17,7 @@
             <md-icon mdPrefix>search &nbsp;</md-icon>
             <input mdInput
                    [(ngModel)]="textS"
-                   placeholder="{{'ADMIN-PANEL.INPUT' | translate}}"
+                   placeholder="Фильтр по названию"
                    type="text">
         </md-input-container>
     </div>
@@ -25,7 +25,7 @@
         <button md-raised-button
                 (click)="onSelect()"
                 color="primary">
-            <md-icon>settings</md-icon>{{'ADMIN-PANEL.BUTTON' | translate}}
+            <md-icon>settings</md-icon>Найти
         </button>
     </div>
 

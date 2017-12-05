@@ -8,7 +8,6 @@ import {TokenService} from "../../services/token/token.serviece";
 import {ConstService} from "../../services/http/service-const.service";
 import {MainService} from "../../services/main/main.service";
 import {AdminPanelRoutingModule} from "./admin-panel-routing.module";
-import {TranslateModule, TranslateService} from "ng2-translate";
 import {AdminPanelIComponent} from "../../components/admin-panel/admin-panel.component";
 import {AdminPanelComponent} from "./admin-panel.component";
 import {FormAdminPanelComponent} from "../../components/admin-panel/form/form.component";
@@ -27,6 +26,7 @@ import {ResearchShowIComponent} from "../../components/show/research/research.co
 import {ItemMonumentShowIComponent} from "../../components/show/monument/item/item-monument.component";
 import {ArtifactShowIComponent} from "../../components/show/artifact/artifact.component";
 import {ExcavationShowIComponent} from "../../components/show/excavation/excavation.component";
+import {TranslateModule} from "@ngx-translate/core";
 
 const adminPanelComponent =[
   AdminPanelComponent,

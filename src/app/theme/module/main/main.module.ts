@@ -10,10 +10,9 @@ import {MainService} from "../../services/main/main.service";
 import {AboutComponent} from "../../components/about/about.component";
 import {TopBarComponent} from "../../../pages/top-bar/top-bar.component";
 import {MainRoutingModule} from "./main-routing.module";
-import {TranslateService} from "ng2-translate";
 import {MainComponent} from "./main.component";
 import {MainCountComponent} from "../../components/main/main.component";
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 const mainComponent =[
   TopBarComponent,

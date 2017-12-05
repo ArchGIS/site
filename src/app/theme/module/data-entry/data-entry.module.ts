@@ -8,10 +8,9 @@ import {TokenService} from "../../services/token/token.serviece";
 import {ConstService} from "../../services/http/service-const.service";
 import {MainService} from "../../services/main/main.service";
 import {DataEntryRoutingModule} from "./data-entry-routing.module";
-import {TranslateService} from "ng2-translate";
 import {DataEntryComponent} from "./data-entry.component";
 import {DataEntryIComponent} from "../../components/data-entry/data-entry.component";
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {StudyTemplateIComponent} from "../../components/data-entry/template/study.component";
 import {MonumentTemplateIComponent} from "../../components/data-entry/template/monument.component";
 
