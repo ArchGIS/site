@@ -42,7 +42,7 @@ export class AdvancedSearchIComponent implements OnChanges{
     id: 'openstreetmapCustom',
     name: 'Open Street Map Custom',
     enabled: false,
-    layer: L.tileLayer('http://{s}.tile.cloudmade.com/API-key/997/256/{z}/{x}/{y}.png', {
+    layer: L.tileLayer('http://vec{s}.maps.yandex.net/tiles?l=map&v=4.55.2&z={z}&x={x}&y={y}&scale=2&lang=ru_RU', {
       maxZoom: 18,
       attribution: 'Open Street Map'
     })
