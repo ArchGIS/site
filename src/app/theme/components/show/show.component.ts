@@ -4,6 +4,8 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnChanges
 import {SearchService} from "../../services/search/search.service";
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
+declare var polylineM: any;
+import 'leaflet.polylinemeasure';
 import {MonumentInterface} from "../../model/quick-search";
 import Monuments = MonumentInterface.Monuments;
 import {DataSource} from "@angular/cdk/collections";
@@ -23,7 +25,7 @@ import {PlatformLocation} from "@angular/common";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ShowIComponent implements OnChanges {
+export class ShowIComponent implements OnChanges, OnInit {
 
   constructor(private service: SearchService,
               public router: Router,
@@ -33,20 +35,6 @@ export class ShowIComponent implements OnChanges {
               private activateRoute: ActivatedRoute) {
     let self = this;
 
-    router.events.subscribe((val) => {
-
-      console.log(val instanceof NavigationEnd)
-    });
-
-    platformLocation.onPopState(() => {
-      debugger;
-      if(platformLocation.pathname.startsWith("/currentRoute")) {
-        this.ngZone.run(() => {
-          debugger;
-          console.log("Reloading component");
-        });
-      }
-    });
     this.subscription = activateRoute.params.subscribe(params=> {
       this.id = params['id'];
       switch (params['entities']) {
@@ -79,16 +67,26 @@ export class ShowIComponent implements OnChanges {
       }
     });
 
-    this.markerClusterOptions = <L.MarkerClusterGroupOptions>{
-      showCoverageOnHover: true,
-      zoomToBoundsOnClick: true,
-      spiderfyOnMaxZoom: true,
-      animate: true,
-      animateAddingMarkers: true,
-      removeOutsideVisibleBounds: true,
-      chunkedLoading: true
-    };
+
   }
+
+  map;
+
+  ngOnInit(){
+    var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 18,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
+        }),
+        latlng = L.latLng(55.798551, 49.106324);
+    this.map = L.map('map', {center: latlng, zoom: 3, layers: [tiles]});
+    L.control.scale({maxWidth:240, metric:true, imperial:false, position: 'bottomleft'}).addTo(this.map);
+    L.control.polylineMeasure({position:'topleft', unit:'metres', clearMeasurementsOnStop: false, showMeasurementsClearControl: true, showUnitControl: true}).addTo(this.map);
+
+
+
+  }
+
+
 
   ngOnChanges() {
     this.subscription = this.activateRoute.params.subscribe(params=> {
@@ -125,15 +123,7 @@ export class ShowIComponent implements OnChanges {
     }
   }
 
-  markerClusterGroup: L.MarkerClusterGroup;
-  markerClusterData: any[] = [];
-  markerClusterOptions: L.MarkerClusterGroupOptions;
 
-  markerClusterReady(group: L.MarkerClusterGroup) {
-
-    this.markerClusterGroup = group;
-
-  }
 
   private entities: string;
   private entitiesID: number;
@@ -154,112 +144,31 @@ export class ShowIComponent implements OnChanges {
 
   onSpatial(spatial: Spatial[]){
     let self = this;
-    self.model = new LeafletLayersDemoModel(
-        [this.LAYER_OSM, this.LAYER_OCM],
-        this.LAYER_OCM.id,
-        [this.marker]
-    );
+    var markers = L.markerClusterGroup();
     let marker;
     spatial.map(item => {
       let title: string = item.name;
       let marker_url: string = 'assets/icon/monTypes/monType' + item.type.id + '_' + item.epoch.id + '.png';
-      marker = {
-        id: 'asd',
-        name: 'Marker',
-        enabled: true,
-        layer: L.marker([item.x, item.y], {
-          icon: L.icon({
-            iconSize: [25, 25],
-            iconAnchor: [25, 25],
-            iconUrl: marker_url,
-          }),
-          title: title,
-          clickable: true
-        }),
-      };
-      self.model.overlayLayers.push(marker)
+
+      marker = L.marker(new L.LatLng(item.x, item.y),
+          { title: title ,
+            icon: L.icon({
+              iconUrl: marker_url,
+              iconSize:[25, 25],
+            })});
+      marker.bindPopup(title);
+      markers.addLayer(marker);
+
+
     });
+    self.map.addLayer(markers);
     self.bool = true;
-    self.onApply();
-  }
-
-  onApply(): void {
-    let self = this;
-    // Get the active base layer
-    let data: any[] = [];
-    self.model.overlayLayers.map(item=>{
-      data.push(item.layer);
-    });
-    self.search = false;
-    self.markerClusterData = data;
-  }
-
-
-  onMonument(event: Spatial[]): void {
-
   }
 
 
 
-  // Open Street Map and Open Cycle Map definitions
-  LAYER_OCM = {
-    id: 'opencyclemap',
-    name: 'Open Cycle Map',
-    enabled: true,
-    layer: L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: 'Open Cycle Map'
-    })
-  };
-  LAYER_OSM = {
-    id: 'openstreetmap',
-    name: 'Open Street Map',
-    enabled: false,
-    layer: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: 'Open Street Map'
-    })
-  };
-
-  baseLayers = {
-    'Open Street Map': this.LAYER_OSM.layer
-  };
-
-  marker = {
-    id: 'marker',
-    name: 'Marker',
-    enabled: true,
-    layer: L.marker([46.879966, -121.726909], {
-      icon: L.icon({
-        iconSize: [25, 41],
-        iconAnchor: [13, 41],
-        iconUrl: 'assets/icon/apple-icon.png',
-      })
-    }),
-  };
 
 
-  // Form model object
-  model:LeafletLayersDemoModel= new LeafletLayersDemoModel(
-      [this.LAYER_OSM, this.LAYER_OCM],
-      this.LAYER_OCM.id,
-      []
-  );
-
-
-  // Values to bind to Leaflet Directive
-  layers: L.Layer[];
-  layersControl: any;
-  options = {
-    zoom: 3,
-    center: L.latLng([55.798551, 49.106324])
-  };
-
-
-  reset(): void{
-    this.search = true;
-    this.bool = false;
-  }
 
 
 }

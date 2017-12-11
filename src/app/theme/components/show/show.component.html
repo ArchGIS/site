@@ -18,14 +18,8 @@
     </div>
     <div class="right"
          [class.right-search]="bool">
-        <div leaflet style="height: 100%; width:100%;"
-             [leafletOptions]="options"
-             [leafletBaseLayers]="baseLayers"
-             [leafletLayersControlOptions]="layersControlOptions"
-
-             [leafletMarkerCluster]="markerClusterData"
-             [leafletMarkerClusterOptions]="markerClusterOptions"
-             (leafletMarkerClusterReady)="markerClusterReady($event)">
+        <div  style="height: 100%; width:100%;"
+              id="map">
         </div>
     </div>
 </div>

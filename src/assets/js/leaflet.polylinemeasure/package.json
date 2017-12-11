@@ -1,0 +1,45 @@
+{
+  "_from": "leaflet.polylinemeasure",
+  "_id": "leaflet.polylinemeasure@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha1-uhG4yI5ujf0S0NNhkNPlvDxeIUQ=",
+  "_location": "/leaflet.polylinemeasure",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "leaflet.polylinemeasure",
+    "name": "leaflet.polylinemeasure",
+    "escapedName": "leaflet.polylinemeasure",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/leaflet.polylinemeasure/-/leaflet.polylinemeasure-1.0.0.tgz",
+  "_shasum": "ba11b8c88e6e8dfd12d0d36190d3e5bc3c5e2144",
+  "_spec": "leaflet.polylinemeasure",
+  "_where": "/home/nardm/temp/site",
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/ppete2/Leaflet.PolylineMeasure/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Leaflet Plugin to measure distances of simple lines as well as of complex polylines",
+  "homepage": "https://github.com/ppete2/Leaflet.PolylineMeasure#readme",
+  "license": "BSD-2-Clause",
+  "main": "Leaflet.PolylineMeasure.js",
+  "name": "leaflet.polylinemeasure",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ppete2/Leaflet.PolylineMeasure.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}
