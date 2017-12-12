@@ -31,43 +31,43 @@ export class SearchService {
     getItemsAuthor(like?: string) {
         let url = `${Consts.baseURL}api/graphql`;
         let item = '{"query": "{Author{id name researches{name}}}"}';
-        return this.service.post<any>(url, item);
+        return this.service.post<any,any>(url, item);
     }
 
     getResearches() {
         let url = `${Consts.baseURL}api/graphql`;
         let item = '{"query": "{Research{id name }}"}';
-        return this.service.post<any>(url, item);
+        return this.service.post<any,any>(url, item);
     }
 
     getAuthorID(id: number) {
         let url = `${Consts.baseURL}api/graphql`;
-        let item = `{"query": "{Author(id:${id}){name researches{id name knowledges{id name site{epoch{id ru_name}  spatial{ date x y type{id ru_name  }}}} publication{id name published_at} report{id year name fileid code }}}}"}`;
-        return this.service.post<any>(url, item);
+        let item = `{"query": "{Author(id:${id}){name researches{id name knowledges{id name site{epoch{id ru_name}  spatial{ date x y type{id ru_name  }} publication{id name published_at} report{id year name fileid code }}}}}"}`;
+        return this.service.post<any,any>(url, item);
     }
     getMonumentID(id: number) {
         let url = `${Consts.baseURL}api/graphql`;
-        let item = `{"query": "{Knowledge(id:${id}){id name description excavations_count artifacts_count site{epoch{id ru_name}  spatial{ date x y type{id ru_name  }}}}}"}`;
-        return this.service.post<any>(url, item);
+        let item = `{"query": "{Site(id:${id}){id artifacts_count excavations{name id area}  epoch{id ru_name}  spatial{ date x y type{id ru_name  }} knowledges{ id name description excavations_count artifacts_count culture{id ru_name}  research{id name year description type{id ru_name} author{id name} report{id  year name} excavations{id name area boss artifacts{id name depth excRegion}} radiocarbons{id name date s sampleDesc bcadSecondTop bcadSecondBot } }} } }"}`;
+        return this.service.post<any,any>(url, item);
     }
 
     getResearchID(id: number) {
         let url = `${Consts.baseURL}api/graphql`;
         let item = `{"query": "{Research(id:${id}){id name year description type{id ru_name} author{id name} report{id  year name} publication{id name published_at} excavations{id name area boss artifacts{id name depth excRegion}} radiocarbons{id name date s sampleDesc bcadSecondTop bcadSecondBot } coauthors{id name} knowledges{ culture{id ru_name} id name description excavations_count artifacts_count site{ heritages{ id name}  epoch{id ru_name}  spatial{ date x y type{id ru_name  }}}} }}"}`;
-        return this.service.post<any>(url, item);
+        return this.service.post<any,any>(url, item);
     }
 
 
     getExcavationID(id: number) {
         let url = `${Consts.baseURL}api/graphql`;
         let item = `{"query": "{Excavation(id:${id}){id name area boss  researches {id name year description type{id ru_name} author{id name} report{id  year name} publication{id name published_at} excavations{id name area boss artifacts{id name depth excRegion}} radiocarbons{id name date s sampleDesc bcadSecondTop bcadSecondBot } coauthors{id name} knowledges{ culture{id ru_name} id name description excavations_count artifacts_count site{ heritages{ id name}  epoch{id ru_name}  spatial{ date x y type{id ru_name  }}}}} }}"}`;
-        return this.service.post<any>(url, item);
+        return this.service.post<any,any>(url, item);
     }
 
     getArtifactID(id: number) {
         let url = `${Consts.baseURL}api/graphql`;
         let item = `{"query": "{Research(id:${id}){id name year description type{id ru_name} author{id name} report{id  year name} publication{id name published_at} excavations{id name area boss artifacts{id name depth excRegion}} radiocarbons{id name date s sampleDesc bcadSecondTop bcadSecondBot } coauthors{id name} knowledges{ culture{id ru_name} id name description excavations_count artifacts_count site{ heritages{ id name}  epoch{id ru_name}  spatial{ date x y type{id ru_name  }}}} }}"}`;
-        return this.service.post<any>(url, item);
+        return this.service.post<any,any>(url, item);
     }
 
 

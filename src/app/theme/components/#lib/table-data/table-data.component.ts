@@ -195,6 +195,7 @@ export declare module AuthorInter {
         research: Research;
         description: string;
         name: string;
+        active: boolean;
         site: Site;
         artifacts_count: number;
         excavations_count: number;
@@ -215,8 +216,14 @@ export declare module AuthorInter {
         id: number;
         name: string;
         active: boolean;
+        epoch: Epoch;
+        artifacts_count: number;
         knowledge: Knowledge;
+        knowledges: Knowledge[];
+        knowledge_count: number;
+        excavations: Excavation[];
         spatia: Spatial[];
+        spatial: Spatial[];
         monument: Monument[];
         heritages: Heritage[];
         artifacts: Artifact[];

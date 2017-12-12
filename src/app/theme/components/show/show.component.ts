@@ -183,9 +183,13 @@ export class ShowIComponent implements OnChanges, OnInit {
     spatial.map(item => {
       let title: string = item.name;
       let marker_url: string = 'assets/icon/monTypes/monType' + item.type.id + '_' + item.epoch.id + '.png';
+      let html_title =
+          `<p>${marker_url}</p>
+            <p><a>${item.id}</a></p>`;
 
       marker = L.marker(new L.LatLng(item.x, item.y),
           { title: title ,
+            clickable: true,
             icon: L.icon({
               iconUrl: marker_url,
               iconSize:[25, 25],

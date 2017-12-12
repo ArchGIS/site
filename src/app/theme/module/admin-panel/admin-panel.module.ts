@@ -27,6 +27,7 @@ import {ItemMonumentShowIComponent} from "../../components/show/monument/item/it
 import {ArtifactShowIComponent} from "../../components/show/artifact/artifact.component";
 import {ExcavationShowIComponent} from "../../components/show/excavation/excavation.component";
 import {TranslateModule} from "@ngx-translate/core";
+import {ItemResearchShowIComponent} from "../../components/show/research/item/item-research.component";
 
 const adminPanelComponent =[
   AdminPanelComponent,
@@ -39,7 +40,8 @@ const adminPanelComponent =[
   ResearchShowIComponent,
   ItemMonumentShowIComponent,
   ArtifactShowIComponent,
-  ExcavationShowIComponent
+  ExcavationShowIComponent,
+  ItemResearchShowIComponent
 ];
 
 

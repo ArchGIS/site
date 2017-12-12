@@ -49,11 +49,13 @@ export class MonumentShowIComponent implements OnChanges {
     self.service.getMonumentID(id)
         .then(res => {
           debugger;
-          let temp: Monument = res.Monument[0];
+          let temp: Monument = res.Site[0];
           temp.monument = [];
           temp.report = [];
           temp.spatia = [];
-          temp.spatia.map(coordinats => {
+          temp.knowledge = temp.knowledges[0];
+          temp.knowledge_count = res.Site[0].knowledges.lenght;
+          temp.spatial.map(coordinats => {
             temp.spatia.push(
                 <Spatial>{
                   id: res.id,
@@ -61,13 +63,13 @@ export class MonumentShowIComponent implements OnChanges {
                   x: coordinats.x,
                   y: coordinats.y,
                   type: coordinats.type,
-                  epoch: res.site.epoch
+                  epoch: temp.epoch
                 })
-          })
+          });
 
           self.coordinats.emit(temp.spatia);
-          self.monument = temp;
           debugger;
+          self.monument = temp;
         })
   }
 
