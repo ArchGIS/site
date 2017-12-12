@@ -91,6 +91,7 @@ export class ShowIComponent implements OnChanges, OnInit {
       layers: [tiles,OpenStreetMap_BlackAndWhite]
     });
     L.control.layers(baseMaps).addTo(this.map);
+
     L.control.scale({
       maxWidth: 240,
       metric: true,
@@ -167,13 +168,12 @@ export class ShowIComponent implements OnChanges, OnInit {
 
   onSpatial(spatial: Spatial[]){
     let self =  this;
-      let markersLayer = new L.LayerGroup();	//layer contain searched elements
     let markers = L.markerClusterGroup();
     let marker;
 
     let controlSearch = new L.Control.Search({
-      position: 'topright',
-      layer: markersLayer,
+      position: 'topleft',
+      layer: markers,
       initial: false,
       zoom: 12,
       marker: false
@@ -192,7 +192,6 @@ export class ShowIComponent implements OnChanges, OnInit {
             })});
       marker.bindPopup(title);
       markers.addLayer(marker);
-      markersLayer.addLayer(marker);
 
     });
     self.map.addLayer(markers);
