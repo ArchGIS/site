@@ -62,6 +62,12 @@ export class SearchService {
         return this.service.post<any,any>(url, item);
     }
 
+    getReportID(id: number) {
+        let url = `${Consts.baseURL}api/graphql`;
+        let item = `{"query": "{Report(id:${id}){ researches{ id name year description type{id ru_name} author{id name} report{id  year name} publication{id name published_at} excavations{id name area boss artifacts{id name depth excRegion}} radiocarbons{id name date s sampleDesc bcadSecondTop bcadSecondBot } coauthors{id name} knowledges{ culture{id ru_name} id name description excavations_count artifacts_count site{ heritages{ id name}  epoch{id ru_name}  spatial{ date x y type{id ru_name  }}}} }}}"}`;
+        return this.service.post<any,any>(url, item);
+    }
+
 
     getExcavationID(id: number) {
         let url = `${Consts.baseURL}api/graphql`;

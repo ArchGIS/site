@@ -137,6 +137,8 @@ export declare module AuthorInter {
         id: any;
         name: string;
         year: number;
+        spatia: Spatial[];
+        researches: Research[];
     }
 
     export interface Publication {

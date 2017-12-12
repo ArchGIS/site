@@ -49,8 +49,11 @@ export class ShowIComponent implements OnChanges, OnInit {
         case 'artifact':
           this.entitiesID = 5;
           break;
-        case 'culture':
+        case 'report':
           this.entitiesID = 6;
+          break
+        case 'culture':
+          this.entitiesID = 9;
           break;
         case 'radiocarbon':
           this.entitiesID = 6;
