@@ -8,6 +8,10 @@ import {AuthorInter} from "../../#lib/table-data/table-data.component";
 import Spatial = AuthorInter.Spatial;
 import Monument = AuthorInter.Monument;
 import {AddItemShowIComponent} from "../ItemAdd/ItemAdd.component";
+import {FormControl} from "@angular/forms";
+import Research2 = AuthorInter.Research2;
+import {Observable} from "rxjs/Observable";
+import Culture = AuthorInter.Culture;
 
 @Component({
   selector: 'show-monument',
@@ -18,7 +22,54 @@ import {AddItemShowIComponent} from "../ItemAdd/ItemAdd.component";
 export class MonumentShowIComponent implements OnChanges {
   constructor(private service: SearchService,
               public dialog: MdDialog) {
+      this.onAddResearches();
+      this.stateCtrl = new FormControl();
   }
+
+    stateCtrl: FormControl;
+    filteredStates: Observable<Culture[]>;
+    researches: Culture[];
+    add: boolean = false;
+    nameAdd: string;
+
+    onAdd(event, city: any) {
+        this.nameAdd = city.ru_name;
+        this.monument.knowledge.culture.ru_name = city.ru_name;
+        this.add = true;
+        this.editCulture = false;
+        debugger;
+    }
+
+    onAddResearches() {
+        let self = this;
+        self.service.getCulture()
+            .then(res => {
+                debugger;
+                let temp: Culture[] = [];
+                res.Culture.map(item=>{
+                        if (item!==undefined&& item!==null){
+                        temp.push(item);
+                    }
+                })
+                self.researches = temp;
+                self.filteredStates = self.stateCtrl.valueChanges
+                    .startWith(null)
+                    .map(user => user && typeof user === 'object' ? user.ru_name : user)
+                    .map(name => name ? self.filterStates(name) : self.researches.slice());
+                debugger;
+            })
+    }
+
+    public displayFn(item: any) {
+        let self = this;
+        return item ? item.ru_name : item;
+    }
+
+    filterStates(name: string) {
+        return this.researches.filter(option => new RegExp(`^${name}`, 'gi')
+            .test(option.ru_name));
+    }
+
 
   @Input() id: number;
   @Output() coordinats = new EventEmitter<Spatial[]>();
@@ -26,6 +77,11 @@ export class MonumentShowIComponent implements OnChanges {
   editName: boolean = false;
   editYear: boolean = false;
   editDescription: boolean = false;
+  editCulture: boolean = false;
+
+
+
+
 
   ngOnChanges() {
     if (this.id) {

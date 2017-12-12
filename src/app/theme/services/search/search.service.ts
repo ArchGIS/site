@@ -39,6 +39,11 @@ export class SearchService {
         let item = '{"query": "{Research{id name year type{ru_name} author{name} report{id name}}}"}';
         return this.service.post<any,any>(url, item);
     }
+    getCulture() {
+        let url = `${Consts.baseURL}api/graphql`;
+        let item = '{"query": "{Culture{id ru_name}}"}';
+        return this.service.post<any,any>(url, item);
+    }
 
     getAuthorID(id: number) {
         let url = `${Consts.baseURL}api/graphql`;

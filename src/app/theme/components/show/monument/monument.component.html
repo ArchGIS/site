@@ -13,12 +13,43 @@
                 {{monument.epoch.ru_name}}
             </div>
         </div>
-        <div class="block">
+
+
+        <div *ngIf="!editCulture&&monument"
+             class="block">
             <div class="request-name">Культурная принадлежность:</div>
             <div class="request-name-main">
                 {{monument.knowledge.culture.ru_name}}
+                <md-icon mdTooltip="Редактировать"
+                         (click)="editCulture=!editCulture">edit</md-icon>
             </div>
         </div>
+
+        <div *ngIf="editCulture&&monument"
+             class="block">
+            <div class="request-name">Культурная принадлежность:</div>
+            <div class="request-name-main">
+                <md-input-container style="width: 400px">
+                    <input mdInput
+                           [mdAutocomplete]="auto"
+                           [formControl]="stateCtrl">
+                    <md-autocomplete #auto="mdAutocomplete"
+                                     [displayWith]="displayFn">
+                        <md-option *ngFor="let state of filteredStates | async"
+                                   (onSelectionChange)="onAdd($event, state)"
+                                   >
+                            <span>{{ state.ru_name }}</span> |
+                        </md-option>
+                    </md-autocomplete>
+                </md-input-container>
+                <md-icon class="icon-save"
+                         mdTooltip="Сохранить"
+                         (click)="editCulture=!editCulture">save</md-icon>
+            </div>
+        </div>
+
+
+
         <div class="block">
             <div class="request-name">Исследований:</div>
             <div class="request-name-main">
