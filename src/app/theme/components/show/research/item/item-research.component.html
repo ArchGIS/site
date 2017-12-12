@@ -41,7 +41,8 @@
 
 <div class="block" *ngIf="!editDescription">
     <div class="request-name">Описание памятника:</div>
-    <div class="request-name-main">
+    <div class="request-name-main"
+        *ngIf="research.description">
         {{research.description}}
         <md-icon mdTooltip="Редактировать"
                  (click)="editDescription=!editDescription">edit</md-icon>

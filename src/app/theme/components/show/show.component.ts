@@ -68,6 +68,47 @@ export class ShowIComponent implements OnChanges, OnInit {
 
   map;
 
+  mapI()
+  { var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
+      }),
+      latlng = L.latLng(55.798551, 49.106324);
+    var OpenStreetMap_BlackAndWhite = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    var baseMaps = {
+      "Grayscale": tiles,
+      "Streets": OpenStreetMap_BlackAndWhite
+    };
+
+
+    this.map = L.map('map', {
+      center: latlng,
+      zoom: 3,
+      layers: [tiles,OpenStreetMap_BlackAndWhite]
+    });
+    L.control.layers(baseMaps).addTo(this.map);
+
+    L.control.scale({
+      maxWidth: 240,
+      metric: true,
+      imperial: false,
+      position: 'bottomleft'
+    }).addTo(this.map);
+
+    L.control.polylineMeasure({
+      position: 'topleft',
+      unit: 'metres',
+      clearMeasurementsOnStop: false,
+      showMeasurementsClearControl: true,
+      showUnitControl: true
+    }).addTo(this.map);
+
+  }
+
   ngOnInit() {
     var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 18,
@@ -145,6 +186,7 @@ export class ShowIComponent implements OnChanges, OnInit {
       default:
         break;
     }
+    this.mapI()
   }
 
 

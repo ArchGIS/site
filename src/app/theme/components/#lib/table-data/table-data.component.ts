@@ -7,6 +7,7 @@ import Knowledge = AuthorInter.Knowledge;
 import Author = AuthorInter.Author;
 import {PreoladSpinner} from "../../../services/preload/preolad.service";
 import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from "@angular/material";
+import Research = AuthorInter.Research;
 
 @Component({
   selector: 'table-data',
@@ -39,6 +40,7 @@ export class TableDataComponent implements OnChanges {
     }
 
     items: Author[]= undefined;
+    research: Research[]= undefined;
 
 
     onDeleteItem(item: Author){
@@ -67,7 +69,21 @@ export class TableDataComponent implements OnChanges {
     }
 
     getResearch(){
-debugger;
+        let self = this;
+        self.service.getResearches()
+            .then(res => {
+                debugger;
+                self.research = res.Research;
+                self.research.map(rr=>{
+                    rr.report_string =  '';
+                    if (rr.report){
+                        rr.report.map(item=>{
+                                rr.report_string +=item.name
+                            }
+                        )
+                    }
+                })
+            })
     }
     getAuthor(){
         let self = this;
@@ -167,6 +183,7 @@ export declare module AuthorInter {
         publication: Publication;
         radiocarbons: Radiocarbon[];
         report?: Report[];
+        report_string: string;
         type: Type2;
         year: number;
         active: boolean;

@@ -36,13 +36,13 @@ export class SearchService {
 
     getResearches() {
         let url = `${Consts.baseURL}api/graphql`;
-        let item = '{"query": "{Research{id name }}"}';
+        let item = '{"query": "{Research{id name year type{ru_name} author{name} report{id name}}}"}';
         return this.service.post<any,any>(url, item);
     }
 
     getAuthorID(id: number) {
         let url = `${Consts.baseURL}api/graphql`;
-        let item = `{"query": "{Author(id:${id}){name researches{id name knowledges{id name site{epoch{id ru_name}  spatial{ date x y type{id ru_name  }} publication{id name published_at} report{id year name fileid code }}}}}"}`;
+         let item = `{"query": "{Author(id:${id}){name researches{id name knowledges{id name site{epoch{id ru_name}  spatial{ date x y type{id ru_name  }}}} publication{id name published_at} report{id year name fileid code }}}}"}`;;
         return this.service.post<any,any>(url, item);
     }
     getMonumentID(id: number) {
