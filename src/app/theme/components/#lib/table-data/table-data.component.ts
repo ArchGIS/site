@@ -205,6 +205,7 @@ export declare module AuthorInter {
         radiocarbons: Radiocarbon[];
         report: Report[];
         researches: Research[];
+        sites: Site;
     }
 
     export interface Knowledge {
@@ -278,6 +279,8 @@ export declare module AuthorInter {
         excRegion: string;
         id: any;
         name: string;
+        spatia: Spatial[];
+        excavation: Excavation;
     }
 
     export interface Epoch{

@@ -43,7 +43,7 @@ export class ShowIComponent implements OnChanges, OnInit {
         case 'monument':
           this.entitiesID = 3;
           break;
-        case 'report':
+        case 'excavation':
           this.entitiesID = 4;
           break;
         case 'artifact':
@@ -115,21 +115,39 @@ export class ShowIComponent implements OnChanges, OnInit {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
         }),
         latlng = L.latLng(55.798551, 49.106324);
+
     var OpenStreetMap_BlackAndWhite = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
+    let googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+      maxZoom: 20,
+      subdomains:['mt0','mt1','mt2','mt3']
+    });
+
+    let googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+      maxZoom: 20,
+      subdomains:['mt0','mt1','mt2','mt3']
+    });
+
+    let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+      maxZoom: 20,
+      subdomains:['mt0','mt1','mt2','mt3']
+    })
+
     var baseMaps = {
-      "Grayscale": tiles,
-      "Streets": OpenStreetMap_BlackAndWhite
+      "OSM": tiles,
+      "Google": googleStreets,
+      "GoogleHybrid": googleHybrid,
+      "GoogleSatellite": googleSat
     };
 
 
     this.map = L.map('map', {
       center: latlng,
       zoom: 3,
-      layers: [tiles,OpenStreetMap_BlackAndWhite]
+      layers: [tiles,OpenStreetMap_BlackAndWhite,googleStreets]
     });
     L.control.layers(baseMaps).addTo(this.map);
 

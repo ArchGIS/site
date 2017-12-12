@@ -73,6 +73,7 @@ export class ExcavationShowIComponent implements OnChanges {
 
     getExcavationID(id: number) {
         let self = this;
+        debugger;
         self.service.getExcavationID(id)
             .then(res => {
                 debugger;

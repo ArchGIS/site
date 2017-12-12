@@ -16,6 +16,8 @@ import Heritage = AuthorInter.Heritage;
 import Excavation = AuthorInter.Excavation;
 import Artifact = AuthorInter.Artifact;
 import Culture = AuthorInter.Culture;
+import {Observable} from "rxjs/Observable";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'show-artifact',
@@ -53,10 +55,17 @@ export class ArtifactShowIComponent implements OnChanges {
     editName: boolean = false;
     editYear: boolean = false;
     editDescription: boolean = false;
+    stateCtrl: FormControl;
+    filteredStates: Observable<Monument[]>;
+    researches: Culture[];
+    add: boolean = false;
+    nameAdd: string;
+
+
 
     ngOnChanges() {
         if (this.id) {
-           // this.getArtifactID(this.id)
+            this.getArtifactID(this.id)
         }
     }
 
@@ -71,66 +80,28 @@ export class ArtifactShowIComponent implements OnChanges {
         });
     }
 
-    /*getArtifactID(id: number) {
+    getArtifactID(id: number) {
         let self = this;
         self.service.getArtifactID(id)
             .then(res => {
+                debugger;
                 let temp: Artifact = res.Artifact[0];
-                temp.monument = [];
-                temp.report = [];
                 temp.spatia = [];
-                temp.heritages = [];
-                temp.artifacts = [];
-                temp.cultures = [];
-                temp.excavations.map(item=>{
-                    item.artifacts.map(rr=>{
-                        temp.artifacts.push(<Artifact>{
-                            id: rr.id,
-                            depth: rr.depth,
-                            excRegion: rr.excRegion,
-                            name: rr.name
-                        })
-                    })
-                });
-                temp.knowledges.map(rr => {
-                    if (rr !== null && rr !== undefined) {
-                        temp.monument.push(<Monument>{
-                            id: rr.id,
-                            name: rr.name,
-                            knowledge: rr
-                        });
-                        if (rr.site.heritages) {
-                            rr.site.heritages.map(hertigage => {
-                                temp.heritages.push(<Heritage>{
-                                    id: hertigage.id,
-                                    name: hertigage.name
-                                })
-                            });
-                        }
-                        if (rr.culture) {
-                            temp.cultures.push(<Culture>{
-                                id: rr.culture.id,
-                                ru_name: rr.culture.ru_name
-                            })
-                        }
-
-                        rr.site.spatial.map(coordinats => {
+                temp.excavation.sites[0].spatial.map(coordinats => {
                             temp.spatia.push(
                                 <Spatial>{
-                                    id: rr.id,
-                                    name: rr.name,
+                                    id: 1,
+                                    name: temp.name,
                                     x: coordinats.x,
                                     y: coordinats.y,
                                     type: coordinats.type,
-                                    epoch: rr.site.epoch
+                                    epoch: temp.excavation.sites[0].epoch
                                 })
-                        })
-                    }
                 });
                 self.coordinats.emit(temp.spatia);
-                self.research = temp;
+                self.artifact = temp;
                 debugger;
             })
-    }*/
+    }
 
 }
