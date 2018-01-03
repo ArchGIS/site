@@ -1,0 +1,19 @@
+<div class="main">
+    <div class="list-item">
+        <md-nav-list>
+            <a md-list-item
+               *ngFor="let link of links"
+                (click)="onSelect(link.id)">
+                {{link.name}}
+            </a>
+        </md-nav-list>
+    </div>
+    <div class="main-item">
+            <div *ngIf="item===1">
+                <personal-information></personal-information>
+            </div>
+            <div *ngIf="item===2">
+                <scientific-biography></scientific-biography>
+            </div>
+    </div>
+</div>

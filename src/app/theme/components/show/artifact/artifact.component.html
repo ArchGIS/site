@@ -85,7 +85,14 @@
     </md-tab>
 
     <md-tab label="Фотографии">
-        Нет данных
+        <image-upload
+                (onRemove)="imageRemoved($event, ind)"
+                (onFileUploadFinish)="imageUploaded($event, ind)"
+                [url]="uploadUrl"
+                [buttonCaption]="'Выберите фотографию'"
+                [dropBoxMessage]="'Drop your images here!'"
+                [headers]="[{header: 'Authorization', value: 'Bearer'}]"
+        ></image-upload>
     </md-tab>
     <md-tab label="Датировки">
         Нет данных

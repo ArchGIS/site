@@ -5,7 +5,6 @@
 import {
     Component,
 } from '@angular/core';
-import { AppState } from './app.service';
 import {TranslateService} from "ng2-translate";
 import {CountItem, MainService} from "../../services/main/main.service";
 

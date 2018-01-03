@@ -9,7 +9,7 @@ import Monument = AuthorInter.Monument;
 import Research2 = AuthorInter.Research2;
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {AddItemShowIComponent} from "../ItemAdd/ItemAdd.component";
-import {MdDialog} from "@angular/material";
+import {MdDialog, MdDialogConfig} from "@angular/material";
 import Spatial = AuthorInter.Spatial;
 import Research = AuthorInter.Research;
 import Heritage = AuthorInter.Heritage;
@@ -18,6 +18,7 @@ import Artifact = AuthorInter.Artifact;
 import Culture = AuthorInter.Culture;
 import {Observable} from "rxjs/Observable";
 import {FormControl} from "@angular/forms";
+import {Consts} from "../../../../const/app-const";
 
 @Component({
   selector: 'show-artifact',
@@ -61,6 +62,17 @@ export class ArtifactShowIComponent implements OnChanges {
     add: boolean = false;
     nameAdd: string;
 
+    uploadUrl: string = Consts.baseURL + 'v1/service/request/photo';
+    AddImage(ind: number) {
+    }
+
+    imageRemoved(event, ind) {
+        let id = JSON.parse(event.serverResponse).data.id;
+    }
+
+    imageUploaded(event, ind) {
+        let id = JSON.parse(event.serverResponse).data.id;
+    }
 
 
     ngOnChanges() {
@@ -74,7 +86,7 @@ export class ArtifactShowIComponent implements OnChanges {
     }*/
 
     openDialog(name: string): void {
-        let dialogRef = this.dialog.open(AddItemShowIComponent, {
+        let dialogRef = this.dialog.open(AddItemShowIComponent, <MdDialogConfig>{
             width: '500px',
             data: {text: name}
         });

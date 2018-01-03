@@ -29,6 +29,7 @@ import {ExcavationShowIComponent} from "../../components/show/excavation/excavat
 import {TranslateModule} from "@ngx-translate/core";
 import {ItemResearchShowIComponent} from "../../components/show/research/item/item-research.component";
 import {ReportShowIComponent} from "../../components/show/report/report.component";
+import {ImageUploadModule} from "../../components/#lib/ng2-image-upload-master/src/image-upload.module";
 
 const adminPanelComponent =[
   AdminPanelComponent,
@@ -72,6 +73,7 @@ const MODULE_CUSTOM = [
     MODULE_CUSTOM,
     LeafletModule.forRoot(),
     LeafletMarkerClusterModule,
+    ImageUploadModule.forRoot(),
   ],
   declarations: [
     adminPanelComponent

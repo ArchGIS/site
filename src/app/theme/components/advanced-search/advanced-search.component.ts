@@ -5,6 +5,8 @@ import {control, latLng, tileLayer} from "leaflet";
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 import zoom = control.zoom;
+import 'leaflet-rastercoords'
+import 'leaflet-easyprint'
 
 @Component({
   templateUrl: `advanced-search.component.html`,
@@ -42,8 +44,8 @@ export class AdvancedSearchIComponent implements OnChanges{
     id: 'openstreetmapCustom',
     name: 'Open Street Map Custom',
     enabled: false,
-    layer: L.tileLayer('http://vec{s}.maps.yandex.net/tiles?l=map&v=4.55.2&z={z}&x={x}&y={y}&scale=2&lang=ru_RU', {
-      maxZoom: 18,
+    layer: L.tileLayer('./asd/{z}/{y}x{x}.png', {
+      maxZoom: 6,
       attribution: 'Open Street Map'
     })
   };
@@ -70,8 +72,39 @@ export class AdvancedSearchIComponent implements OnChanges{
   zoom: number = 18;
 
   ngOnInit() {
-    this.generateData();
 
+
+
+    var map = L.map('map').setView([0, 0], 4);
+    L.easyPrint({
+      title: 'My awesome print button',
+      position: 'bottomright',
+      sizeModes: ['A4Portrait', 'A4Landscape']
+    }).addTo(map);
+    let img = [
+        17749,
+        10009
+    ];
+
+   // var rc = new L.RasterCoords(map, img);
+
+
+
+    L.tileLayer('./map/PGM_clip/{z}/{x}/{y}.png',{
+      minZoom: 0,
+      maxZoom: 7,
+      continuousWorld: true,
+      noWrap: true,
+      attribution: '',
+      tms: false
+    }).addTo(map);
+   /* var kmlLayer = new L.KML("mapperz-kml-example.kml", {async: true});
+
+    kmlLayer.on("loaded", function(e) {
+      map.fitBounds(e.target.getBounds());
+    });
+
+    map.addLayer(kmlLayer);*/
   }
 
   markerClusterReady(group: L.MarkerClusterGroup) {

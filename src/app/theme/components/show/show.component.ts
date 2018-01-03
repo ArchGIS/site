@@ -6,6 +6,8 @@ import * as L from 'leaflet';
 import 'leaflet.markercluster';
 import 'leaflet.polylinemeasure';
 import 'leaflet-search';
+import 'leaflet-rastercoords'
+import 'leaflet-easyprint'
 import {MonumentInterface} from "../../model/quick-search";
 import Monuments = MonumentInterface.Monuments;
 import {Subscription} from "rxjs/Subscription";
@@ -25,13 +27,13 @@ export class ShowIComponent implements OnChanges, OnInit {
 
   constructor(private service: SearchService,
               public router: Router,
-              private cdRef:ChangeDetectorRef,
+              private cdRef: ChangeDetectorRef,
               private platformLocation: PlatformLocation,
               private ngZone: NgZone,
               private activateRoute: ActivatedRoute) {
     let self = this;
 
-    this.subscription = activateRoute.params.subscribe(params=> {
+    this.subscription = activateRoute.params.subscribe(params => {
       this.id = params['id'];
       switch (params['entities']) {
         case 'author':
@@ -71,27 +73,50 @@ export class ShowIComponent implements OnChanges, OnInit {
 
   map;
 
-  mapI()
-  { var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
-      }),
-      latlng = L.latLng(55.798551, 49.106324);
+  mapI() {
+    var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 18,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
+        }),
+        latlng = L.latLng(55.798551, 49.106324);
+
     var OpenStreetMap_BlackAndWhite = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
-    var baseMaps = {
-      "Grayscale": tiles,
-      "Streets": OpenStreetMap_BlackAndWhite
-    };
+    let googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+      maxZoom: 20,
+      subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+    });
 
+    let googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+      maxZoom: 20,
+      subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+    });
+
+    let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+      maxZoom: 20,
+      subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+    });
+
+
+    let Custom = L.tileLayer('./map/{z}/{x}/{y}.png', {
+      maxZoom: 7,
+    });
+
+    let baseMaps = {
+      "OSM": tiles,
+      "Google": googleStreets,
+      "GoogleHybrid": googleHybrid,
+      "GoogleSatellite": googleSat,
+      "Custom": Custom,
+    };
 
     this.map = L.map('map', {
       center: latlng,
       zoom: 3,
-      layers: [tiles,OpenStreetMap_BlackAndWhite]
+      layers: [tiles, OpenStreetMap_BlackAndWhite, googleStreets]
     });
     L.control.layers(baseMaps).addTo(this.map);
 
@@ -108,6 +133,12 @@ export class ShowIComponent implements OnChanges, OnInit {
       clearMeasurementsOnStop: false,
       showMeasurementsClearControl: true,
       showUnitControl: true
+    }).addTo(this.map);
+
+    L.easyPrint({
+      title: 'My awesome print button',
+      position: 'bottomright',
+      sizeModes: ['A4Portrait', 'A4Landscape']
     }).addTo(this.map);
 
   }
@@ -124,35 +155,49 @@ export class ShowIComponent implements OnChanges, OnInit {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
-    let googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+    let googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
       maxZoom: 20,
-      subdomains:['mt0','mt1','mt2','mt3']
+      subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
     });
 
-    let googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+    let googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
       maxZoom: 20,
-      subdomains:['mt0','mt1','mt2','mt3']
+      subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
     });
 
-    let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+    let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
       maxZoom: 20,
-      subdomains:['mt0','mt1','mt2','mt3']
-    })
+      subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+    });
+
+
+    let Custom = L.tileLayer('./map/{z}/{x}/{y}.png', {
+      maxZoom: 7,
+    }
 
     var baseMaps = {
       "OSM": tiles,
       "Google": googleStreets,
       "GoogleHybrid": googleHybrid,
-      "GoogleSatellite": googleSat
+      "GoogleSatellite": googleSat,
+      "Custom": Custom,
+
+
     };
 
 
     this.map = L.map('map', {
       center: latlng,
       zoom: 3,
-      layers: [tiles,OpenStreetMap_BlackAndWhite,googleStreets]
+      layers: [tiles, OpenStreetMap_BlackAndWhite, googleStreets,googleHybrid,googleSat,Custom]
     });
     L.control.layers(baseMaps).addTo(this.map);
+
+    L.easyPrint({
+      title: 'My awesome print button',
+      position: 'bottomleft',
+      sizeModes: ['A4Portrait', 'A4Landscape']
+    }).addTo(this.map);
 
     L.control.scale({
       maxWidth: 240,
@@ -173,9 +218,8 @@ export class ShowIComponent implements OnChanges, OnInit {
   }
 
 
-
   ngOnChanges() {
-    this.subscription = this.activateRoute.params.subscribe(params=> {
+    this.subscription = this.activateRoute.params.subscribe(params => {
       this.id = params['id'];
       this.entities = params['entities'];
     });
@@ -211,7 +255,6 @@ export class ShowIComponent implements OnChanges, OnInit {
   }
 
 
-
   private entities: string;
   private entitiesID: number;
   private id: number;
@@ -228,9 +271,8 @@ export class ShowIComponent implements OnChanges, OnInit {
   public search: boolean = true;
 
 
-
-  onSpatial(spatial: Spatial[]){
-    let self =  this;
+  onSpatial(spatial: Spatial[]) {
+    let self = this;
     let markers = L.markerClusterGroup();
     let marker;
 
@@ -251,12 +293,15 @@ export class ShowIComponent implements OnChanges, OnInit {
             <p><a>${item.id}</a></p>`;
 
       marker = L.marker(new L.LatLng(item.x, item.y),
-          { title: title ,
+          {
+            title: title,
             clickable: true,
+            draggable: true,
             icon: L.icon({
               iconUrl: marker_url,
-              iconSize:[25, 25],
-            })});
+              iconSize: [25, 25],
+            })
+          });
       marker.bindPopup(title);
       markers.addLayer(marker);
 
@@ -264,11 +309,6 @@ export class ShowIComponent implements OnChanges, OnInit {
     self.map.addLayer(markers);
     self.bool = true;
   }
-
-
-
-
-
 
 
 }

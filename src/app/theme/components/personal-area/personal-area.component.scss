@@ -1,0 +1,17 @@
+@import "../../../const/css/material";
+
+.main {
+  width: 80vw;
+  margin: 3em auto;
+  display: flex;
+  flex-direction: row;
+  .main-item {
+    background-color: white;
+    width: 100%;
+    box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.32);
+
+  }
+  .list-item {
+    width: 250px;
+  }
+}

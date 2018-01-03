@@ -9,7 +9,7 @@ import Monument = AuthorInter.Monument;
 import Research2 = AuthorInter.Research2;
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {AddItemShowIComponent} from "../ItemAdd/ItemAdd.component";
-import {MdDialog} from "@angular/material";
+import {MdDialog, MdDialogConfig} from "@angular/material";
 import Spatial = AuthorInter.Spatial;
 import Research = AuthorInter.Research;
 import Heritage = AuthorInter.Heritage;
@@ -66,7 +66,7 @@ export class ReportShowIComponent implements OnChanges {
     }*/
 
     openDialog(name: string): void {
-        let dialogRef = this.dialog.open(AddItemShowIComponent, {
+        let dialogRef = this.dialog.open(AddItemShowIComponent, <MdDialogConfig>{
             width: '500px',
             data: {text: name}
         });

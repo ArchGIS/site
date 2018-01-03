@@ -5,17 +5,10 @@
             <!-- Map -->
             <div class="col-md-12" style="margin-top:16px;">
 
-                <div leaflet
+                <div
                      id="map"
                      style="height: 400px;"
-                     [leafletOptions]="options"
-                     [leafletBaseLayers]="baseLayers"
-                     [leafletLayersControlOptions]="layersControlOptions"
-                     [leafletLayers]="layers"
-
-                     [leafletMarkerCluster]="markerClusterData"
-                     [leafletMarkerClusterOptions]="markerClusterOptions"
-                     (leafletMarkerClusterReady)="markerClusterReady($event)">
+                     >
                 </div>
 
             </div>

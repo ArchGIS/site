@@ -94,10 +94,7 @@ export class MonumentShowIComponent implements OnChanges {
    }*/
 
   openDialog(name: string): void {
-    let dialogRef = this.dialog.open(AddItemShowIComponent, {
-      width: '500px',
-      data: {text: name}
-    });
+
   }
 
   getMonumentID(id: number) {

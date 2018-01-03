@@ -5,7 +5,6 @@
 import {
     Component,
 } from '@angular/core';
-import { AppState } from './app.service';
 import {TranslateService} from "../../services/translate/translate.service";
 import {ConstService} from "../../services/http/service-const.service";
 import {Consts} from "../../../const/app-const";
