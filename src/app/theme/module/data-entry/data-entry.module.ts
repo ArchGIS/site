@@ -13,12 +13,14 @@ import {DataEntryIComponent} from "../../components/data-entry/data-entry.compon
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {StudyTemplateIComponent} from "../../components/data-entry/template/study.component";
 import {MonumentTemplateIComponent} from "../../components/data-entry/template/monument.component";
+import {ExcavationTemplateIComponent} from "../../components/data-entry/template/excavation.component";
 
 const dataEntryComponent =[
   DataEntryComponent,
   DataEntryIComponent,
   StudyTemplateIComponent,
-  MonumentTemplateIComponent
+  MonumentTemplateIComponent,
+  ExcavationTemplateIComponent
 ];
 
 

@@ -37,31 +37,47 @@
                 <study-entry></study-entry>
                 <div class="button">
                     <button md-raised-button
+                            class="data-entry-button"
                             color="primary">Далее</button>
                 </div>
             </md-tab>
-            <md-tab label="Памятник">
-                <monument-entry></monument-entry>
+            <md-tab label="Памятники">
+                <md-list>
+                    <md-list-item style=" display: flex; justify-content: center;">
+                        <md-accordion>
+                            <div *ngFor="let item of monuments; let i=index">
+                                <monument-entry [count]="i+1"></monument-entry>
+                            </div>
+                        </md-accordion>
+                    </md-list-item>
+                </md-list>
+                <div class="button">
+                   <button md-raised-button class="data-entry-button"
+                        color="primary" (click)="onAddMonument()">
+                    <md-icon>settings</md-icon>
+                    Добавить памятник
+                    </button>
+                </div>
                 <div class="button">
                     <button md-raised-button
+                            class="data-entry-button"
                             color="primary">Далее</button>
                 </div>
             </md-tab>
-            <md-tab label="Вскрытие">
-                <div class="button">
-                    <button md-raised-button
-                            color="primary">Далее</button>
+            <md-tab label="Вскрытия">
+                <div *ngFor="let item of excavations; let i=index">
+                    <excavation-entry [count]="i+1"></excavation-entry>
                 </div>
-            </md-tab>
-            <md-tab label="Колекция">
                 <div class="button">
-                    <button md-raised-button
-                            color="primary">Далее</button>
+                    <button md-raised-button class="data-entry-button"
+                            color="primary" (click)="onAddExcavation()">
+                        <md-icon>settings</md-icon>
+                        Добавить вскрытие
+                    </button>
                 </div>
-            </md-tab>
-            <md-tab label="Артефакт">
                 <div class="button">
                     <button md-raised-button
+                            class="data-entry-button"
                             color="primary">Далее</button>
                 </div>
             </md-tab>

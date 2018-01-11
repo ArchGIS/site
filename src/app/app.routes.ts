@@ -11,12 +11,12 @@ export const ROUTES: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    //canActivate: [AuthGuardLogin]
+    canActivate: [AuthGuardLogin]
   },
   {
     path: 'main',
     loadChildren: 'app/theme/module/main/main.module#MainModule',
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
 
   { path: '**',    component: NoContentComponent },

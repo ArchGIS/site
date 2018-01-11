@@ -1,12 +1,6 @@
-
-
-import {Component, OnChanges, OnInit} from "@angular/core";
-import {control, latLng, tileLayer} from "leaflet";
-import * as L from 'leaflet';
-import 'leaflet.markercluster';
-import zoom = control.zoom;
-import 'leaflet-rastercoords'
-import 'leaflet-easyprint'
+import {Component, OnChanges, OnInit, Query} from "@angular/core";
+import {createQuery} from "@angular/core/src/view/query";
+import {SearchService} from "../../services/search/search.service";
 
 @Component({
   templateUrl: `advanced-search.component.html`,
@@ -15,118 +9,65 @@ import 'leaflet-easyprint'
 
 export class AdvancedSearchIComponent implements OnChanges{
 
+  constructor(private service: SearchService) {
+    let self = this;
+    self.typeS = [
+      {id: 1, name: 'Памятник', value: 'monument'},
+      {id: 2, name: 'Иследование', value: 'research'},
+      {id: 3, name: 'Автор', value: 'author'},
+    ];
+  }
 
-  layers = [
-    L.circle([ 46.95, -122 ], { radius: 5000 }),
-    L.polygon([[ 46.8, -121.85 ], [ 46.92, -121.92 ], [ 46.87, -121.8 ]]),
-    L.marker([ 46.879966, -121.726909 ])
-  ];
+  public typeS: EntityType[] = [];
+  public typeSID: number = 1;
 
-  layersEmpty= [ ];
-  map: L.Map;
+  query: SearchQuery[] = [];
+  values: Parameter[] = [];
+  findData: any[];
 
+  entity: string = 'monument';
+  criteria: string[] = ['1'];
+
+  onAddCriteria() {
+    this.criteria.push('1');
+  }
+
+  updateEntity() {
+    this.entity = this.typeS[this.typeSID-1].value;
+  }
+
+  updateValues(value) {
+    console.log(value)
+    this.values[value[0]] = {name: value[2], "value": value[1]};
+  }
+
+  sendQuery() {
+    this.query[0] = {id: this.typeSID, params: this.values};
+    let self = this;
+    self.service.getAdvancedSearch(JSON.stringify(this.query))
+      .then(res => {
+        self.findData = res;
+        console.log(self.findData)
+      })
+  }
 
   ngOnChanges(){
     debugger;
   }
+}
 
-  // Open Street Map Definition
-  LAYER_OSM = {
-    id: 'openstreetmap',
-    name: 'Open Street Map',
-    enabled: false,
-    layer: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: 'Open Street Map'
-    })
-  };// Open Street Map Definition
-  LAYER_OSM_Custom = {
-    id: 'openstreetmapCustom',
-    name: 'Open Street Map Custom',
-    enabled: false,
-    layer: L.tileLayer('./asd/{z}/{y}x{x}.png', {
-      maxZoom: 6,
-      attribution: 'Open Street Map'
-    })
-  };
+export interface EntityType{
+  id: number;
+  name: string;
+  value: string;
+}
 
-  // Values to bind to Leaflet Directive
-  layersControlOptions = { position: 'bottomright' };
-  baseLayers = {
-    'Open Street Map': this.LAYER_OSM.layer,
-    'Open Street Map Custom': this.LAYER_OSM_Custom.layer,
-  };
-  options = {
-    zoom: 3,
-    center: L.latLng([ 46.879966, -121.726909 ])
-  };
+export interface Parameter {
+  name: string;
+  value: string;
+}
 
-  // Marker cluster stuff
-  markerClusterGroup: L.MarkerClusterGroup;
-  markerClusterData: any[] = [];
-  markerClusterOptions: L.MarkerClusterGroupOptions;
-
-  // Generators for lat/lon values
-  generateLat() { return Math.random() * 360 - 180; }
-  generateLon() { return Math.random() * 180 - 90; }
-  zoom: number = 18;
-
-  ngOnInit() {
-
-
-
-    var map = L.map('map').setView([0, 0], 4);
-    L.easyPrint({
-      title: 'My awesome print button',
-      position: 'bottomright',
-      sizeModes: ['A4Portrait', 'A4Landscape']
-    }).addTo(map);
-    let img = [
-        17749,
-        10009
-    ];
-
-   // var rc = new L.RasterCoords(map, img);
-
-
-
-    L.tileLayer('./map/PGM_clip/{z}/{x}/{y}.png',{
-      minZoom: 0,
-      maxZoom: 7,
-      continuousWorld: true,
-      noWrap: true,
-      attribution: '',
-      tms: false
-    }).addTo(map);
-   /* var kmlLayer = new L.KML("mapperz-kml-example.kml", {async: true});
-
-    kmlLayer.on("loaded", function(e) {
-      map.fitBounds(e.target.getBounds());
-    });
-
-    map.addLayer(kmlLayer);*/
-  }
-
-  markerClusterReady(group: L.MarkerClusterGroup) {
-    this.markerClusterGroup = group;
-
-  }
-
-  generateData() {
-
-    const data: any[] = [];
-
-    for (let i = 0; i < 10; i++) {
-
-      const icon = L.icon({
-        iconUrl: 'assets/icon/monTypes/monType1_1.png',
-        shadowUrl: 'assets/icon/monTypes/monType1_1.png'
-      });
-
-      data.push(L.marker([ this.generateLon(), this.generateLat() ], { icon }));
-    }
-
-    this.markerClusterData = data;
-
-  }
+export interface SearchQuery {
+  id: number;
+  params: Parameter[];
 }

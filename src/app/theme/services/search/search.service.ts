@@ -8,6 +8,7 @@ import {Http, Response} from "@angular/http";
     import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/mergeMap';
 import { Observable } from "rxjs/Observable";
+import {post} from "selenium-webdriver/http";
 @Injectable()
 export class SearchService {
 
@@ -205,6 +206,11 @@ export class SearchService {
     getSiteTypes(lang: string): Promise<any> {
         let url = `${Consts.baseURL}api/site_types?lang=${lang}`;
         return this.service.get<any>(url)
+    }
+
+    getAdvancedSearch(params: any): Promise<any> {
+        let url = `${Consts.baseURL}api/example`;
+        return this.service.post<any, any>(url, params)
     }
 
     private handleError(error: Response | any) {

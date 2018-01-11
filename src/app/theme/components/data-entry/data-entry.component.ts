@@ -45,4 +45,15 @@ export class DataEntryIComponent {
       name: 'Исследование',
     },
   ]
+
+  monuments: string[] = [];
+  excavations: string[] = [];
+
+  onAddMonument(){
+    this.monuments.push('1');
+  }
+
+  onAddExcavation(){
+    this.excavations.push('1');
+  }
 }
