@@ -24,17 +24,23 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
-import { NoContentComponent } from './no-content';
+import { NoContentComponent } from './theme/components/no-content';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
 import {TRANSLATION_PROVIDERS} from "./theme/translation/translations";
 import {TranslateService} from "./theme/services/translate/translate.service";
-import {TranslatePipe} from "./theme/pipes/translate/translate.pipe";
-import {TopBarComponent} from "./pages/top-bar/top-bar.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "@angular/material";
-import {AboutComponent} from "./theme/about/about.component";
+import {TokenService} from "./theme/services/token/token.serviece";
+import {ConstService} from "./theme/services/http/service-const.service";
+import {MainService} from "./theme/services/main/main.service";
+import {LoginComponent} from "./theme/components/login/login.component";
+import {LoginService} from "./theme/services/login/login.service";
+import {AuthGuard} from "./theme/guard/auth-guard.service";
+import {AuthGuardLogin} from "./theme/guard/LoginGuard";
+import {AuthService} from "./theme/guard/auth.service";
+import {PreoladSpinner} from "./theme/services/preload/preolad.service";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -49,9 +55,14 @@ type StoreType = {
 };
 
 const Pipes = [
-  TranslatePipe
 ];
 
+const HTTP_CONST = [
+  TokenService,
+  ConstService,
+  MainService,
+  LoginService
+];
 
 
 /**
@@ -62,8 +73,7 @@ const Pipes = [
   declarations: [
     AppComponent,
     NoContentComponent,
-    TopBarComponent,
-    AboutComponent
+    LoginComponent
   ],
   /**
    * Import Angular's modules.
@@ -84,7 +94,12 @@ const Pipes = [
     APP_PROVIDERS,
     TRANSLATION_PROVIDERS,
     TranslateService,
-    Pipes
+    Pipes,
+    HTTP_CONST,
+    AuthGuard,
+    AuthGuardLogin,
+    AuthService,
+    PreoladSpinner
   ]
 })
 export class AppModule {

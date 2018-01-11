@@ -18,14 +18,14 @@ export class TopBarComponent {
 
     constructor(private _translate: TranslateService) {
         this.supportedLanguages = [
-            {display: 'English', value: 'en'},
-            {display: 'Русский', value: 'ru'},
+            {display: 'English', value: 'en', icon: 'assets/icon/ru.png'},
+            {display: 'Русский', value: 'ru', icon: 'assets/icon/en.png'},
         ];
     }
 
     public listTopB: Array<{ link: string, label: string }> = [
         {
-            link: '',
+            link: 'info',
             label: 'Arch Gic'
         },
         {
@@ -33,44 +33,41 @@ export class TopBarComponent {
             label: 'О системе'
         },
         {
-            link: '',
+            link: 'admin-panel',
             label: 'Административная панель'
         },
         {
-            link: '',
+            link: 'data-download',
             label: 'Загрузка данных'
         },
         {
-            link: '',
+            link: 'data-entry',
             label: 'Внесение данных'
         },
         {
-            link: '',
+            link: 'uploading-data',
             label: 'Выгрузка данных'
         },
         {
-            link: '',
+            link: 'sampling',
             label: 'Выборки'
         },
         {
-            link: '',
+            link: 'advanced-search',
             label: 'Расширенный поиск'
         },
         {
-            link: '',
+            link: 'quick-search',
             label: 'Быстрый поиск'
         },
         {
-            link: '',
+            link: 'command',
             label: 'Команда'
         },
     ];
 
-    public supportedLanguages: Array<{ display: string, value: string }>;
+    public supportedLanguages: Array<{ display: string, value: string, icon: string }>;
 
-    public selectLang(lang: string) {
-        this._translate.use(lang);
-    }
 
 }
 

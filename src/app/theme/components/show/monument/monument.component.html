@@ -1,0 +1,192 @@
+<md-tab-group>
+    <md-tab label="Общие сведения"
+            *ngIf="monument">
+        <div class="block">
+            <div class="request-name">Названия памятника:</div>
+            <div class="request-name-main">
+                    {{monument.knowledge.name}}
+            </div>
+        </div>
+        <div class="block">
+            <div class="request-name">Эпоха:</div>
+            <div class="request-name-main">
+                {{monument.epoch.ru_name}}
+            </div>
+        </div>
+
+
+        <div *ngIf="!editCulture&&monument"
+             class="block">
+            <div class="request-name">Культурная принадлежность:</div>
+            <div class="request-name-main">
+                {{monument.knowledge.culture.ru_name}}
+                <md-icon mdTooltip="Редактировать"
+                         (click)="editCulture=!editCulture">edit</md-icon>
+            </div>
+        </div>
+
+        <div *ngIf="editCulture&&monument"
+             class="block">
+            <div class="request-name">Культурная принадлежность:</div>
+            <div class="request-name-main">
+                <md-input-container style="width: 400px">
+                    <input mdInput
+                           [mdAutocomplete]="auto"
+                           [formControl]="stateCtrl">
+                    <md-autocomplete #auto="mdAutocomplete"
+                                     [displayWith]="displayFn">
+                        <md-option *ngFor="let state of filteredStates | async"
+                                   (onSelectionChange)="onAdd($event, state)"
+                                   >
+                            <span>{{ state.ru_name }}</span> |
+                        </md-option>
+                    </md-autocomplete>
+                </md-input-container>
+                <md-icon class="icon-save"
+                         mdTooltip="Сохранить"
+                         (click)="editCulture=!editCulture">save</md-icon>
+            </div>
+        </div>
+
+
+
+        <div class="block">
+            <div class="request-name">Исследований:</div>
+            <div class="request-name-main">
+                {{monument.knowledges?.length}}
+            </div>
+        </div>
+        <div class="block">
+            <div class="request-name">Вскрытий:</div>
+            <div class="request-name-main" *ngIf="monument.excavations.length!==0">
+                {{monument.excavations[0].area}}
+            </div>
+            <div class="request-name-main" *ngIf="monument.excavations.length===0">
+                    0
+            </div>
+        </div>
+        <div class="block">
+            <div class="request-name">Артефактов:</div>
+            <div class="request-name-main">
+                {{monument.artifacts_count}}
+            </div>
+        </div>
+    </md-tab>
+    <md-tab label="Исследования">
+        <div *ngIf="monument"
+             class="block-max">
+            <div *ngFor="let block of monument.knowledges; let i=index">
+                <div class="expansion-panel"
+                     (click)="block.active = !block.active">
+                    <div class="title">
+                        Памятник №{{i+1}}: {{block.name}}
+                        <md-icon *ngIf="!block.active"
+                                 style="font-size: 24px">keyboard_arrow_down</md-icon>
+                        <md-icon *ngIf="block.active"
+                                 style="font-size: 24px">keyboard_arrow_up</md-icon>
+                    </div>
+                    <div *ngIf="block.active"
+                         class="main-block">
+                        <show-research-item [research]="block"></show-research-item>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="monument.knowledges.length===0"
+                 class="empty-item">
+                Нет данных
+            </div>
+        </div>
+
+    </md-tab>
+   <!-- <md-tab label="Датировки">
+        Хронологические рамки культурного слоя:
+        Века: 5 — 6 - <a>Раннесредневековое трупоположение у с. Лихачевка Полтавской области - 2004 (Обломский А.М., Аналитическое, 2004)</a>
+        Века: 450 — 550 - <a>Среднеднепровские ингумации второй половины V—VI в. - 2004 (Гавритухин И.О., Аналитическое, 2004)</a>
+    </md-tab>-->
+    <md-tab label="Отчёты">
+        <div class="block-max">
+            <md-nav-list *ngIf="monument">
+                <md-list-item *ngFor="let link of monument.knowledge.research.report">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'report', link.id]"> {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="monument.report?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+    <md-tab label="Вскрытия">
+        <div class="block-max">
+            <md-nav-list *ngIf="monument">
+                <md-list-item *ngFor="let link of monument.excavations">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'excavation', link.id]">
+                        {{ link.name }} - {{link.area}}, руководитель работ : {{link.boss}}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="monument.excavations?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+    <md-tab label="Артефакты">
+        <div class="block-max">
+        <md-nav-list *ngIf="monument">
+            <md-list-item *ngFor="let link of monument.knowledge.research.artifacts">
+                <md-icon md-list-icon
+                         *ngIf="link"
+                         (click)="onDeleteResearches(link)"
+                         mdTooltip="Удалить">delete</md-icon>
+                <a mdLine
+                   *ngIf="link"
+                   [routerLink]="['/main', 'admin-panel', 'show', 'artifact', link.id]">
+                    {{ link.name }}
+                </a>
+            </md-list-item>
+            <md-list-item *ngIf="monument.knowledge.research.artifacts?.length===0"
+                          class="empty-item">
+                Нет данных
+            </md-list-item>
+        </md-nav-list>
+        </div>
+    </md-tab>
+    <md-tab label="Радиоуглеродные датировки">
+        <div class="block-max">
+            <md-nav-list *ngIf="monument">
+                <md-list-item *ngFor="let link of monument.knowledge.research.radiocarbons">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'radiocarbon', link.id]">
+                        {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="monument.knowledge.research.radiocarbons?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+    <md-tab label="Фотографии">Нет</md-tab>
+    <md-tab label="Топопланы">Нет</md-tab>
+    <md-tab label="История координат">Нет</md-tab>
+    <md-tab label="3D модель">Нет</md-tab>
+</md-tab-group>

@@ -1,0 +1,12 @@
+<md-input-container >
+    <input mdInput
+           placeholder="Имя"
+           [(ngModel)]="typeName">
+</md-input-container>
+
+<button md-raised-button
+        (click)="getSearch()"
+        color="primary">
+    <md-icon>search</md-icon>
+    Показать результаты
+</button>

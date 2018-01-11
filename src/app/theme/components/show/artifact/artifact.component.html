@@ -1,0 +1,125 @@
+<md-tab-group>
+
+    <md-tab label="Общие сведения">
+        <div *ngIf="artifact"
+             class="block-max">
+
+            <div class="block">
+                <div class="request-name">Название артефакта:</div>
+                <div class="request-name-main">
+                    {{artifact.name}}
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="request-name">Категория:</div>
+                <div class="request-name-main">
+                    Нет данных
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="request-name">Материал:</div>
+                <div class="request-name-main">
+                    Нет данных
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="request-name">Размер:</div>
+                <div class="request-name-main">
+                    Нет данных
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="request-name">Вес:</div>
+                <div class="request-name-main">
+                    Нет данных
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="request-name">Техника изготовления:</div>
+                <div class="request-name-main">
+                    Нет данных
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="request-name">Ключевые слова:</div>
+                <div class="request-name-main">
+                    Нет данных
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="request-name">Год находки:</div>
+                <div class="request-name-main">
+                    Нет данных
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="request-name">Найден на памятнике:</div>
+                <div class="request-name-main">
+                    <a mdLine
+                       [routerLink]="['/main', 'admin-panel', 'show', 'monument', artifact.excavation.sites[0].knowledges[0].id]">
+                        {{ artifact.excavation.sites[0].knowledges[0].name }}
+                    </a>
+
+                </div>
+            </div>
+
+
+            <div class="block">
+                <div class="request-name">Место находки:</div>
+                <div class="request-name-main">
+                    <p>Участок: {{artifact.excRegion}}</p>
+                    <p>Глубина: {{artifact.depth}}</p>
+                </div>
+            </div>
+
+
+        </div>
+    </md-tab>
+
+    <md-tab label="Фотографии">
+        <image-upload
+                (onRemove)="imageRemoved($event, ind)"
+                (onFileUploadFinish)="imageUploaded($event, ind)"
+                [url]="uploadUrl"
+                [buttonCaption]="'Выберите фотографию'"
+                [dropBoxMessage]="'Drop your images here!'"
+                [headers]="[{header: 'Authorization', value: 'Bearer'}]"
+        ></image-upload>
+    </md-tab>
+    <md-tab label="Датировки">
+        Нет данных
+    </md-tab>
+    <md-tab label="Исследования">
+        <div *ngIf="artifact"
+             class="block-max">
+            <div *ngFor="let block of artifact.excavation.researches; let i=index">
+                <div class="expansion-panel"
+                     (click)="block.active = !block.active">
+                    <div class="title">
+                        Исследование №{{i+1}}: {{block.name}}
+                        <md-icon *ngIf="!block.active"
+                                 style="font-size: 24px">keyboard_arrow_down</md-icon>
+                        <md-icon *ngIf="block.active"
+                                 style="font-size: 24px">keyboard_arrow_up</md-icon>
+                    </div>
+                    <div *ngIf="block.active"
+                         class="main-block">
+                        <show-research-item [research]="block"></show-research-item>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="artifact.excavation.researches.length===0"
+                 class="empty-item">
+                Нет данных
+            </div>
+        </div>
+    </md-tab>
+</md-tab-group>

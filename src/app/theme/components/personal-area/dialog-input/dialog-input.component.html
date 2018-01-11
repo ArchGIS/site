@@ -1,0 +1,12 @@
+<h1 md-dialog-title>{{data.name}}</h1>
+<div md-dialog-content>
+    <md-input-container>
+        <input mdInput
+               ([ngModel])="text"
+               placeholder="Название">
+    </md-input-container>
+</div>
+<div md-dialog-actions>
+    <button md-raised-button >Добавить</button>
+    <button md-raised-button >Отменить</button>
+</div>

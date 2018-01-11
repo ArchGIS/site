@@ -1,0 +1,86 @@
+<div class="main">
+    <div class="form" *ngIf="bool">
+        <h3>Создание данных</h3>
+        <md-list>
+            <md-list-item>
+                <md-select placeholder="Что создается?">
+                    <md-option *ngFor="let type of essences"
+                               [value]="type.id">
+                        {{ type.name }}
+                    </md-option>
+                </md-select>
+            </md-list-item>
+            <md-list-item>
+                <md-select placeholder="На основе чего?">
+                    <md-option *ngFor="let type of types"
+                               [value]="type.id">
+                        {{ type.name }}
+                    </md-option>
+                </md-select>
+            </md-list-item>
+            <md-list-item style="margin-top: 40px; display: flex;justify-content: center;">
+                <div class="button">
+                    <button md-raised-button
+                            (click)="bool=!bool"
+                            color="primary">
+                        Приступить к заполнению
+                    </button>
+                </div>
+            </md-list-item>
+        </md-list>
+    </div>
+    <div class="form"
+         *ngIf="!bool"
+         style="margin: 2em;align-self: flex-start;">
+        <md-tab-group>
+            <md-tab label="Исследование">
+                <study-entry></study-entry>
+                <div class="button">
+                    <button md-raised-button
+                            class="data-entry-button"
+                            color="primary">Далее</button>
+                </div>
+            </md-tab>
+            <md-tab label="Памятники">
+                <md-list>
+                    <md-list-item style=" display: flex; justify-content: center;">
+                        <md-accordion>
+                            <div *ngFor="let item of monuments; let i=index">
+                                <monument-entry [count]="i+1"></monument-entry>
+                            </div>
+                        </md-accordion>
+                    </md-list-item>
+                </md-list>
+                <div class="button">
+                   <button md-raised-button class="data-entry-button"
+                        color="primary" (click)="onAddMonument()">
+                    <md-icon>settings</md-icon>
+                    Добавить памятник
+                    </button>
+                </div>
+                <div class="button">
+                    <button md-raised-button
+                            class="data-entry-button"
+                            color="primary">Далее</button>
+                </div>
+            </md-tab>
+            <md-tab label="Вскрытия">
+                <div *ngFor="let item of excavations; let i=index">
+                    <excavation-entry [count]="i+1"></excavation-entry>
+                </div>
+                <div class="button">
+                    <button md-raised-button class="data-entry-button"
+                            color="primary" (click)="onAddExcavation()">
+                        <md-icon>settings</md-icon>
+                        Добавить вскрытие
+                    </button>
+                </div>
+                <div class="button">
+                    <button md-raised-button
+                            class="data-entry-button"
+                            color="primary">Далее</button>
+                </div>
+            </md-tab>
+        </md-tab-group>
+    </div>
+</div>

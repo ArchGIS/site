@@ -1,0 +1,60 @@
+<div class="main">
+    <div class="left"
+         [class.left-search]="search">
+        <div class="form">
+            <div class="block">
+                <h2>Расширенный поиск</h2>
+            </div>
+
+            <md-select placeholder="Что ищем?"
+                       style="margin-bottom: 20px;"
+                       [(ngModel)]="typeSID"
+                       (change)="updateEntity()">
+                <md-option *ngFor="let type of typeS"
+                           [value]="type.id">
+                    {{ type.name }}
+                </md-option>
+            </md-select>
+
+            <div *ngFor="let item of criteria; let i=index">
+                <search-criteria-form
+                    [count]="i+1"
+                    (onChange)="updateValues($event)">
+                </search-criteria-form>
+            </div>
+            <div class="block">
+                <button md-raised-button
+                        (click)="onAddCriteria()"
+                        color="primary">
+                    Добавить критерий
+                </button>
+            </div>
+            <div class="block">
+                <button md-raised-button
+                        (click)="sendQuery()"
+                        color="primary">
+                    Поиск
+                </button>
+            </div>
+            <md-nav-list>
+                <a mat-list-item *ngFor="let item of findData; let i=index"
+                    href="#/main/admin-panel/show/{{entity}}/{{item[0].id}}"
+                    >
+                    <span *ngIf="typeSID == '1'; else defaultTemplate">
+                          {{ item[0].name }} ({{item[0].epoch}}, {{item[0].type}})
+                    </span>
+                    <ng-template #defaultTemplate>
+                          {{ item[0].name }}
+                    </ng-template>
+                </a>
+            </md-nav-list>
+        </div>
+    </div>
+
+    <div class="right"
+         [class.right-search]="bool">
+        <div  style="height: 100%; width:100%;"
+              id="map">
+        </div>
+    </div>
+</div>

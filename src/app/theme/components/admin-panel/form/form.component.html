@@ -1,0 +1,32 @@
+<div class="main">
+    <div class="title">
+        <h2>Административная панель</h2>
+    </div>
+    <div class="form">
+        <md-select placeholder="Сущность"
+                   [(value)]="entitiesIDSelect">
+            <md-option *ngFor="let essence of entities"
+                       (click)="onSelectEntities(essence.id)"
+                       [value]="essence.id">
+                {{ essence.name }}
+            </md-option>
+        </md-select>
+    </div>
+    <div class="form">
+        <md-input-container>
+            <md-icon mdPrefix>search &nbsp;</md-icon>
+            <input mdInput
+                   [(ngModel)]="textS"
+                   placeholder="Фильтр по названию"
+                   type="text">
+        </md-input-container>
+    </div>
+    <div class="form">
+        <button md-raised-button
+                (click)="onSelect()"
+                color="primary">
+            <md-icon>settings</md-icon>Найти
+        </button>
+    </div>
+
+</div>

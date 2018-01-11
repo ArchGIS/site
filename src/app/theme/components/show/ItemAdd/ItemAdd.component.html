@@ -1,0 +1,29 @@
+<h1 md-dialog-title>Добавление исследование</h1>
+<div md-dialog-content>
+    <div *ngIf="!add">
+        <md-input-container style="width: 400px">
+            <input mdInput
+                   placeholder="Исследование"
+                   [mdAutocomplete]="auto"
+                   [formControl]="stateCtrl">
+            <md-autocomplete #auto="mdAutocomplete"
+                             [displayWith]="displayFn">
+                <md-option *ngFor="let state of filteredStates | async"
+                           (onSelectionChange)="onAdd($event, state)"
+                            [value]="state.id">
+                    <span>{{ state.name }}</span> |
+                </md-option>
+            </md-autocomplete>
+        </md-input-container>
+    </div>
+    <div *ngIf="add">
+        {{nameAdd}}
+    </div>
+</div>
+<div md-dialog-actions *ngIf="add">
+    <button md-raised-button (click)="onNoClick()">Добавить</button>
+    <button md-raised-button (click)="onNoClick()">Отменить</button>
+</div>
+<div md-dialog-actions *ngIf="! add">
+    <button md-raised-button (click)="onNoClick()">Отменить</button>
+</div>

@@ -1,0 +1,246 @@
+<md-tab-group>
+
+    <md-tab label="Общие сведения">
+        <div *ngIf="research"
+             class="block-max">
+
+            <div class="block">
+                <div class="request-name">Автор:</div>
+                <div class="request-name-main">
+                    <a [routerLink]="['/main', 'admin-panel', 'show', 'author', research.author.id]">
+                        {{research.author.name}}</a>
+                </div>
+            </div>
+
+            <div *ngIf="research.coauthors.length!==0">
+                <div class="block" *ngFor="let author of research.coauthors">
+                    <div class="request-name">Соавтор:</div>
+                    <div class="request-name-main">
+                        <a [routerLink]="['/main', 'admin-panel', 'show', 'author', author?.id]">
+                            {{author?.name}}</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="block" *ngIf="!editName">
+                <div class="request-name">Название:</div>
+                <div class="request-name-main">
+                    {{research.name}}
+                    <md-icon mdTooltip="Редактировать"
+                             (click)="editName=!editName">edit</md-icon>
+                </div>
+            </div>
+
+            <div class="block" *ngIf="editName">
+                <div class="request-name">Название:</div>
+                <md-input-container md-line>
+                    <input mdInput
+                           (keyup.enter)="editName=!editName"
+                           [(ngModel)]="research.name">
+                </md-input-container>
+                <md-icon class="icon-save"
+                         mdTooltip="Сохранить"
+                         (click)="editName=!editName">save</md-icon>
+            </div>
+
+
+            <div class="block" *ngIf="!editYear">
+                <div class="request-name">Год проведения исследования:</div>
+                <div class="request-name-main">
+                    {{research.year}}
+                    <md-icon mdTooltip="Редактировать"
+                             (click)="editYear=!editYear">edit</md-icon>
+                </div>
+            </div>
+
+            <div class="block" *ngIf="editYear">
+                <div class="request-name">Год проведения исследования:</div>
+                <md-input-container md-line>
+                    <input mdInput
+                           (keyup.enter)="editYear=!editYear"
+                           [(ngModel)]="research.year">
+                </md-input-container>
+                <md-icon class="icon-save"
+                         mdTooltip="Сохранить"
+                         (click)="editYear=!editYear">save</md-icon>
+            </div>
+
+
+
+            <div class="block">
+                <div class="request-name">Тип исследования:</div>
+                <div class="request-name-main">Не указан</div>
+            </div>
+
+            <div class="block" *ngIf="!editDescription">
+                <div class="request-name">Описание:</div>
+                <div class="request-name-main">
+                    {{research.description}}
+                    <md-icon mdTooltip="Редактировать"
+                             (click)="editDescription=!editDescription">edit</md-icon>
+                </div>
+            </div>
+
+            <div class="block" *ngIf="editDescription">
+                <div class="request-name">Описание:</div>
+                <md-input-container md-line>
+                    <textarea mdInput
+                           (keyup.enter)="editDescription=!editDescription"
+                           [(ngModel)]="research.description">
+                    </textarea>
+                </md-input-container>
+                <md-icon class="icon-save"
+                         mdTooltip="Сохранить"
+                         (click)="editDescription=!editDescription">save</md-icon>
+            </div>
+
+
+            <div *ngIf="research.publication"
+                 class="block">
+                <div class="request-name">Публикация:</div>
+                <div class="request-name-main"> <a [routerLink]="['/main', 'admin-panel', 'publication', 'author', research.publication?.id]">
+                    {{research.publication?.name}}</a></div>
+            </div>
+        </div>
+    </md-tab>
+
+    <md-tab label="Памятники">
+        <div *ngIf="research"
+                class="block-max">
+            <div *ngFor="let block of research.monument; let i=index">
+                <div class="expansion-panel"
+                     (click)="block.active = !block.active">
+                    <div class="title">
+                        Памятник №{{i+1}}: {{block.name}}
+                        <md-icon *ngIf="!block.active"
+                                 style="font-size: 24px">keyboard_arrow_down</md-icon>
+                        <md-icon *ngIf="block.active"
+                                style="font-size: 24px">keyboard_arrow_up</md-icon>
+                    </div>
+                    <div *ngIf="block.active"
+                         class="main-block">
+                        <show-monument-item [monument]="block"></show-monument-item>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="research.monument.length===0"
+                    class="empty-item">
+                Нет данных
+            </div>
+        </div>
+    </md-tab>
+
+    <md-tab label="ОКН">
+        <div class="block-max">
+            <md-nav-list *ngIf="research">
+                <md-list-item *ngFor="let link of research.heritages">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'heritage', link.id]">
+                        {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="research.heritage?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+
+    <md-tab label="Вскрытия">
+        <div class="block-max">
+            <md-nav-list *ngIf="research">
+                <md-list-item *ngFor="let link of research.excavations">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'excavation', link.id]">
+                        {{ link.name }} - {{link.area}}, руководитель работ : {{link.boss}}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="research.excavations?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+
+    <md-tab label="Топопланы">
+
+    </md-tab>
+
+    <md-tab label="Артефакты">
+        <div class="block-max">
+            <md-nav-list *ngIf="research">
+                <md-list-item *ngFor="let link of research.artifacts">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'artifact', link.id]">
+                        {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="research.excavations?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+
+    <md-tab label="Радиоуглеродные датировки">
+        <div class="block-max">
+            <md-nav-list *ngIf="research">
+                <md-list-item *ngFor="let link of research.radiocarbons">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'radiocarbon', link.id]">
+                        {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="research.radiocarbons?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+
+    <md-tab label="Культуры">
+        <div class="block-max">
+            <md-nav-list *ngIf="research">
+                <md-list-item *ngFor="let link of research.cultures">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'culture', link.id]">
+                        {{ link.ru_name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="research.cultures?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+</md-tab-group>

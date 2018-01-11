@@ -1,0 +1,72 @@
+<div class="main">
+    <div class="form">
+        <h3>Административная панель</h3>
+        <md-list>
+            <md-list-item>
+                <md-select placeholder="Сущность">
+                    <md-option *ngFor="let type of essences"
+                               [value]="type.id">
+                        {{ type.name }}
+                    </md-option>
+                </md-select>
+            </md-list-item>
+            <md-list-item>
+                <md-input-container>
+                    <input mdInput placeholder="Фильтр по названию">
+                </md-input-container>
+            </md-list-item>
+            <md-list-item>
+                <md-input-container>
+                    <input mdInput placeholder="Фильтр по культуре">
+                </md-input-container>
+            </md-list-item>
+            <md-list-item>
+                <div class="item-main">
+                    Левая верхняя граница области поиска
+                    <div class="item">
+                        <md-input-container style="width: 185px">
+                            <input mdInput
+                                   type="number"
+                                   placeholder="N">
+                        </md-input-container>
+                        <md-input-container style="width: 185px">
+                            <input mdInput
+                                   type="number"
+                                   placeholder="E">
+                        </md-input-container>
+                    </div>
+                </div>
+            </md-list-item>
+            <md-list-item style="margin-top: 27px;">
+                <div class="item-main">
+                    Левая верхняя граница области поиска
+                    <div class="item">
+                        <md-input-container style="width: 185px">
+                            <input mdInput
+                                   type="number"
+                                   placeholder="E">
+                        </md-input-container>
+                        <md-input-container style="width: 185px">
+                            <input mdInput
+                                   type="number"
+                                   placeholder="N">
+                        </md-input-container>
+                    </div>
+                </div>
+            </md-list-item>
+            <md-list-item style="margin-top: 40px; display: flex;
+    justify-content: center;
+">
+                <div class="button">
+                    <button md-raised-button
+                            color="primary">
+                        <md-icon>settings</md-icon>
+                        Найти
+                    </button>
+                </div>
+            </md-list-item>
+        </md-list>
+
+    </div>
+
+</div>

@@ -1,0 +1,71 @@
+<div class="main">
+    <div class="left"
+         [class.left-search]="search">
+        <div class="form"
+             *ngIf="search">
+            <h2>Быстрый поиск</h2>
+            <md-select placeholder="Что ищем?"
+                       [(ngModel)]="typeSID">
+                <md-option *ngFor="let type of typeS"
+                           [value]="type.id">
+                    {{ type.name }}
+                </md-option>
+            </md-select>
+            <h3>Критерии поиска</h3>
+            <div [ngSwitch]="typeSID">
+                <template [ngSwitchCase]="1">
+                    <quick-search-monument class="form-children"
+                                            (result)="onResult($event, 1)"></quick-search-monument>
+                </template>
+                <template [ngSwitchCase]="2">
+                    <quick-search-study class="form-children"
+                                        (result)="onResult($event, 2)"></quick-search-study>
+                </template>
+                <template [ngSwitchCase]="3">
+                    <quick-search-author class="form-children"
+                                         (result)="onResult($event, 3)"></quick-search-author>
+                </template>
+                <template [ngSwitchCase]="4">
+                    <quick-search-report class="form-children"
+                                         (result)="onResult($event, 4)"></quick-search-report>
+                </template>
+                <template [ngSwitchCase]="5">
+                    <quick-search-OCN class="form-children"
+                                      (result)="onResult($event, 5)"></quick-search-OCN>
+                </template>
+                <template [ngSwitchCase]="6">
+                    <quick-search-opening class="form-children"
+                                          (result)="onResult($event, 6)"></quick-search-opening>
+                </template>
+                <template [ngSwitchCase]="7">
+                    <quick-search-radiocarbon-dating class="form-children"
+                                                     (result)="onResult($event, 7)"></quick-search-radiocarbon-dating>
+                </template>
+            </div>
+
+        </div>
+        <div class="arrow"
+             *ngIf="table"
+        (click)="reset()">
+            <md-icon >arrow_left</md-icon>
+        </div>
+        <div class="table">
+            <div *ngFor="let tab of table">
+                <a>{{tab}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="right"
+         [class.right-search]="!bool">
+        <div leaflet style="height: 100%; width:100%;"
+             *ngIf="!search"
+             [leafletOptions]="options"
+             [leafletBaseLayers]="baseLayers"
+             [leafletLayersControlOptions]="layersControlOptions"
+
+             [leafletMarkerCluster]="markerClusterData"
+             [leafletMarkerClusterOptions]="markerClusterOptions"
+             (leafletMarkerClusterReady)="markerClusterReady($event)">
+        </div>
+    </div>
+</div>

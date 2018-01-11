@@ -1,0 +1,125 @@
+<md-tab-group>
+    <md-tab label="Общие сведения">
+        <md-list *ngIf="author">
+
+            <md-list-item *ngIf="!editName">
+                <p md-line>Имя:</p>
+                <p md-line>
+                    {{author.name}}
+                    <md-icon mdTooltip="Редактировать"
+                             (click)="editName=!editName">edit</md-icon>
+                </p>
+            </md-list-item>
+
+            <md-list-item *ngIf="editName">
+                <p md-line>Имя:</p>
+                <md-input-container md-line>
+                    <input mdInput
+                           (keyup.enter)="editName=!editName"
+                           [(ngModel)]="author.name">
+                </md-input-container>
+                <md-icon class="icon-save"
+                         mdTooltip="Сохранить"
+                         (click)="editName=!editName">save</md-icon>
+            </md-list-item>
+
+            <md-list-item>
+                <p md-line>Год рождения:</p>
+                <p md-line>Не указан
+                    <md-icon mdTooltip="Редактировать">edit</md-icon>
+                </p>
+
+
+            </md-list-item>
+
+            <md-list-item>
+                <p md-line>Организации:</p>
+                <p md-line>Нет данных
+                    <md-icon mdTooltip="Редактировать">edit</md-icon></p>
+            </md-list-item>
+            <md-list-item>
+                <p md-line>Биография:</p>
+                <p md-line>Не заполнено
+                    <md-icon mdTooltip="Редактировать">edit</md-icon></p>
+            </md-list-item>
+        </md-list>
+    </md-tab>
+    <md-tab label="Исследования">
+        <div class="block-max">
+            <md-nav-list *ngIf="author">
+               <!-- <button md-raised-button
+                        (click)="openDialog()">Добавить</button>-->
+                <md-list-item *ngFor="let link of author.researches">
+                    <md-icon md-list-icon
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       [routerLink]="['/main', 'admin-panel', 'show', 'research', link.id]"> {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="author.researches?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+    <md-tab label="Памятники">
+        <div class="block-max">
+            <md-nav-list *ngIf="author">
+                        <md-list-item *ngFor="let link of author.monument">
+                            <md-icon md-list-icon
+                                     *ngIf="link"
+                                     (click)="onDeleteResearches(link)"
+                                     mdTooltip="Удалить">delete</md-icon>
+                            <a mdLine
+                               *ngIf="link"
+                               [routerLink]="['/main', 'admin-panel', 'show', 'monument', link.id]"> {{ link.name }}</a>
+                        </md-list-item>
+                <md-list-item *ngIf="author.monument?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+    <md-tab label="Отчёты">
+        <div class="block-max">
+            <md-nav-list *ngIf="author">
+                <md-list-item *ngFor="let link of author.report">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'report', link.id]"> {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="author.report?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+    <md-tab label="Публикации">
+        <div class="block-max">
+            <md-nav-list *ngIf="author">
+                <md-list-item *ngFor="let link of author.publications">
+                    <md-icon md-list-icon
+                             *ngIf="link"
+                             (click)="onDeleteResearches(link)"
+                             mdTooltip="Удалить">delete</md-icon>
+                    <a mdLine
+                       *ngIf="link"
+                       [routerLink]="['/main', 'admin-panel', 'show', 'publication', link.id]"> {{ link.name }}
+                    </a>
+                </md-list-item>
+                <md-list-item *ngIf="author.publications?.length===0"
+                              class="empty-item">
+                    Нет данных
+                </md-list-item>
+            </md-nav-list>
+        </div>
+    </md-tab>
+</md-tab-group>

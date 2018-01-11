@@ -1,0 +1,19 @@
+<md-input-container >
+    <input mdInput
+           placeholder="Автор исследования"
+           [(ngModel)]="typeName">
+</md-input-container>
+
+<md-input-container >
+    <input mdInput
+           type="number"
+           placeholder="Год проведения исследования"
+           [(ngModel)]="typeYear">
+</md-input-container>
+
+<button md-raised-button
+        (click)="getSearch()"
+        color="primary">
+    <md-icon>search</md-icon>
+    Показать результаты
+</button>
