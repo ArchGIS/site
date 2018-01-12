@@ -49,10 +49,10 @@ debugger;
 
 
     if (cropOptions) {
-      form.append('X', cropOptions.x);
-      form.append('Y', cropOptions.y);
-      form.append('Width', cropOptions.width);
-      form.append('Height', cropOptions.height);
+      form.append('X', cropOptions.x.toString());
+      form.append('Y', cropOptions.y.toString());
+      form.append('Width', cropOptions.width.toString());
+      form.append('Height', cropOptions.height.toString());
     }
 
     let uploadingFile = new UploadedFile(

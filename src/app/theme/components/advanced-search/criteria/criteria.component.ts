@@ -106,12 +106,12 @@ export class FormSearchCriteriaComponent {
   }
 }
 export interface selectorOption{
-  id: number;
+  id: string;
   name: string;
 }
 
 export interface Criteria{
-  id: string;
+  id: number;
   name: string;
   desc: string;
 }

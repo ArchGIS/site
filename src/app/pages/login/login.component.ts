@@ -69,7 +69,7 @@ export class LoginComponent {
     public supportedLanguages: Array<{ display: string, value: string }>;
 
     public selectLang(lang: string) {
-        this._translate.use(lang);
+        // this._translate.use(lang);
     }
 
 }
