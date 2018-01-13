@@ -57,7 +57,7 @@ export class ReportShowIComponent implements OnChanges {
 
     ngOnChanges() {
         if (this.id) {
-            this.getResearchID(this.id)
+            this.getReportID(this.id)
         }
     }
 
@@ -72,7 +72,7 @@ export class ReportShowIComponent implements OnChanges {
         });
     }
 
-    getResearchID(id: number) {
+    getReportID(id: number) {
         let self = this;
         self.service.getReportID(id)
             .then(res => {

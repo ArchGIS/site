@@ -34,7 +34,7 @@ export class TopBarComponent {
         },
         {
             link: 'admin-panel',
-            label: 'Административная панель'
+            label: 'Админ панель'
         },
         {
             link: 'data-download',
@@ -60,9 +60,13 @@ export class TopBarComponent {
             link: 'quick-search',
             label: 'Быстрый поиск'
         },
+        // {
+        //     link: 'command',
+        //     label: 'Команда'
+        // },
         {
-            link: 'command',
-            label: 'Команда'
+            link: 'personal-area',
+            label: 'Личный кабинет'
         },
     ];
 

@@ -1,0 +1,44 @@
+<md-tab-group>
+
+    <md-tab label="Общие сведения">
+        <div *ngIf="publication"
+             class="block-max">
+
+            <div class="block">
+                <div class="request-name">Автор:</div>
+                <div class="request-name-main">
+                    <a [routerLink]="['/main', 'admin-panel', 'show', 'author', publication.researches[0].author.id]">
+                        {{publication.researches[0].author.name}}</a>
+                </div>
+            </div>
+
+                <div class="block" >
+                    <div class="request-name">Название:</div>
+                    <div class="request-name-main">
+                            {{publication.name}}
+                </div>
+                </div>
+
+                <div class="block" >
+                    <div class="request-name">Издательство:</div>
+                    <div class="request-name-main">
+                            Не указан
+                </div>
+                </div>
+                <!--<div class="block" >
+                    <div class="request-name">Год издания:</div>
+                    <div class="request-name-main">
+                            {{publication.year}}
+                        </div>
+                </div>-->
+                <div class="block" >
+                    <div class="request-name">Количество страниц:</div>
+                    <div class="request-name-main">
+                            {{publication.published_at}}
+                        </div>
+                </div>
+        </div>
+    </md-tab>
+
+
+</md-tab-group>

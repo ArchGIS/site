@@ -17,6 +17,7 @@ import Spatial = AuthorInter.Spatial;
 import {PlatformLocation} from "@angular/common";
 
 
+
 @Component({
   templateUrl: 'show.component.html',
   styleUrls: ['show.component.scss'],
@@ -31,42 +32,43 @@ export class ShowIComponent implements OnChanges, OnInit {
               private platformLocation: PlatformLocation,
               private ngZone: NgZone,
               private activateRoute: ActivatedRoute) {
-    let self = this;
+      let self = this;
 
-    this.subscription = activateRoute.params.subscribe(params => {
-      this.id = params['id'];
-      switch (params['entities']) {
-        case 'author':
-          this.entitiesID = 1;
-          break;
-        case 'research':
-          this.entitiesID = 2;
-          break;
-        case 'monument':
-          this.entitiesID = 3;
-          break;
-        case 'excavation':
-          this.entitiesID = 4;
-          break;
-        case 'artifact':
-          this.entitiesID = 5;
-          break;
-        case 'report':
-          this.entitiesID = 6;
-          break
-        case 'culture':
-          this.entitiesID = 9;
-          break;
-        case 'radiocarbon':
-          this.entitiesID = 6;
-          break;
-        case 'publication':
-          this.entitiesID = 7;
-          break;
-        default:
-          break;
-      }
-    });
+      this.subscription = activateRoute.params.subscribe(params => {
+          this.id = params['id'];
+          switch (params['entities']) {
+              case 'author':
+                  this.entitiesID = 1;
+                  break;
+              case 'research':
+                  this.entitiesID = 2;
+                  break;
+              case 'monument':
+                  this.entitiesID = 3;
+                  break;
+              case 'excavation':
+                  this.entitiesID = 4;
+                  break;
+              case 'artifact':
+                  this.entitiesID = 5;
+                  break;
+              case 'report':
+                  this.entitiesID = 6;
+                  break;
+              case 'publication':
+                  this.entitiesID = 7;
+                  break;
+              case 'culture':
+                  this.entitiesID = 9;
+                  break;
+              case 'radiocarbon':
+                  this.entitiesID = 8;
+                  break;
+
+              default:
+                  break;
+          }
+      });
 
 
   }
@@ -135,11 +137,11 @@ export class ShowIComponent implements OnChanges, OnInit {
       showUnitControl: true
     }).addTo(this.map);
 
-    L.easyPrint({
+   /*   L.easyPrint({
       title: 'My awesome print button',
       position: 'bottomright',
       sizeModes: ['A4Portrait', 'A4Landscape']
-    }).addTo(this.map);
+    }).addTo(this.map);*/
 
   }
 
@@ -173,7 +175,7 @@ export class ShowIComponent implements OnChanges, OnInit {
 
     let Custom = L.tileLayer('./map/{z}/{x}/{y}.png', {
       maxZoom: 7,
-    }
+    });
 
     var baseMaps = {
       "OSM": tiles,
@@ -193,11 +195,11 @@ export class ShowIComponent implements OnChanges, OnInit {
     });
     L.control.layers(baseMaps).addTo(this.map);
 
-    L.easyPrint({
+   /* L.easyPrint({
       title: 'My awesome print button',
       position: 'bottomleft',
       sizeModes: ['A4Portrait', 'A4Landscape']
-    }).addTo(this.map);
+    }).addTo(this.map);*/
 
     L.control.scale({
       maxWidth: 240,
@@ -276,7 +278,7 @@ export class ShowIComponent implements OnChanges, OnInit {
     let markers = L.markerClusterGroup();
     let marker;
 
-    let controlSearch = new L.Control.Search({
+  /*  let controlSearch = new L.Control.Search({
       position: 'topleft',
       layer: markers,
       initial: false,
@@ -284,7 +286,7 @@ export class ShowIComponent implements OnChanges, OnInit {
       marker: false
     });
 
-    this.map.addControl(controlSearch);
+    this.map.addControl(controlSearch);*/
     spatial.map(item => {
       let title: string = item.name;
       let marker_url: string = 'assets/icon/monTypes/monType' + item.type.id + '_' + item.epoch.id + '.png';

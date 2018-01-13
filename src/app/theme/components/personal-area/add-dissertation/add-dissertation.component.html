@@ -1,0 +1,32 @@
+<h1 md-dialog-title>{{data.name}}</h1>
+<div md-dialog-content style="display: flex; flex-direction: column">
+    <md-input-container>
+        <input mdInput placeholder="Название (полное)">
+    </md-input-container>
+    <md-input-container>
+        <input mdInput placeholder="Название (сокращенное)">
+    </md-input-container>
+    <span>
+                <md-select placeholder="Город">
+                    <md-option></md-option>
+                </md-select>
+                 <md-icon mdTooltip="Добавить"
+                          (click)="add=!add">
+                add</md-icon>
+        </span>
+    <md-input-container *ngIf="add">
+        <input mdInput placeholder="Город">
+        <button mdTooltip="Добавить"
+                (click)="add=!add"
+                md-button
+                mdSuffix
+                md-icon-button
+                aria-label="Clear">
+            <md-icon>done</md-icon>
+        </button>
+    </md-input-container>
+</div>
+<div md-dialog-actions>
+    <button md-raised-button >Добавить</button>
+    <button md-raised-button >Отменить</button>
+</div>

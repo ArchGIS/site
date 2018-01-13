@@ -76,11 +76,11 @@ export class AdvancedSearchIComponent implements OnChanges{
 
 
     var map = L.map('map').setView([0, 0], 4);
-    L.easyPrint({
+  /*  L.easyPrint({
       title: 'My awesome print button',
       position: 'bottomright',
       sizeModes: ['A4Portrait', 'A4Landscape']
-    }).addTo(map);
+    }).addTo(map);*/
     let img = [
         17749,
         10009

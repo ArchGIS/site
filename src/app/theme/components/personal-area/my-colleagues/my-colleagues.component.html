@@ -1,0 +1,41 @@
+<div class="main">
+<div class="main-item">
+    <div class="title-item">
+        Мои соавторы
+    </div>
+    <div class="item">
+        <div class="line"><span class="title">Автор:</span> Ошибка данных <md-icon mdTooltip="Написать">message</md-icon></div>
+    </div>
+</div>
+<div class="main-item">
+    <div class="title-item">
+        Мои рабочие группы
+    </div>
+    <div class="item">
+        <div class="line"><span class="title">Название:</span> Ошибка данных <md-icon mdTooltip="Изменить">edit</md-icon></div>
+        <div class="line"><span class="title">Список участников:</span> Ошибка данных <md-icon mdTooltip="Изменить">edit</md-icon></div>
+    </div>
+</div>
+<button md-raised-button
+        (click)="addDissert=!addDissert">
+    Добавить рабочию группу
+</button>
+<div *ngIf="addDissert" style="    display: flex;
+    flex-direction: column;
+    margin: 1em;">
+    <md-input-container>
+        <input mdInput placeholder="Название">
+    </md-input-container>
+    <md-select placeholder="Текущее исследование">
+        <md-option></md-option>
+    </md-select>
+    <md-select placeholder="Автор">
+        <md-option></md-option>
+    </md-select>
+    <button md-raised-button
+            style="width: 300px; margin: 1em"
+            (click)="addDissert=!addDissert"
+            color="primary">
+        Добавить
+    </button>
+</div></div>

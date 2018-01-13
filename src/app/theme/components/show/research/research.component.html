@@ -69,7 +69,7 @@
 
             <div class="block">
                 <div class="request-name">Тип исследования:</div>
-                <div class="request-name-main">Не указан</div>
+                <div class="request-name-main">{{research.type.ru_name}}</div>
             </div>
 
             <div class="block" *ngIf="!editDescription">
@@ -95,10 +95,20 @@
             </div>
 
 
+            <div class="block" *ngIf="research.report">
+                <div class="request-name">Отчёт:</div>
+                <div class="request-name-main">{{research.report.name}}</div>
+            </div>
+
+            <div class="block" *ngIf="research.knowledges">
+                <div class="request-name">Количество памятников::</div>
+                <div class="request-name-main">{{research.knowledges.length}}</div>
+            </div>
+
             <div *ngIf="research.publication"
                  class="block">
                 <div class="request-name">Публикация:</div>
-                <div class="request-name-main"> <a [routerLink]="['/main', 'admin-panel', 'publication', 'author', research.publication?.id]">
+                <div class="request-name-main"> <a [routerLink]="['/main', 'admin-panel', 'show','publication', research.publication?.id]">
                     {{research.publication?.name}}</a></div>
             </div>
         </div>
@@ -144,7 +154,7 @@
                         {{ link.name }}
                     </a>
                 </md-list-item>
-                <md-list-item *ngIf="research.heritage?.length===0"
+                <md-list-item *ngIf="research.heritages?.length===0"
                               class="empty-item">
                     Нет данных
                 </md-list-item>
@@ -175,7 +185,10 @@
     </md-tab>
 
     <md-tab label="Топопланы">
-
+        <md-list-item
+                      class="empty-item">
+            Нет данных
+        </md-list-item>
     </md-tab>
 
     <md-tab label="Артефакты">
@@ -192,7 +205,7 @@
                         {{ link.name }}
                     </a>
                 </md-list-item>
-                <md-list-item *ngIf="research.excavations?.length===0"
+                <md-list-item *ngIf="research.artifacts?.length===0"
                               class="empty-item">
                     Нет данных
                 </md-list-item>

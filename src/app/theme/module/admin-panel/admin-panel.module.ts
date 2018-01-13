@@ -30,6 +30,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {ItemResearchShowIComponent} from "../../components/show/research/item/item-research.component";
 import {ReportShowIComponent} from "../../components/show/report/report.component";
 import {ImageUploadModule} from "../../components/#lib/ng2-image-upload-master/src/image-upload.module";
+import {PublicationShowIComponent} from "../../components/show/publication/publication.component";
 
 const adminPanelComponent =[
   AdminPanelComponent,
@@ -44,7 +45,8 @@ const adminPanelComponent =[
   ArtifactShowIComponent,
   ExcavationShowIComponent,
   ItemResearchShowIComponent,
-  ReportShowIComponent
+  ReportShowIComponent,
+    PublicationShowIComponent
 ];
 
 

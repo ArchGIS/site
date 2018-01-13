@@ -18,6 +18,18 @@ import {PersonalInformationComponent} from "../../components/personal-area/perso
 import {ImageUploadModule} from "../../components/#lib/ng2-image-upload-master/src/image-upload.module";
 import {DialogInputComponent} from "../../components/personal-area/dialog-input/dialog-input.component";
 import {ScientificBiographyComponent} from "../../components/personal-area/scientific-biography/scientific-biography.component";
+import {AddDissertationComponent} from "../../components/personal-area/add-dissertation/add-dissertation.component";
+import {PlacesWorkComponent} from "../../components/personal-area/places-work/places-work.component";
+import {PersonalMonumentComponent} from "../../components/personal-area/monument/monument.component";
+import {MyResearchComponent} from "../../components/personal-area/my-research/my-research.component";
+import {MyReportComponent} from "../../components/personal-area/my-report/my-report.component";
+import {MyPublishComponent} from "../../components/personal-area/my-publish/my-publish.component";
+import {MySamplesComponent} from "../../components/personal-area/my-samples/my-samples.component";
+import {MyColleaguesComponent} from "../../components/personal-area/my-colleagues/my-colleagues.component";
+import {MyCurrentResearchComponent} from "../../components/personal-area/my-current-research/my-current-research.component";
+import {MyMapsComponent} from "../../components/personal-area/my-maps/my-maps.component";
+import {MyToolsComponent} from "../../components/personal-area/my-tools/my-tools.component";
+import {MyMessagesComponent} from "../../components/personal-area/my-messages/my-messages.component";
 
 const mainComponent =[
   TopBarComponent,
@@ -27,7 +39,19 @@ const mainComponent =[
   PersonalAreaComponent,
   PersonalInformationComponent,
   DialogInputComponent,
-  ScientificBiographyComponent
+  ScientificBiographyComponent,
+    AddDissertationComponent,
+    PlacesWorkComponent,
+    PersonalMonumentComponent,
+    MyResearchComponent,
+    MyReportComponent,
+    MyPublishComponent,
+    MySamplesComponent,
+    MyColleaguesComponent,
+    MyCurrentResearchComponent,
+    MyMapsComponent,
+    MyToolsComponent,
+    MyMessagesComponent
 ];
 
 

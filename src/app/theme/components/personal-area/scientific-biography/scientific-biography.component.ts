@@ -20,6 +20,8 @@ export class ScientificBiographyComponent {
 
     }
 
+    addDissert: boolean = false;
+
     onAdd(name: string) {
         let dialogRef = this.dialog.open(DialogInputComponent, <MdDialogConfig>{
             data: {name: name}
