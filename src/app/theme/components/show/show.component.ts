@@ -136,11 +136,11 @@ export class ShowIComponent implements OnChanges, OnInit {
       showUnitControl: true
     }).addTo(this.map);
 
-    L.easyPrint({
-      title: 'My awesome print button',
-      position: 'bottomright',
-      sizeModes: ['A4Portrait', 'A4Landscape']
-    }).addTo(this.map);
+    // L.easyPrint({
+    //   title: 'My awesome print button',
+    //   position: 'bottomright',
+    //   sizeModes: ['A4Portrait', 'A4Landscape']
+    // }).addTo(this.map);
 
   }
 
@@ -194,11 +194,11 @@ export class ShowIComponent implements OnChanges, OnInit {
     });
     L.control.layers(baseMaps).addTo(this.map);
 
-    L.easyPrint({
-      title: 'My awesome print button',
-      position: 'bottomleft',
-      sizeModes: ['A4Portrait', 'A4Landscape']
-    }).addTo(this.map);
+    // L.easyPrint({
+    //   title: 'My awesome print button',
+    //   position: 'bottomleft',
+    //   sizeModes: ['A4Portrait', 'A4Landscape']
+    // }).addTo(this.map);
 
     L.control.scale({
       maxWidth: 240,
@@ -277,15 +277,15 @@ export class ShowIComponent implements OnChanges, OnInit {
     let markers = L.markerClusterGroup();
     let marker;
 
-    let controlSearch = new L.Control.Search({
-      position: 'topleft',
-      layer: markers,
-      initial: false,
-      zoom: 12,
-      marker: false
-    });
-
-    this.map.addControl(controlSearch);
+    // let controlSearch = new L.Control.Search({
+    //   position: 'topleft',
+    //   layer: markers,
+    //   initial: false,
+    //   zoom: 12,
+    //   marker: false
+    // });
+    //
+    // this.map.addControl(controlSearch);
     spatial.map(item => {
       let title: string = item.name;
       let marker_url: string = 'assets/icon/monTypes/monType' + item.type.id + '_' + item.epoch.id + '.png';
