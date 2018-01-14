@@ -68,23 +68,21 @@ export class TableDataComponent implements OnChanges {
 
     }
 
-    getResearch(){
+    getResearch() {
         let self = this;
         self.service.getResearches()
             .then(res => {
                 debugger;
                 self.research = res.Research;
-                self.research.map(rr=>{
-                    rr.report_string =  '';
-                    if (rr.report){
-                        rr.report.map(item=>{
-                                rr.report_string +=item.name
-                            }
-                        )
+                self.research.map(rr => {
+                    rr.report_string = '';
+                    if (rr.report) {
+                        rr.report_string = rr.report.name;
                     }
                 })
             })
     }
+
     getAuthor(){
         let self = this;
         self.service.getItemsAuthor()
@@ -145,6 +143,8 @@ export declare module AuthorInter {
         id: any;
         name: string;
         published_at: number;
+        spatia: Spatial[];
+        researches: Research[]
     }
 
     export interface Research2 {
@@ -184,7 +184,7 @@ export declare module AuthorInter {
         name: string;
         publication: Publication;
         radiocarbons: Radiocarbon[];
-        report?: Report[];
+        report: Report;
         report_string: string;
         type: Type2;
         year: number;

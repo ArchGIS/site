@@ -10,8 +10,8 @@ export interface Coordinates {
 export declare module MonumentInterface {
 
     export interface Item {
-        site_name: string[];
-        research_name: string[];
+        site_names: string[];
+        res_names: string[];
         epoch: number;
         type: number;
     }
@@ -23,7 +23,7 @@ export declare module MonumentInterface {
     }
 
     export interface Monuments {
-        sites: Site[];
+        sites: Item[];
     }
 
 }

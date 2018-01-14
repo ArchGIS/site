@@ -31,42 +31,43 @@ export class ShowIComponent implements OnChanges, OnInit {
               private platformLocation: PlatformLocation,
               private ngZone: NgZone,
               private activateRoute: ActivatedRoute) {
-    let self = this;
+      let self = this;
 
-    this.subscription = activateRoute.params.subscribe(params => {
-      this.id = params['id'];
-      switch (params['entities']) {
-        case 'author':
-          this.entitiesID = 1;
-          break;
-        case 'research':
-          this.entitiesID = 2;
-          break;
-        case 'monument':
-          this.entitiesID = 3;
-          break;
-        case 'excavation':
-          this.entitiesID = 4;
-          break;
-        case 'artifact':
-          this.entitiesID = 5;
-          break;
-        case 'report':
-          this.entitiesID = 6;
-          break
-        case 'culture':
-          this.entitiesID = 9;
-          break;
-        case 'radiocarbon':
-          this.entitiesID = 6;
-          break;
-        case 'publication':
-          this.entitiesID = 7;
-          break;
-        default:
-          break;
-      }
-    });
+      this.subscription = activateRoute.params.subscribe(params => {
+          this.id = params['id'];
+          switch (params['entities']) {
+              case 'author':
+                  this.entitiesID = 1;
+                  break;
+              case 'research':
+                  this.entitiesID = 2;
+                  break;
+              case 'monument':
+                  this.entitiesID = 3;
+                  break;
+              case 'excavation':
+                  this.entitiesID = 4;
+                  break;
+              case 'artifact':
+                  this.entitiesID = 5;
+                  break;
+              case 'report':
+                  this.entitiesID = 6;
+                  break;
+              case 'publication':
+                  this.entitiesID = 7;
+                  break;
+              case 'culture':
+                  this.entitiesID = 9;
+                  break;
+              case 'radiocarbon':
+                  this.entitiesID = 8;
+                  break;
+
+              default:
+                  break;
+          }
+      });
 
 
   }
@@ -172,8 +173,8 @@ export class ShowIComponent implements OnChanges, OnInit {
 
 
     let Custom = L.tileLayer('./map/{z}/{x}/{y}.png', {
-      maxZoom: 7
-    })
+      maxZoom: 7,
+    });
 
     var baseMaps = {
       "OSM": tiles,

@@ -60,9 +60,9 @@ export class ResearchShowIComponent implements OnChanges {
         }
     }
 
-   /* onDeleteResearches(item: Research2) {
-        this.author.researches = this.author.researches.filter(res => item.id !== res.id);
-    }*/
+    /* onDeleteResearches(item: Research2) {
+         this.author.researches = this.author.researches.filter(res => item.id !== res.id);
+     }*/
 
     openDialog(name: string): void {
         let dialogRef = this.dialog.open(AddItemShowIComponent, <MdDialogConfig>{
@@ -77,13 +77,12 @@ export class ResearchShowIComponent implements OnChanges {
             .then(res => {
                 let temp: Research = res.Research[0];
                 temp.monument = [];
-                temp.report = [];
                 temp.spatia = [];
                 temp.heritages = [];
                 temp.artifacts = [];
                 temp.cultures = [];
-                temp.excavations.map(item=>{
-                    item.artifacts.map(rr=>{
+                temp.excavations.map(item => {
+                    item.artifacts.map(rr => {
                         temp.artifacts.push(<Artifact>{
                             id: rr.id,
                             depth: rr.depth,
@@ -128,6 +127,11 @@ export class ResearchShowIComponent implements OnChanges {
                     }
                 });
                 self.coordinats.emit(temp.spatia);
+                if (temp.description === null ||
+                    temp.description === undefined ||
+                    temp.description === '') {
+                    temp.description = 'Нет данных';
+                }
                 self.research = temp;
                 debugger;
             })

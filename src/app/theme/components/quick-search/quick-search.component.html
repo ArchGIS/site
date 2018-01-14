@@ -49,11 +49,12 @@
         (click)="reset()">
             <md-icon >arrow_left</md-icon>
         </div>
-        <div class="table">
-            <div *ngFor="let tab of table">
-                <a>{{tab}}</a>
-            </div>
-        </div>
+
+        <table  class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <tr *ngFor="let tab of table" >
+                <td> <a>{{tab}}</a></td>
+            </tr>
+        </table>
     </div>
     <div class="right"
          [class.right-search]="!bool">

@@ -1,0 +1,29 @@
+<div class="main">
+        <div class="main-item">
+            <div class="title-item">
+                Мои текущие исследования
+            </div>
+            <div class="item">
+                <div class="line"><span class="title">Название:</span> Ошибка данных <md-icon mdTooltip="Изменить">edit</md-icon></div>
+                <div class="line"><span class="title">Описание:</span> Ошибка данных <md-icon mdTooltip="Изменить">edit</md-icon></div>
+                <div class="line"><span class="title">Рабочая группа</span> Ошибка данных </div>
+            </div>
+        </div>
+        <button md-raised-button
+                (click)="addDissert=!addDissert">
+            Добавить исследование
+        </button>
+        <div *ngIf="addDissert">
+            <md-input-container>
+                <input mdInput placeholder="Название">
+                <button mdTooltip="Добавить"
+                        (click)="addDissert=!addDissert"
+                        md-button
+                        mdSuffix
+                        md-icon-button
+                        aria-label="Clear">
+                    <md-icon>done</md-icon>
+                </button>
+            </md-input-container>
+        </div>
+</div>

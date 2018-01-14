@@ -6,6 +6,7 @@ import {AboutComponent} from "../../components/about/about.component";
 import {MainCountComponent} from "../../components/main/main.component";
 import {PersonalAreaComponent} from "../../components/personal-area/personal-area.component";
 import {DialogInputComponent} from "../../components/personal-area/dialog-input/dialog-input.component";
+import {AddDissertationComponent} from "../../components/personal-area/add-dissertation/add-dissertation.component";
 
 
 const MainRoutes: Routes = [
@@ -69,6 +70,10 @@ const MainRoutes: Routes = [
                     {
                         path: 'dialog-input',
                         component: DialogInputComponent,
+                    },
+                    {
+                        path: 'add-dissertation',
+                        component: AddDissertationComponent,
                     },
                 ]
             }

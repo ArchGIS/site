@@ -1,0 +1,109 @@
+<div class="main">
+    <div class="main-item">
+        <div class="title-item">
+            Место работы
+        </div>
+        <md-select placeholder="Организация">
+            <md-option></md-option>
+        </md-select>
+
+        <div style="    display: flex;
+    flex-direction: column;">
+            <span style="margin-bottom: 1em;    font-size: 16px;
+            margin-top: 1em">
+                Годы работы</span>
+            <span><md-input-container>
+            <input mdInput
+                   type="date"
+                   placeholder="От">
+             </md-input-container>
+             <md-input-container>
+            <input mdInput
+                   type="date"
+                   placeholder="До">
+        </md-input-container></span>
+
+        </div>
+
+        <md-input-container>
+            <input mdInput placeholder="Должность">
+        </md-input-container>
+    </div>
+
+
+    <button md-raised-button
+            class="button-add"
+            (click)="addDissert=!addDissert">
+        Добавить организацию
+    </button>
+
+    <div *ngIf="addDissert" class="add-diset">
+        <md-input-container>
+            <input mdInput placeholder="Название (полное)">
+        </md-input-container>
+        <md-input-container>
+            <input mdInput placeholder="Название (сокращенное)">
+        </md-input-container>
+        <span>
+                <md-select placeholder="Город">
+                    <md-option></md-option>
+                </md-select>
+                 <md-icon mdTooltip="Добавить"
+                          (click)="onAddInput('Город')">
+                add</md-icon>
+        </span>
+        <md-input-container>
+            <input mdInput
+                   type="datetime-local"
+                   placeholder="Год создания">
+        </md-input-container>
+
+        <md-input-container>
+            <input mdInput
+                   type="datetime-local"
+                   placeholder="Год расформирования">
+        </md-input-container>
+
+        <md-input-container style="margin-top: 1em;">
+            <textarea mdInput placeholder="Описание">
+            </textarea>
+        </md-input-container>
+
+        <span>
+            <md-select placeholder="Организация-предшественник ">
+                <md-option></md-option>
+            </md-select>
+            <md-icon mdTooltip="Добавить"
+                     (click)="onAdd('Организация-предшественник ')">add</md-icon>
+        </span>
+        <span>
+            <md-select placeholder="Организация-правопреемник  ">
+                <md-option></md-option>
+            </md-select>
+            <md-icon mdTooltip="Добавить"
+                     (click)="onAdd('Организация-правопреемник  ')">add</md-icon>
+        </span>
+
+
+
+
+        <button md-raised-button
+                class="button-add"
+                (click)="addDissert=!addDissert"
+                color="primary">
+            Добавить
+        </button>
+    </div>
+
+
+
+
+
+
+
+    <button md-raised-button color="primary">
+        Сохранить
+    </button>
+
+
+</div>

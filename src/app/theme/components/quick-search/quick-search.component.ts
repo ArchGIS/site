@@ -81,7 +81,17 @@ export class QuickSearchIComponent {
 
   onMonument(event: Monuments): void {
     let self = this;
-    self.model = new LeafletLayersDemoModel(
+      self.table = [];
+      event.sites.map(item => {
+          let title: string = '';
+          if (item.site_names) {
+              item.site_names.map(rr => {
+                  title += rr;
+              });
+          }
+          self.table.push(title);
+      });
+   /* self.model = new LeafletLayersDemoModel(
         [this.LAYER_OSM, this.LAYER_OCM],
         this.LAYER_OCM.id,
         [this.marker]
@@ -90,9 +100,12 @@ export class QuickSearchIComponent {
     self.table = [];
     event.sites.map(item => {
       let title: string = '';
-      item.item.site_name.map(rr => {
-        title += rr;
-      });
+      debugger;
+      if (item.item.site_names){
+          item.item.site_names.map(rr => {
+              title += rr;
+          });
+      }
       let epoch: string = self.epochS[item.item.epoch - 1];
       let type: string = self.type[item.item.type - 1];
       self.table.push(`${title} (${epoch}, ${type})`);
@@ -114,15 +127,18 @@ export class QuickSearchIComponent {
       self.model.overlayLayers.push(marker)
     });
     self.bool = true;
-    self.onApply();
+    self.onApply();*/
   }
 
 
   onResult(event: any, type: number){
     let self = this;
+    debugger;
     switch (type){
       case 1:
-        self.onMonument(event);
+          self.onMonument(event);
+          self.search = false;
+          self.bool = true;
     }
   }
 
