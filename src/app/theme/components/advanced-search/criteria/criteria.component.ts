@@ -98,11 +98,13 @@ export class FormSearchCriteriaComponent {
   public siteTypes: selectorOption[];
 
   @Input() count: number;
-  value: string;
+  value: string = "";
+  critNOT: boolean = false;
 
   @Output() onChange:EventEmitter<any[]> = new EventEmitter();
   change(value) {
-    this.onChange.emit([this.count-1, value, this.criteria[this.criteriaID].name]);
+    console.log(this.value)
+    this.onChange.emit([this.count-1, this.value, this.criteria[this.criteriaID].name, this.critNOT]);
   }
 }
 export interface selectorOption{

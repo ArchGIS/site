@@ -36,9 +36,9 @@ export class AdvancedSearchIComponent implements OnChanges{
     this.entity = this.typeS[this.typeSID-1].value;
   }
 
-  updateValues(value) {
-    console.log(value)
-    this.values[value[0]] = {name: value[2], "value": value[1]};
+  updateValues(data) {
+    console.log(data);
+    this.values[data[0]] = {name: data[2], value: data[1], not: data[3]};
   }
 
   sendQuery() {
@@ -65,6 +65,7 @@ export interface EntityType{
 export interface Parameter {
   name: string;
   value: string;
+  not: boolean;
 }
 
 export interface SearchQuery {
