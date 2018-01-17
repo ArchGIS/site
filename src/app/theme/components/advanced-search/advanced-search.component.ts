@@ -26,23 +26,31 @@ export class AdvancedSearchIComponent implements OnChanges{
   findData: any[];
 
   entity: string = 'monument';
-  criteria: string[] = ['1'];
+  queryCount: string[] = ['1'];
 
-  onAddCriteria() {
-    this.criteria.push('1');
+  onAddQuery() {
+    this.queryCount.push('1');
   }
 
   updateEntity() {
+    let self = this;
+    this.findData = [];
     this.entity = this.typeS[this.typeSID-1].value;
+
+    this.query.forEach(function (query) {
+      query.id = self.typeSID;
+    })
   }
 
   updateValues(data) {
-    console.log(data);
-    this.values[data[0]] = {name: data[2], value: data[1], not: data[3]};
+    this.query[data[0]] = {id: this.typeSID, params: data[1]};
+  }
+
+  deleteQuery() {
+    this.query.splice(0, 1);
   }
 
   sendQuery() {
-    this.query[0] = {id: this.typeSID, params: this.values};
     let self = this;
     self.service.getAdvancedSearch(JSON.stringify(this.query))
       .then(res => {

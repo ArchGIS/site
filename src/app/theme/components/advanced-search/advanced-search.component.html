@@ -7,7 +7,7 @@
             </div>
 
             <md-select placeholder="Что ищем?"
-                       style="margin-bottom: 20px;"
+                       style="margin: 20px 0px 20px;"
                        [(ngModel)]="typeSID"
                        (change)="updateEntity()">
                 <md-option *ngFor="let type of typeS"
@@ -16,26 +16,26 @@
                 </md-option>
             </md-select>
 
-            <div *ngFor="let item of criteria; let i=index">
-                <search-criteria-form
-                    [count]="i+1"
-                    (onChange)="updateValues($event)">
-                </search-criteria-form>
+            <div *ngFor="let item of queryCount; let i=index">
+                <search-query-form
+                        [count]="i+1"
+                        (onChange)="updateValues($event)"
+                        (onDelete)="deleteQuery($event)">
+                </search-query-form>
             </div>
             <div class="block">
                 <button md-raised-button
-                        (click)="onAddCriteria()"
+                        (click)="onAddQuery()"
                         color="primary">
-                    Добавить критерий
+                    Добавить запрос
                 </button>
-            </div>
-            <div class="block">
                 <button md-raised-button
                         (click)="sendQuery()"
                         color="primary">
                     Поиск
                 </button>
             </div>
+
             <md-nav-list>
                 <a mat-list-item *ngFor="let item of findData; let i=index"
                     href="#/main/admin-panel/show/{{entity}}/{{item[0].id}}"

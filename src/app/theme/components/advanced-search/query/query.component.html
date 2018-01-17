@@ -1,0 +1,24 @@
+<div class="block">
+    <h4>Запрос №{{count}}</h4>
+</div>
+
+<div *ngFor="let item of critCount; let i=index">
+    <search-criteria-form
+            [count]="i+1"
+            (onChange)="updateParameters($event)">
+    </search-criteria-form>
+</div>
+
+<div class="block">
+    <button md-raised-button
+            (click)="onAddCriteria()"
+            color="primary">
+        Добавить критерий
+    </button>
+
+    <button md-raised-button
+            (click)="onDeleteCriteria()"
+            color="primary">
+        Удалить критерий
+    </button>
+</div>

@@ -15,11 +15,13 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {LeafletMarkerClusterModule} from "@asymmetrik/angular2-leaflet-markercluster";
 import {LeafletModule} from "@asymmetrik/angular2-leaflet";
 import {FormSearchCriteriaComponent} from "../../components/advanced-search/criteria/criteria.component";
+import {FormSearchQueryComponent} from "../../components/advanced-search/query/query.component";
 
 const advancedSearchComponent =[
   AdvancedSearchComponent,
   AdvancedSearchIComponent,
-  FormSearchCriteriaComponent
+  FormSearchCriteriaComponent,
+  FormSearchQueryComponent
 ];
 
 

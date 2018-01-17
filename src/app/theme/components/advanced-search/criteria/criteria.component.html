@@ -1,5 +1,5 @@
 <div class="block">
-    <md-select placeholder="Критерий №{{count}}"
+    <md-select placeholder="Критерий №{{count}}" class="criteria-select"
                [(ngModel)]="criteriaID"  (ngModelChange)="change($event)">
         <md-option *ngFor="let crit of criteria"
                    [value]="crit.id">
@@ -11,7 +11,7 @@
 <div class="block">
     <div [ngSwitch]="criteriaID">
         <ng-template [ngSwitchCase]="16">
-            <md-select placeholder="Выберите тип" [(ngModel)]="value" (ngModelChange)="change($event)">
+            <md-select class="criteria-input" placeholder="Выберите тип" [(ngModel)]="value" (ngModelChange)="change($event)">
                 <md-option *ngFor="let item of resTypes"
                            [value]="item.id">
                     {{ item.name }}
@@ -19,7 +19,7 @@
             </md-select>
         </ng-template>
         <ng-template [ngSwitchCase]="19">
-            <md-select placeholder="Выберите" [(ngModel)]="value" (ngModelChange)="change($event)">
+            <md-select class="criteria-input" placeholder="Выберите" [(ngModel)]="value" (ngModelChange)="change($event)">
                 <md-option *ngFor="let item of herSec"
                            [value]="item.id">
                     {{ item.name }}
@@ -27,7 +27,7 @@
             </md-select>
         </ng-template>
         <ng-template [ngSwitchCase]="26">
-            <md-select placeholder="Выберите эпоху" [(ngModel)]="value" (ngModelChange)="change($event)">
+            <md-select class="criteria-input" placeholder="Выберите эпоху" [(ngModel)]="value" (ngModelChange)="change($event)">
                 <md-option *ngFor="let item of epochs"
                            [value]="item.id">
                     {{ item.name }}
@@ -35,7 +35,7 @@
             </md-select>
         </ng-template>
         <ng-template [ngSwitchCase]="25">
-            <md-select placeholder="Выберите тип" [(ngModel)]="value" (ngModelChange)="change($event)">
+            <md-select class="criteria-input" placeholder="Выберите тип" [(ngModel)]="value" (ngModelChange)="change($event)">
                 <md-option *ngFor="let item of siteTypes"
                            [value]="item.id">
                     {{ item.name }}
@@ -43,7 +43,7 @@
             </md-select>
         </ng-template>
         <ng-template ngSwitchDefault>
-            <md-input-container>
+            <md-input-container class="criteria-input">
                 <input mdInput
                        placeholder="Значение"
                        [(ngModel)]="value" (ngModelChange)="change($event)">

@@ -103,10 +103,10 @@ export class FormSearchCriteriaComponent {
 
   @Output() onChange:EventEmitter<any[]> = new EventEmitter();
   change(value) {
-    console.log(this.value)
     this.onChange.emit([this.count-1, this.value, this.criteria[this.criteriaID].name, this.critNOT]);
   }
 }
+
 export interface selectorOption{
   id: string;
   name: string;
