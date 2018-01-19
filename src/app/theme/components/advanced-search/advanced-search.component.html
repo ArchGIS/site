@@ -5,36 +5,49 @@
             <div class="block">
                 <h2>Расширенный поиск</h2>
             </div>
+            <md-tab-group>
+                <md-tab label="По атрибутам">
+                    <md-select placeholder="Что ищем?"
+                               style="margin: 20px 0px 20px;"
+                               [(ngModel)]="typeSID"
+                               (change)="updateEntity()">
+                        <md-option *ngFor="let type of typeS"
+                                   [value]="type.id">
+                            {{ type.name }}
+                        </md-option>
+                    </md-select>
 
-            <md-select placeholder="Что ищем?"
-                       style="margin: 20px 0px 20px;"
-                       [(ngModel)]="typeSID"
-                       (change)="updateEntity()">
-                <md-option *ngFor="let type of typeS"
-                           [value]="type.id">
-                    {{ type.name }}
-                </md-option>
-            </md-select>
+                    <div *ngFor="let item of queryCount; let i=index">
+                        <search-query-form
+                                [count]="i+1"
+                                (onChange)="updateValues($event)">
+                        </search-query-form>
+                    </div>
+                    <div class="block">
+                        <button md-raised-button
+                                (click)="onAddQuery()"
+                                color="primary">
+                            Добавить запрос
+                        </button>
+                        <button md-raised-button
+                                (click)="onDeleteQuery()"
+                                color="primary">
+                            Удалить запрос
+                        </button>
+                    </div>
 
-            <div *ngFor="let item of queryCount; let i=index">
-                <search-query-form
-                        [count]="i+1"
-                        (onChange)="updateValues($event)"
-                        (onDelete)="deleteQuery($event)">
-                </search-query-form>
-            </div>
-            <div class="block">
-                <button md-raised-button
-                        (click)="onAddQuery()"
-                        color="primary">
-                    Добавить запрос
-                </button>
-                <button md-raised-button
-                        (click)="sendQuery()"
-                        color="primary">
-                    Поиск
-                </button>
-            </div>
+                    <div class="block">
+                        <button md-raised-button
+                                (click)="sendQuery()"
+                                color="primary">
+                            Поиск
+                        </button>
+                    </div>
+                </md-tab>
+                <md-tab label="По местоположению">
+                    <h3>В разработке</h3>
+                </md-tab>
+            </md-tab-group>
 
             <md-nav-list>
                 <a mat-list-item *ngFor="let item of findData; let i=index"

@@ -32,6 +32,11 @@ export class AdvancedSearchIComponent implements OnChanges{
     this.queryCount.push('1');
   }
 
+  onDeleteQuery() {
+    this.queryCount.splice(0, 1);
+    this.query.splice(this.query.length - 1, 1);
+  }
+
   updateEntity() {
     let self = this;
     this.findData = [];
@@ -44,10 +49,6 @@ export class AdvancedSearchIComponent implements OnChanges{
 
   updateValues(data) {
     this.query[data[0]] = {id: this.typeSID, params: data[1]};
-  }
-
-  deleteQuery() {
-    this.query.splice(0, 1);
   }
 
   sendQuery() {

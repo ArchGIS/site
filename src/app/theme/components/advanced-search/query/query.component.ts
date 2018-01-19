@@ -33,6 +33,5 @@ export class FormSearchQueryComponent {
   @Input() count: number;
 
   @Output() onChange:EventEmitter<any[]> = new EventEmitter();
-  @Output() onDelete:EventEmitter<any[]> = new EventEmitter();
 }
 
