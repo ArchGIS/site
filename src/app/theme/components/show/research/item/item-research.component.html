@@ -9,7 +9,7 @@
 <div class="block" *ngIf="!editName">
     <div class="request-name">Название, данное исследователем:</div>
     <div class="request-name-main">
-        {{research.name}}
+        {{research.research.name}}
         <md-icon mdTooltip="Редактировать"
                  (click)="editName=!editName">edit</md-icon>
     </div>
@@ -19,7 +19,7 @@
     <md-input-container md-line>
         <input mdInput
                (keyup.enter)="editName=!editName"
-               [(ngModel)]="research.name">
+               [(ngModel)]="research.research.name">
     </md-input-container>
     <md-icon class="icon-save"
              mdTooltip="Сохранить"

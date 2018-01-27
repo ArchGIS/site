@@ -237,6 +237,7 @@ export declare module AuthorInter {
         name: string;
         active: boolean;
         epoch: Epoch;
+        siteType: Type;
         artifacts_count: number;
         knowledge: Knowledge;
         knowledges: Knowledge[];

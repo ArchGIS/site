@@ -133,11 +133,11 @@ export class ShowIComponent implements OnChanges, OnInit {
             position: 'topleft',
             unit: 'metres',
             clearMeasurementsOnStop: false,
-            showMeasurementsClearControl: true,
-            showUnitControl: true
+            showMeasurementsClearControl: false,
+            showUnitControl: false
         }).addTo(this.map);
 
-        /*   L.easyPrint({
+          /*L.easyPrint({
            title: 'My awesome print button',
            position: 'bottomright',
            sizeModes: ['A4Portrait', 'A4Landscape']
@@ -278,7 +278,7 @@ export class ShowIComponent implements OnChanges, OnInit {
         let markers = L.markerClusterGroup();
         let marker;
 
-        /*  let controlSearch = new L.Control.Search({
+          /*let controlSearch = new L.Control.Search({
             position: 'topleft',
             layer: markers,
             initial: false,
@@ -291,10 +291,10 @@ export class ShowIComponent implements OnChanges, OnInit {
             let title: string = item.name;
             let marker_url: string = 'assets/icon/monTypes/monType' + item.type.id + '_' + item.epoch.id + '.png';
             let html_title =
-                `<p>${marker_url}</p>
-            <p><a>${item.id}</a></p>`;
+                `<a [routerLink]="['/main', 'admin-panel', 'show', 'monument', ${item.id}]" ><img 
+                    src="${marker_url}"></a>`;
 
-            marker = L.marker(new L.LatLng(item.x, item.y),
+          marker = L.marker(new L.LatLng(item.x, item.y),
                 {
                     title: title,
                     clickable: true,
@@ -304,6 +304,16 @@ export class ShowIComponent implements OnChanges, OnInit {
                         iconSize: [25, 25],
                     })
                 });
+            /*marker = L.marker(new L.LatLng(item.x, item.y),
+                {
+                    title: title,
+                    clickable: true,
+                    draggable: true,
+                    icon: L.divIcon({
+                        html: html_title,
+                        iconSize: [25, 25],
+                    })
+                });*/
             marker.bindPopup(title);
             markers.addLayer(marker);
 

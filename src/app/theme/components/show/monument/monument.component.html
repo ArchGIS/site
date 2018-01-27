@@ -4,13 +4,21 @@
         <div class="block">
             <div class="request-name">Названия памятника:</div>
             <div class="request-name-main">
-                    {{monument.knowledge.name}}
+                <span *ngFor="let item of monument.knowledges">
+                    {{item.name}},
+                </span>
             </div>
         </div>
         <div class="block">
             <div class="request-name">Эпоха:</div>
             <div class="request-name-main">
                 {{monument.epoch.ru_name}}
+            </div>
+        </div>
+        <div class="block">
+            <div class="request-name">Тип::</div>
+            <div class="request-name-main">
+                {{monument.siteType.ru_name}}
             </div>
         </div>
 
@@ -71,6 +79,36 @@
                 {{monument.artifacts_count}}
             </div>
         </div>
+        <div class="block">
+            <div class="request-name">ОКН:</div>
+            <div class="request-name-main">
+                Отсутствует
+            </div>
+        </div>
+        <div class="block">
+            <div class="request-name">Всего культурных слоев :</div>
+            <div class="request-name-main">
+                0
+            </div>
+        </div>
+        <div class="block">
+            <div class="request-name">Вышележащие культурные слои:</div>
+            <div class="request-name-main">
+                Нет
+            </div>
+        </div>
+        <div class="block">
+            <div class="request-name">Культурные слои с близкой стратиграфической позицией:</div>
+            <div class="request-name-main">
+                Нет
+            </div>
+        </div>
+        <div class="block">
+            <div class="request-name">Нижележащие культурные слои:</div>
+            <div class="request-name-main">
+                Нет
+            </div>
+        </div>
     </md-tab>
     <md-tab label="Исследования">
         <div *ngIf="monument"
@@ -79,7 +117,7 @@
                 <div class="expansion-panel"
                      (click)="block.active = !block.active">
                     <div class="title">
-                        Памятник №{{i+1}}: {{block.name}}
+                        Памятник №{{i+1}}: {{block.research.name}}
                         <md-icon *ngIf="!block.active"
                                  style="font-size: 24px">keyboard_arrow_down</md-icon>
                         <md-icon *ngIf="block.active"
