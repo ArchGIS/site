@@ -11,15 +11,15 @@
             <show-monument *ngIf="entitiesID===3"
                            (coordinats)="onSpatial($event)"
                            [id]="id"></show-monument>
-            <show-excavation *ngIf="entitiesID===4"
+            <show-report *ngIf="entitiesID===4"
+                         (coordinats)="onSpatial($event)"
+                         [id]="id"></show-report>
+            <show-excavation *ngIf="entitiesID===5"
                            (coordinats)="onSpatial($event)"
                            [id]="id"></show-excavation>
-            <show-artifact *ngIf="entitiesID===5"
+            <show-artifact *ngIf="entitiesID===6"
                            (coordinats)="onSpatial($event)"
                            [id]="id"></show-artifact>
-            <show-report *ngIf="entitiesID===6"
-                           (coordinats)="onSpatial($event)"
-                         [id]="id"></show-report>
             <show-publication *ngIf="entitiesID===7"
                            (coordinats)="onSpatial($event)"
                          [id]="id"></show-publication>

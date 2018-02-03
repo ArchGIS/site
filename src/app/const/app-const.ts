@@ -8,5 +8,6 @@ export class Consts{
     static app_version: string="1.0";
     static app_type: string="web";
     static release: boolean = false;
+    public static baseURLD: string = 'http://185.147.81.8:7000/';
     public static baseURL: string = Consts.release?'bla-bla':'http://185.147.81.8:7000/';
 }

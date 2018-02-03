@@ -144,13 +144,13 @@ export class QuickSearchIComponent {
 
 
 
-  markerClusterGroup: L.MarkerClusterGroup;
+  //markerClusterGroup: L.MarkerClusterGroup;
   markerClusterData: any[] = [];
   markerClusterOptions: L.MarkerClusterGroupOptions;
 
   markerClusterReady(group: L.MarkerClusterGroup) {
 
-    this.markerClusterGroup = group;
+    //this.markerClusterGroup = group;
 
   }
 
