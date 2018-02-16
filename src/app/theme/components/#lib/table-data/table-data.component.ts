@@ -270,6 +270,7 @@ export declare module AuthorInter {
     export interface Spatial {
         date: any;
         type: Type;
+        sites: Site[];
         epoch: Epoch;
         x: number;
         y: number;
@@ -296,6 +297,7 @@ export declare module AuthorInter {
         spatial: Spatial[];
         epoch: Epoch;
         heritages: Heritage[];
+        knowledges: Knowledge[];
     }
 
     export interface Heritage{

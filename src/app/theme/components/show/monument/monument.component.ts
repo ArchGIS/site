@@ -111,8 +111,8 @@ export class MonumentShowIComponent implements OnChanges {
           temp.spatial.map(coordinats => {
             temp.spatia.push(
                 <Spatial>{
-                  id: res.id,
-                  name: res.name,
+                  id: temp.id,
+                  name: coordinats.sites[0].knowledges[0].name,
                   x: coordinats.x,
                   y: coordinats.y,
                   type: coordinats.type,

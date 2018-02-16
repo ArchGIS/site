@@ -7,17 +7,23 @@ import {AuthGuard} from "./theme/guard/auth-guard.service";
 
 
 export const ROUTES: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {
+      path: '',
+      redirectTo: 'login',
+      pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent,
-    //canActivate: [AuthGuardLogin]
+    canActivate: [AuthGuardLogin]
   },
   {
     path: 'main',
     loadChildren: 'app/theme/module/main/main.module#MainModule',
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
 
-  { path: '**',    component: NoContentComponent },
+  {
+      path: '**',
+      component: NoContentComponent
+  },
 ];

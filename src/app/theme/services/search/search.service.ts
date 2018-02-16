@@ -52,7 +52,7 @@ export class SearchService {
     }
     getMonumentID(id: number) {
         let url = `${Consts.baseURL}api/graphql`;
-        let item = `{"query": "{Site(id:${id}){id siteType{id ru_name} artifacts_count excavations{name id area}  epoch{id ru_name}  spatial{ date x y type{id ru_name  }} knowledges{ id name description excavations_count artifacts_count culture{id ru_name}  research{id name year description type{id ru_name} author{id name} report{id  year name} excavations{id name area boss artifacts{id name depth excRegion}} radiocarbons{id name date s sampleDesc bcadSecondTop bcadSecondBot } }} } }"}`;
+        let item = `{"query": "{Site(id:${id}){id siteType{id ru_name} artifacts_count excavations{name id area}  epoch{id ru_name}  spatial{ date x y sites{knowledges{name    }}  type{id ru_name  }} knowledges{ id name description excavations_count artifacts_count culture{id ru_name}  research{id name year description type{id ru_name} author{id name} report{id  year name} excavations{id name area boss artifacts{id name depth excRegion}} radiocarbons{id name date s sampleDesc bcadSecondTop bcadSecondBot } }} } }"}`;
         return this.service.post<any,any>(url, item);
     }
 
