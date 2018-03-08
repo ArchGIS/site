@@ -8,6 +8,9 @@ import Author = AuthorInter.Author;
 import {PreoladSpinner} from "../../../services/preload/preolad.service";
 import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from "@angular/material";
 import Research = AuthorInter.Research;
+import AnswerEmpty = AuthorInter.AnswerEmpty;
+import Monument = AuthorInter.Monument;
+import Artifact = AuthorInter.Artifact;
 
 @Component({
   selector: 'table-data',
@@ -41,6 +44,8 @@ export class TableDataComponent implements OnChanges {
 
     items: Author[]= undefined;
     research: Research[]= undefined;
+    monuments: Monument[]= undefined;
+    artifacts: Artifact[]= undefined;
 
 
     onDeleteItem(item: Author){
@@ -56,12 +61,24 @@ export class TableDataComponent implements OnChanges {
 
     onSelect(id: number) {
         let self = this;
-        switch (id){
+        self.items = undefined;
+        self.research= undefined;
+        self.monuments= undefined;
+        self.artifacts= undefined;
+
+        switch (id) {
             case 1:
                 self.getAuthor();
                 break;
             case 2:
                 self.getResearch();
+                break;
+            case 3:
+                self.getMonument();
+                break;
+            case 4:
+                self.getArtifacts();
+                break;
             default:
                 break;
         }
@@ -73,32 +90,112 @@ export class TableDataComponent implements OnChanges {
         self.service.getResearches()
             .then(res => {
                 debugger;
-                self.research = res.Research;
-                self.research.map(rr => {
-                    rr.report_string = '';
-                    if (rr.report) {
-                        rr.report_string = rr.report.name;
-                    }
-                })
+                self.research = [];
+                if (self.textSearch !== undefined && self.textSearch !== null && self.textSearch !== "") {
+                    res.Research.map((item: Research) => {
+                        if (item.name){
+                            if (item.name.search(self.textSearch)>-1) {
+                                item.report_string = '';
+                                if (item.report) {
+                                    item.report_string = item.report.name;
+                                }
+                                self.research.push(item);
+                            }
+                        }
+                    })
+                }
+                else {
+                    self.research = res.Research;
+                    self.research.map(rr => {
+                        rr.report_string = '';
+                        if (rr.report) {
+                            rr.report_string = rr.report.name;
+                        }
+                    })
+                }
             })
     }
 
-    getAuthor(){
+    getMonument() {
+        let self = this;
+        self.service.getMonuments()
+            .then(res => {
+                debugger;
+                self.monuments = [];
+                if (self.textSearch !== undefined && self.textSearch !== null && self.textSearch !== "") {
+                    res.Monuments.map((item: Monument) => {
+                        if (item.name) {
+                            let name = item.name.toLocaleLowerCase();
+                            let text = self.textSearch.toLocaleLowerCase();
+                            if (name.search(text) > -1) {
+                                self.monuments.push(item);
+                            }
+                        }
+                    })
+                }
+                else {
+                    self.monuments = res.Monuments;
+                }
+            })
+    }
+
+    getArtifacts() {
+        let self = this;
+        self.service.getArtifacts()
+            .then(res => {
+                debugger;
+                self.artifacts = [];
+                if (self.textSearch !== undefined && self.textSearch !== null && self.textSearch !== "") {
+                    res.Artifact.map((item: Artifact) => {
+                        if (item.name) {
+                            let name = item.name.toLocaleLowerCase();
+                            let text = self.textSearch.toLocaleLowerCase();
+                            if (name.search(text) > -1) {
+                                self.artifacts.push(item);
+                            }
+                        }
+                    })
+                }
+                else {
+                    self.artifacts = res.Artifact;
+                }
+            })
+    }
+
+    getAuthor() {
         let self = this;
         self.service.getItemsAuthor()
             .then(res => {
+                self.items = [];
                 debugger;
-                self.items = res.Author;
-                debugger;
+                if (self.textSearch !== undefined && self.textSearch !== null && self.textSearch !== "") {
+                    res.Author.map((item: Author) => {
+                        if (item.name) {
+                            let name = item.name.toLocaleLowerCase();
+                            let text = self.textSearch.toLocaleLowerCase();
+                            if (name.search(text) > -1) {
+                                if (item.researches) {
+                                    item.researches_string = '';
+                                    item.researches.map(rr => {
+                                        item.researches_string += rr.name + ',';
+                                    })
+                                }
+                                self.items.push(item);
+                            }
+                        }
+                    })
+                }
+                else {
+                    self.items = res.Author;
                     self.items.map(r => {
                         if (r.researches) {
                             r.researches_string = '';
                             r.researches.map(item => {
-                                r.researches_string += item.name+',';
+                                r.researches_string += item.name + ',';
                             })
                         }
                     });
-                debugger;
+                }
             })
     }
 
@@ -128,6 +225,10 @@ export class DeleteTableDialog {
 
 
 export declare module AuthorInter {
+
+    export interface AnswerEmpty<T> {
+        item: T
+    }
 
     export interface Report {
         code?: any;

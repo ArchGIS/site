@@ -1,14 +1,4 @@
-<!--<table cellpadding="7">
-    <tr>
-        <th *ngFor="let item of items">
-            {{item}}
-        </th>
-    </tr>
-    <tr *ngFor="let item of items">
-        <td>{{item}}</td>
-    </tr>
-</table>
--->
+
 <div id="main">
 
     <div  class="top-bar">
@@ -81,6 +71,38 @@
             <td>{{item.author.name}}</td>
             <td>{{item.year}}</td>
             <td>{{item.report_string}}</td>
+            <td><a [routerLink]="['show', 'author', item.id]">Редактировать</a></td>
+            <td><a (click)="onDeleteItem(item)">Удалить</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <table  *ngIf="itemsID===3"
+            class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             #check
+                             [(ngModel)]="selectedTableCheck"
+                             (change)="onSelectCheckBox()"></md-checkbox>
+            </th>
+            <th>Название	</th>
+            <th>Тип	</th>
+            <th>Эпоха</th>
+            <th>Исследования</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="monuments">
+        <tr *ngFor="let item of monuments"
+            [ngStyle]="{'background-color': item.active?'#eee':'#fff'}">
+            <td *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             [(ngModel)]="item.active"></md-checkbox>
+            </td>
+            <td>{{item.name}}</td>
+            <td>{{item.type?.ru_name}}</td>
+            <td>{{item.epoch.ru_name}}</td>
+            <td></td>
             <td><a [routerLink]="['show', 'author', item.id]">Редактировать</a></td>
             <td><a (click)="onDeleteItem(item)">Удалить</a></td>
         </tr>

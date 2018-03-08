@@ -25,13 +25,13 @@
                          [id]="id"></show-publication>
         </div>
     </div>
-    <div class="right"
+    <!--<div class="right"
          [class.right-search]="bool">
         <div  style="height: 100%; width:100%;"
               id="map">
         </div>
-    </div>
-    <!--<md-tab-group>
+    </div>-->
+   <!--<md-tab-group>
         <md-tab label="Tab 1">
             <div class="right"
                  [class.right-search]="bool">
@@ -49,5 +49,35 @@
             </div>
         </md-tab>
     </md-tab-group>-->
-
+    <div class="maps">
+        <md-button-toggle-group #group="mdButtonToggleGroup"
+                                class="class-group">
+            <md-button-toggle value="general"
+                              (click)="onSelectMap(group.value)">
+                Общая
+            </md-button-toggle>
+            <md-button-toggle value="Verstovka"
+                              (click)="onSelectMap(group.value)">
+                Verstovka
+            </md-button-toggle>
+            <md-button-toggle value="PGM"
+                              (click)="onSelectMap(group.value)">
+                PGM
+            </md-button-toggle>
+        </md-button-toggle-group>
+        <div class="right"
+             [hidden]="selectMap!==0"
+             [class.right-search]="bool">
+            <div  style="    height: calc(100vh - 100px);; width:100%;"
+                  id="map">
+            </div>
+        </div>
+        <div class="right"
+             [hidden]="selectMap!==1"
+             [class.right-search]="bool">
+            <div  style="    height: calc(100vh - 100px);; width:100%;"
+                  id="map_Verstovka_clip">
+            </div>
+        </div>
+    </div>
 </div>

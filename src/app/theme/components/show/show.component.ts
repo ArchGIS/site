@@ -78,15 +78,16 @@ export class ShowIComponent implements OnChanges, OnInit {
 
     map;
     mapVerstovka;
-
+    selectMap: number= 0;
 
     onCustomMap() {
         let self = this;
+        debugger;
         var image = './assets/map/Verstovka_clip';
         var width = 17749;
         var height = 10009;
-        var maxLevel = 7;
-        var minLevel = 0;
+        var maxLevel = 9;
+        var minLevel = 4;
         var orgLevel = 7;
 
         // Some weird calculations to fit the image to the initial position
@@ -104,16 +105,15 @@ export class ShowIComponent implements OnChanges, OnInit {
         var centerLat = (360 / Math.PI) * (Math.atan(Math.exp(rc / radius)) - (Math.PI / 4));
         var centerLon = (west + east) / 2;
         var bounds = [[south, west], [north, east]];
-        L.CRS.Wall = L.extend({}, L.CRS.Simple, {
+         L.CRS.Wall = L.extend({}, L.CRS.Simple, {
             transformation: new L.Transformation(55, 34868879985, 5.758860016636791, 54, 42786981175, 50, 37309762885),
         });
         self.mapVerstovka = new L.Map('map_Verstovka_clip', {
             maxBounds: bounds,
-            crs: L.CRS.Wall
         });
 
         L.tileLayer(image + '/{z}-{x}-{y}.jpg', {
-            crs: L.CRS.Wall,
+           crs: L.CRS.Wall,
             maxZoom: maxLevel,
             minZoom: minLevel,
             opacity: 1.0,
@@ -128,8 +128,20 @@ export class ShowIComponent implements OnChanges, OnInit {
         var center = new L.latLng(centerLat, centerLon);
 
         self.mapVerstovka.setView(center, zoom);
+    }
 
-
+    onSelectMap(map: string){
+        switch (map){
+            case 'general':
+                this.selectMap = 0;
+                break;
+            case 'Verstovka':
+                this.selectMap = 1;
+                break;
+            case 'PGM':
+                this.selectMap = 2;
+                break;
+        }
     }
 
     mapI() {
@@ -186,6 +198,7 @@ export class ShowIComponent implements OnChanges, OnInit {
             new L.LatLng(54.4280310993334, 48.7781774812816),
             new L.LatLng(55.3486380722023, 50.3731024874584));
         // let bounds = [[south, west], [north, east]];
+
         let Custom = L.tileLayer(image + '/{z}-{x}-{y}.jpg', {
             minZoom: 7,
             maxZoom: 18,
@@ -282,7 +295,7 @@ export class ShowIComponent implements OnChanges, OnInit {
             showMeasurementsClearControl: true,
             showUnitControl: true
         }).addTo(self.map);
-        //self.onCustomMap()
+        self.onCustomMap()
     }
 
     ngOnInit() {
@@ -362,6 +375,7 @@ export class ShowIComponent implements OnChanges, OnInit {
         });
 
         self.map.addControl(controlSearch);
+        self.mapVerstovka(controlSearch)
         spatial.map(item => {
 
             let marker_url: string = 'assets/icon/monTypes/monType' + item.type.id + '_' + item.epoch.id + '.png';
@@ -382,6 +396,7 @@ export class ShowIComponent implements OnChanges, OnInit {
 
         });
         self.map.addLayer(markers);
+        self.mapVerstovka.addLayer(markers);
         self.bool = true;
     }
 
