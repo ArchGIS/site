@@ -71,7 +71,7 @@
             <td>{{item.author.name}}</td>
             <td>{{item.year}}</td>
             <td>{{item.report_string}}</td>
-            <td><a [routerLink]="['show', 'author', item.id]">Редактировать</a></td>
+            <td><a [routerLink]="['show', 'research', item.id]">Редактировать</a></td>
             <td><a (click)="onDeleteItem(item)">Удалить</a></td>
         </tr>
         </tbody>
@@ -103,7 +103,184 @@
             <td>{{item.type?.ru_name}}</td>
             <td>{{item.epoch.ru_name}}</td>
             <td></td>
-            <td><a [routerLink]="['show', 'author', item.id]">Редактировать</a></td>
+            <td><a [routerLink]="['show', 'monument', item.id]">Редактировать</a></td>
+            <td><a (click)="onDeleteItem(item)">Удалить</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <table  *ngIf="itemsID===4"
+            class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             #check
+                             [(ngModel)]="selectedTableCheck"
+                             (change)="onSelectCheckBox()"></md-checkbox>
+            </th>
+            <th>Название	</th>
+            <th>Категория	</th>
+            <th>Год находки</th>
+            <th>Коллекции</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="artifacts">
+        <tr *ngFor="let item of artifacts"
+            [ngStyle]="{'background-color': item.active?'#eee':'#fff'}">
+            <td *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             [(ngModel)]="item.active"></md-checkbox>
+            </td>
+            <td>{{item.name}}</td>
+            <td>{{item.category?.ru_name}}</td>
+            <td> </td>
+            <td>{{item.collections?.name}}</td>
+            <td><a [routerLink]="['show', 'artifact', item.id]">Редактировать</a></td>
+            <td><a (click)="onDeleteItem(item)">Удалить</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <table  *ngIf="itemsID===5"
+            class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             #check
+                             [(ngModel)]="selectedTableCheck"
+                             (change)="onSelectCheckBox()"></md-checkbox>
+            </th>
+            <th>Индекс	</th>
+            <th>Дата BP	</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="radiocarbons">
+        <tr *ngFor="let item of radiocarbons"
+            [ngStyle]="{'background-color': item.active?'#eee':'#fff'}">
+            <td *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             [(ngModel)]="item.active"></md-checkbox>
+            </td>
+            <td>{{item.name}}</td>
+            <td>{{item.date}}</td>
+            <td><a [routerLink]="['show', 'radiocarbon', item.id]">Редактировать</a></td>
+            <td><a (click)="onDeleteItem(item)">Удалить</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <table  *ngIf="itemsID===6"
+            class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             #check
+                             [(ngModel)]="selectedTableCheck"
+                             (change)="onSelectCheckBox()"></md-checkbox>
+            </th>
+            <th>Название	</th>
+            <th>Исследование	</th>
+            <th>Руководитель раскопа	</th>
+            <th>Площадь</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody *ngIf="excavation">
+        <tr *ngFor="let item of excavation"
+            [ngStyle]="{'background-color': item.active?'#eee':'#fff'}">
+            <td *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             [(ngModel)]="item.active"></md-checkbox>
+            </td>
+            <td>{{item.name}}</td>
+            <td>{{item.researches[0]?.name}}</td>
+            <td>{{item.boss}}</td>
+            <td>{{item.area}}</td>
+            <td><a [routerLink]="['show', 'excavation', item.id]">Редактировать</a></td>
+            <td><a (click)="onDeleteItem(item)">Удалить</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <table  *ngIf="itemsID===7"
+            class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             #check
+                             [(ngModel)]="selectedTableCheck"
+                             (change)="onSelectCheckBox()"></md-checkbox>
+            </th>
+            <th>Название	</th>
+            <th>Код	</th>
+            <th>Адрес</th>
+            <th>Датировка</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="heritages">
+        <tr *ngFor="let item of heritages"
+            [ngStyle]="{'background-color': item.active?'#eee':'#fff'}">
+            <td *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             [(ngModel)]="item.active"></md-checkbox>
+            </td>
+            <td>{{item.name}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a [routerLink]="['show', 'excavation', item.id]">Редактировать</a></td>
+            <td><a (click)="onDeleteItem(item)">Удалить</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <table  *ngIf="itemsID===8"
+            class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             #check
+                             [(ngModel)]="selectedTableCheck"
+                             (change)="onSelectCheckBox()"></md-checkbox>
+            </th>
+            <th>Название	</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="epoch">
+        <tr *ngFor="let item of epoch"
+            [ngStyle]="{'background-color': item.active?'#eee':'#fff'}">
+            <td *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             [(ngModel)]="item.active"></md-checkbox>
+            </td>
+            <td>{{item.ru_name}}</td>
+            <td><a disabled [routerLink]="['show', 'epoch', item.id]">Редактировать</a></td>
+            <td><a (click)="onDeleteItem(item)">Удалить</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <table  *ngIf="itemsID===9"
+            class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             #check
+                             [(ngModel)]="selectedTableCheck"
+                             (change)="onSelectCheckBox()"></md-checkbox>
+            </th>
+            <th>Название	</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="culture">
+        <tr *ngFor="let item of culture"
+            [ngStyle]="{'background-color': item.active?'#eee':'#fff'}">
+            <td *ngIf="selectedTable">
+                <md-checkbox color="primary"
+                             [(ngModel)]="item.active"></md-checkbox>
+            </td>
+            <td>{{item.ru_name}}</td>
+            <td><a disabled [routerLink]="['show', 'epoch', item.id]">Редактировать</a></td>
             <td><a (click)="onDeleteItem(item)">Удалить</a></td>
         </tr>
         </tbody>

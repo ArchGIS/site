@@ -11,6 +11,11 @@ import Research = AuthorInter.Research;
 import AnswerEmpty = AuthorInter.AnswerEmpty;
 import Monument = AuthorInter.Monument;
 import Artifact = AuthorInter.Artifact;
+import Radiocarbon = AuthorInter.Radiocarbon;
+import Excavation = AuthorInter.Excavation;
+import Heritage = AuthorInter.Heritage;
+import Epoch = AuthorInter.Epoch;
+import Culture = AuthorInter.Culture;
 
 @Component({
   selector: 'table-data',
@@ -46,6 +51,11 @@ export class TableDataComponent implements OnChanges {
     research: Research[]= undefined;
     monuments: Monument[]= undefined;
     artifacts: Artifact[]= undefined;
+    radiocarbons: Radiocarbon[]= undefined;
+    excavation : Excavation[]= undefined;
+    heritages : Heritage[]= undefined;
+    epoch : Epoch[]= undefined;
+    culture : Culture[]= undefined;
 
 
     onDeleteItem(item: Author){
@@ -79,6 +89,25 @@ export class TableDataComponent implements OnChanges {
             case 4:
                 self.getArtifacts();
                 break;
+            case 5:
+                self.getRadiocarbons();
+                break;
+
+            case 6:
+                self.getExcavations();
+                break;
+            case 7:
+                self.getHeritages();
+                break;
+            case 8:
+                self.getEpoch();
+                break;
+
+            case 9:
+                self.getCulture();
+                break;
+
+
             default:
                 break;
         }
@@ -138,6 +167,77 @@ export class TableDataComponent implements OnChanges {
                 }
             })
     }
+    getCulture() {
+        let self = this;
+        self.service.getCultures()
+            .then(res => {
+                debugger;
+                self.culture = [];
+                if (self.textSearch !== undefined && self.textSearch !== null && self.textSearch !== "") {
+                    res.Culture.map((item: Culture) => {
+                        if (item.ru_name) {
+                            let name = item.ru_name.toLocaleLowerCase();
+                            let text = self.textSearch.toLocaleLowerCase();
+                            if (name.search(text) > -1) {
+                                self.culture.push(item);
+                            }
+                        }
+                    })
+                }
+                else {
+                    res.Culture.map((item: Culture) => {
+                        if (item){
+                            self.culture.push(item);
+                        }
+                    });
+                }
+            })
+    }
+
+    getExcavations() {
+        let self = this;
+        self.service.getExcavations()
+            .then(res => {
+                debugger;
+                self.excavation = [];
+                if (self.textSearch !== undefined && self.textSearch !== null && self.textSearch !== "") {
+                    res.Excavation.map((item: Excavation) => {
+                        if (item.name) {
+                            let name = item.name.toLocaleLowerCase();
+                            let text = self.textSearch.toLocaleLowerCase();
+                            if (name.search(text) > -1) {
+                                self.excavation.push(item);
+                            }
+                        }
+                    })
+                }
+                else {
+                    self.excavation = res.Excavation;
+                }
+            })
+    }
+    getEpoch() {
+        let self = this;
+        self.service.getEpochs()
+            .then(res => {
+                debugger;
+                self.epoch = [];
+                if (self.textSearch !== undefined && self.textSearch !== null && self.textSearch !== "") {
+                    res.Epoch.map((item: Epoch) => {
+                        if (item.ru_name) {
+                            let name = item.ru_name.toLocaleLowerCase();
+                            let text = self.textSearch.toLocaleLowerCase();
+                            if (name.search(text) > -1) {
+                                self.epoch.push(item);
+                            }
+                        }
+                    })
+                }
+                else {
+                    self.epoch = res.Epoch;
+                }
+            })
+    }
 
     getArtifacts() {
         let self = this;
@@ -158,6 +258,51 @@ export class TableDataComponent implements OnChanges {
                 }
                 else {
                     self.artifacts = res.Artifact;
+                }
+            })
+    }
+    getHeritages() {
+        let self = this;
+        self.service.getHeritages()
+            .then(res => {
+                debugger;
+                self.heritages = [];
+                if (self.textSearch !== undefined && self.textSearch !== null && self.textSearch !== "") {
+                    res.Heritage.map((item: Heritage) => {
+                        if (item.name) {
+                            let name = item.name.toLocaleLowerCase();
+                            let text = self.textSearch.toLocaleLowerCase();
+                            if (name.search(text) > -1) {
+                                self.heritages.push(item);
+                            }
+                        }
+                    })
+                }
+                else {
+                    self.heritages = res.Heritage;
+                }
+            })
+    }
+
+    getRadiocarbons() {
+        let self = this;
+        self.service.getRadiocarbons()
+            .then(res => {
+                debugger;
+                self.radiocarbons = [];
+                if (self.textSearch !== undefined && self.textSearch !== null && self.textSearch !== "") {
+                    res.Radiocarbon.map((item: Radiocarbon) => {
+                        if (item.name) {
+                            let name = item.name.toLocaleLowerCase();
+                            let text = self.textSearch.toLocaleLowerCase();
+                            if (name.search(text) > -1) {
+                                self.radiocarbons.push(item);
+                            }
+                        }
+                    })
+                }
+                else {
+                    self.radiocarbons = res.Radiocarbon;
                 }
             })
     }
@@ -330,7 +475,9 @@ export declare module AuthorInter {
         id: number;
         name: string;
         s: number;
+        spatia: Spatial[];
         sampleDesc: string;
+        researches: Research;
     }
 
     export interface Monument{
@@ -365,6 +512,7 @@ export declare module AuthorInter {
 
     export interface Culture {
         id: number;
+        active: boolean;
         ru_name: string;
     }
 
@@ -386,6 +534,8 @@ export declare module AuthorInter {
         name: string;
         spatia: Spatial[];
         excavation: Excavation;
+        category: ArtifactCategory;
+        collections: Collection;
     }
 
     export interface Epoch{
@@ -404,7 +554,22 @@ export declare module AuthorInter {
     export interface Heritage{
         id: number;
         name: string;
+        sites: Site[];
     }
+
+    export interface ArtifactCategory {
+        id: number;
+        en_name: string;
+        ru_name: string;
+    }
+
+    export interface Collection {
+        name: string;
+    }
+
+
+
+
 
 }
 

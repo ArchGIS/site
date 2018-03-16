@@ -31,8 +31,13 @@ import {ItemResearchShowIComponent} from "../../components/show/research/item/it
 import {ReportShowIComponent} from "../../components/show/report/report.component";
 import {ImageUploadModule} from "../../components/#lib/ng2-image-upload-master/src/image-upload.module";
 import {PublicationShowIComponent} from "../../components/show/publication/publication.component";
+import {GeneralMapComponent} from "../../components/show/map/general/general-map.component";
+import {VerstovkaComponent} from "../../components/show/map/Verstovka/verstovka.component";
+import {RadiocarbonComponent} from "../../components/show/radiocarbon/radiocarbon.component";
 
 const adminPanelComponent =[
+    GeneralMapComponent,
+    VerstovkaComponent,
   AdminPanelComponent,
   AdminPanelIComponent,
   FormAdminPanelComponent,
@@ -46,7 +51,8 @@ const adminPanelComponent =[
   ExcavationShowIComponent,
   ItemResearchShowIComponent,
   ReportShowIComponent,
-    PublicationShowIComponent
+    PublicationShowIComponent,
+    RadiocarbonComponent
 ];
 
 

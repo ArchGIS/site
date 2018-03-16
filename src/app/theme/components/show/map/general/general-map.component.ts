@@ -1,150 +1,47 @@
 
 
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnChanges, OnInit} from "@angular/core";
-import {SearchService} from "../../services/search/search.service";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnChanges, OnInit, Input} from "@angular/core";
 declare var L:any;
 import * as LM from 'leaflet';
 import 'leaflet.polylinemeasure';
 import 'leaflet-search';
 import 'leaflet-rastercoords';
 import 'leaflet-easyprint';
-import '../../../#lib/leaflet-bing/leaflet-bing-layer'
+import '../../../../../#lib/leaflet-bing/leaflet-bing-layer'
 import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
-import {AuthorInter} from "../#lib/table-data/table-data.component";
 import Spatial = AuthorInter.Spatial;
-import {PlatformLocation} from "@angular/common";
-import {Consts} from "../../../const/app-const";
+import {AuthorInter} from "../../../#lib/table-data/table-data.component";
+import {Consts} from "../../../../../const/app-const";
 
 
 
 @Component({
-  templateUrl: 'show.component.html',
-  styleUrls: ['show.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  template: `
+      <div  style="    height: calc(100vh - 100px);; width:100%;"
+            id="map">
+      </div>
+  `,
+  selector: 'general-map'
 })
 
-export class ShowIComponent implements OnChanges, OnInit {
+export class GeneralMapComponent implements OnChanges, OnInit {
 
-    constructor(private service: SearchService,
-                public router: Router,
-                private cdRef: ChangeDetectorRef,
-                private platformLocation: PlatformLocation,
-                private ngZone: NgZone,
-                private activateRoute: ActivatedRoute) {
+    constructor(public router: Router) {
         let self = this;
         debugger;
-        self.subscription = activateRoute.params.subscribe(params => {
-            self.id = params['id'];
-            debugger;
-            // if (self.map) {
-            //     self.map.off();
-            //     self.map.remove();
-            //     self.mapI();
-            // }
-            switch (params['entities']) {
-                case 'author':
-                    self.entitiesID = 1;
-                    break;
-                case 'research':
-                    self.entitiesID = 2;
-                    break;
-                case 'monument':
-                    self.entitiesID = 3;
-                    break;
-                case 'report':
-                    self.entitiesID = 4;
-                    break;
-                case 'excavation':
-                    self.entitiesID = 5;
-                    break;
-                case 'artifact':
-                    self.entitiesID = 6;
-                    break;
-                case 'publication':
-                    self.entitiesID = 7;
-                    break;
-                case 'culture':
-                    self.entitiesID = 0;
-                    break;
-                case 'radiocarbon':
-                    self.entitiesID = 8;
-                    break;
-                default:
-                    break;
-            }
-        });
-    }
-
-    map;
-    mapVerstovka;
-    selectMap: number= 0;
-
-    onCustomMap() {
-        let self = this;
-        debugger;
-        var image = './assets/map/Verstovka_clip';
-        var width = 17749;
-        var height = 10009;
-        var maxLevel = 9;
-        var minLevel = 4;
-        var orgLevel = 7;
-
-        // Some weird calculations to fit the image to the initial position
-        // Leaflet has some bugs there. The fitBounds method is not correct for large scale bounds
-        var tileWidth = 256 * Math.pow(2, orgLevel);
-        var radius = tileWidth / 2 / Math.PI;
-        var rx = width - tileWidth / 2;
-        var ry = -height + tileWidth / 2;
-
-        var west = -180;
-        var east = (180 / Math.PI) * (rx / radius);
-        var north = 85.05;
-        var south = (360 / Math.PI) * (Math.atan(Math.exp(ry / radius)) - (Math.PI / 4));
-        var rc = (tileWidth / 2 + ry) / 2;
-        var centerLat = (360 / Math.PI) * (Math.atan(Math.exp(rc / radius)) - (Math.PI / 4));
-        var centerLon = (west + east) / 2;
-        var bounds = [[south, west], [north, east]];
-         L.CRS.Wall = L.extend({}, L.CRS.Simple, {
-            transformation: new L.Transformation(55, 34868879985, 5.758860016636791, 54, 42786981175, 50, 37309762885),
-        });
-        self.mapVerstovka = new L.Map('map_Verstovka_clip', {
-            maxBounds: bounds,
-        });
-
-        L.tileLayer(image + '/{z}-{x}-{y}.jpg', {
-           crs: L.CRS.Wall,
-            maxZoom: maxLevel,
-            minZoom: minLevel,
-            opacity: 1.0,
-            zIndex: 1,
-            noWrap: true,
-            bounds: bounds,
-            attribution: '<a href="https://github.com/oliverheilig/LeafletPano">LeafletPano</a>'
-        }).addTo(self.mapVerstovka);
-
-
-        var zoom = self.mapVerstovka.getBoundsZoom(bounds);
-        var center = new L.latLng(centerLat, centerLon);
-
-        self.mapVerstovka.setView(center, zoom);
-    }
-
-    onSelectMap(map: string){
-        switch (map){
-            case 'general':
-                this.selectMap = 0;
-                break;
-            case 'Verstovka':
-                this.selectMap = 1;
-                break;
-            case 'PGM':
-                this.selectMap = 2;
-                break;
+        if (self.map) {
+            self.map.off();
+            self.map.remove();
+            self.mapI();
         }
     }
 
-    /*mapI() {
+    map = undefined;
+
+    @Input() items: Spatial[];
+
+    mapI() {
         let self = this;
         let tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 18,
@@ -293,73 +190,59 @@ export class ShowIComponent implements OnChanges, OnInit {
             showMeasurementsClearControl: true,
             showUnitControl: true
         }).addTo(self.map);
-        self.onCustomMap()
-    }*/
+        self.onSpatial(self.items)
+    }
 
     ngOnInit() {
         let self = this;
-     //   self.mapI();
+        self.mapI();
     }
 
 
     ngOnChanges() {
-        let self = this;
-        self.subscription = this.activateRoute.params.subscribe(params => {
-            self.id = params['id'];
-            self.entities = params['entities'];
-        });
-        switch (self.entities) {
-            case 'author':
-                self.entitiesID = 1;
-                break;
-            case 'research':
-                self.entitiesID = 2;
-                break;
-            case 'monument':
-                self.entitiesID = 3;
-                break;
-            case 'report':
-                self.entitiesID = 4;
-                break;
-            case 'excavation':
-                self.entitiesID = 5;
-                break;
-            case 'artifact':
-                self.entitiesID = 6;
-                break;
-            case 'publication':
-                self.entitiesID = 7;
-                break;
-            case 'culture':
-                self.entitiesID = 0;
-                break;
-            case 'radiocarbon':
-                self.entitiesID = 0;
-                break;
-            default:
-                break;
-        }
+
     }
 
 
-    private entities: string;
-    private entitiesID: number;
-    private id: number;
-    private subscription: Subscription;
 
-    private typeEpochID: number = 0;
     bool: boolean = false;
 
-    public typeName: string = '';
-
-    public typeS: TypeSearch[];
-    public typeSID: number = 1;
-
-    public search: boolean = true;
-    public items: Spatial[];
 
     onSpatial(spatial: Spatial[]) {
-        this.items = spatial;
+        let self = this;
+        debugger;
+        let markers = LM.markerClusterGroup();
+        let marker;
+
+        let controlSearch = new L.Control.Search({
+            position: 'topleft',
+            layer: markers,
+            initial: false,
+            zoom: 12,
+            marker: false
+        });
+
+        self.map.addControl(controlSearch);
+        spatial.map(item => {
+
+            let marker_url: string = 'assets/icon/monTypes/monType' + item.type.id + '_' + item.epoch.id + '.png';
+            let title: string = `<a  onclick="window.open('${Consts.baseURLD}#/main/admin-panel/show/monument/${item.id}')">${item.name}</a>`;
+
+            marker = L.marker(new L.LatLng(item.x, item.y),
+                {
+                    title: title,
+                    clickable: true,
+                    draggable: false,
+                    icon: L.icon({
+                        iconUrl: marker_url,
+                        iconSize: [25, 25],
+                    })
+                }).on('click', self.markerOnClick);
+            marker.bindPopup(title);
+            markers.addLayer(marker);
+        });
+        self.map.addLayer(markers);
+        self.bool = true;
     }
 
     markerOnClick(e) {

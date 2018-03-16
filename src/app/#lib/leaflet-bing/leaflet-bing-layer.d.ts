@@ -1,6 +1,6 @@
 import * as L from 'leaflet';
 
-declare module 'leaflet' {
+ declare module 'leaflet' {
     namespace TileLayer {
         interface bing extends Control {
             new (options: BingOptionsLeaflet): any;

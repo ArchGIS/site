@@ -23,6 +23,9 @@
             <show-publication *ngIf="entitiesID===7"
                            (coordinats)="onSpatial($event)"
                          [id]="id"></show-publication>
+            <show-radiocarbon *ngIf="entitiesID===8"
+                           (coordinats)="onSpatial($event)"
+                         [id]="id"></show-radiocarbon>
         </div>
     </div>
     <!--<div class="right"
@@ -68,16 +71,14 @@
         <div class="right"
              [hidden]="selectMap!==0"
              [class.right-search]="bool">
-            <div  style="    height: calc(100vh - 100px);; width:100%;"
-                  id="map">
-            </div>
+            <general-map *ngIf="items"
+                         [items]="items"></general-map>
         </div>
         <div class="right"
              [hidden]="selectMap!==1"
              [class.right-search]="bool">
-            <div  style="    height: calc(100vh - 100px);; width:100%;"
-                  id="map_Verstovka_clip">
-            </div>
+            <verstovka-map *ngIf="items"
+                           [items]="items"></verstovka-map>
         </div>
     </div>
 </div>

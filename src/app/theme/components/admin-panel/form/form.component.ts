@@ -37,10 +37,11 @@ export class FormAdminPanelComponent {
             {id: 7, name: 'ОКН'},
             {id: 8, name: 'Эпоха'},
             {id: 9, name: 'Культура'},
-            {id: 10, name: 'Отчёт'},
+            /*{id: 10, name: 'Отчёт'},
             {id: 11, name: 'Публикация'},
             {id: 12, name: 'Город'},
-            {id: 13, name: 'Организация'}];
+            {id: 13, name: 'Организация'}
+            */];
     filter: any;
 
     @Output() textSearch = new EventEmitter<string>();

@@ -1,0 +1,143 @@
+<md-tab-group>
+
+    <md-tab label="Общие сведения">
+        <div *ngIf="radiocarbon"
+             class="block-max">
+
+            <div class="block">
+                <div class="request-name">Индекс:</div>
+                <div class="request-name-main">
+                  {{radiocarbon.name}}
+                </div>
+            </div>
+
+                <div class="block" >
+                    <div class="request-name">Тип даты:</div>
+                    <div class="request-name-main">
+                        No data
+                </div>
+                </div>
+
+                <div class="block" >
+                    <div class="request-name">Дата BP:</div>
+                    <div class="request-name-main">
+{{radiocarbon.date}}
+                </div>
+                </div>
+                <!--<div class="block" >
+                    <div class="request-name">Год издания:</div>
+                    <div class="request-name-main">
+                            {{publication.year}}
+                        </div>
+                </div>-->
+                <div class="block" >
+                    <div class="request-name">±1s:</div>
+                    <div class="request-name-main">
+                            {{radiocarbon.s}}
+                        </div>
+                </div>
+                <div class="block" >
+                    <div class="request-name">BC/AD 68.2%:</div>
+                    <div class="request-name-main">
+                        Нет данных
+                        </div>
+                </div>
+                <div class="block" >
+                    <div class="request-name">BC/AD 95.4%:</div>
+                    <div class="request-name-main">
+                        Нет данных
+                        </div>
+                </div>
+                <div class="block" >
+                    <div class="request-name">Curve IntCal:</div>
+                    <div class="request-name-main">
+                        Нет данных
+                        </div>
+                </div>
+                <div class="block" >
+                    <div class="request-name">Глубина от современной поверхности:
+                    </div>
+                    <div class="request-name-main">
+                        Нет данных
+                        </div>
+                </div>
+                <div class="block" >
+                    <div class="request-name">Глубина относительно высотного репера (нивелировочная отметка), см:
+                    </div>
+                    <div class="request-name-main">
+                        Нет данных
+                        </div>
+                </div>
+                <div class="block" >
+                    <div class="request-name">Место обнаружения (участок/квадрат):
+                    </div>
+                    <div class="request-name-main">
+                        Нет данных
+                        </div>
+                </div>
+                <div class="block" >
+                    <div class="request-name">Стратиграфическая характеристика вмещающего слоя:
+                    </div>
+                    <div class="request-name-main">
+                        Нет данных
+                        </div>
+                </div>
+                <div class="block" >
+                    <div class="request-name">Генезис вмещающих осадков:
+                    </div>
+                    <div class="request-name-main">
+                        Нет данных
+                        </div>
+                </div>
+                <div class="block" >
+                    <div class="request-name">Датированный материал:
+                    </div>
+                    <div class="request-name-main">
+                        Нет данных
+                        </div>
+                </div>
+                <div class="block" >
+                    <div class="request-name">Описание образца:</div>
+                    <div class="request-name-main">
+                        Нет данных
+                        </div>
+                </div>
+        </div>
+    </md-tab>
+    <md-tab label="Исследования">
+        <div *ngIf="radiocarbon.researches"
+             class="block-max">
+            <div *ngFor="let block of radiocarbon.researches; let i=index">
+                <div class="expansion-panel"
+                     (click)="block.active = !block.active">
+                    <div class="title">
+                        Исследование №{{i+1}}: {{block.research.name}}
+                        <md-icon *ngIf="!block.active"
+                                 style="font-size: 24px">keyboard_arrow_down</md-icon>
+                        <md-icon *ngIf="block.active"
+                                 style="font-size: 24px">keyboard_arrow_up</md-icon>
+                    </div>
+                    <div *ngIf="block.active"
+                         class="main-block">
+                        <show-research-item [research]="block"></show-research-item>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="radiocarbon.researches.length===0"
+                 class="empty-item">
+                Нет данных
+            </div>
+        </div>
+
+    </md-tab>
+    <md-tab label="Фотографии">
+        <image-upload
+                (onRemove)="imageRemoved($event, ind)"
+                (onFileUploadFinish)="imageUploaded($event, ind)"
+                [url]="uploadUrl"
+                [buttonCaption]="'Выберите фотографию'"
+                [dropBoxMessage]="'Drop your images here!'"
+                [headers]="[{header: 'Authorization', value: 'Bearer'}]"
+        ></image-upload>
+    </md-tab>
+</md-tab-group>

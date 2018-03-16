@@ -46,10 +46,39 @@ export class SearchService {
         return this.service.post<any,any>(url, item);
     }
 
+    getExcavations() {
+        let url = `${Consts.baseURL}api/graphql`;
+        let item = '{"query": "{Excavation {id name area boss sites{knowledges{name}} researches{name}  }}"}';
+        return this.service.post<any,any>(url, item);
+    }
+
+
+    getEpochs() {
+        let url = `${Consts.baseURL}api/graphql`;
+        let item = '{"query": "{Epoch  {id ru_name }}"}';
+        return this.service.post<any,any>(url, item);
+    }
+    getCultures() {
+        let url = `${Consts.baseURL}api/graphql`;
+        let item = '{"query": "{Culture  {id ru_name }}"}';
+        return this.service.post<any,any>(url, item);
+    }
+
 
     getArtifacts() {
         let url = `${Consts.baseURL}api/graphql`;
-        let item = '{"query": "{Artifact {id name depth excRegion excavation{name researches{name year type{ru_name}} }  }}"}';
+        let item = '{"query": "{Artifact {id name category{ru_name} collections{name} depth excRegion excavation{name researches{name year type{ru_name}} }  }}"}';
+        return this.service.post<any,any>(url, item);
+    }
+    getHeritages() {
+        let url = `${Consts.baseURL}api/graphql`;
+        let item = '{"query": "{Heritage {id name sites{knowledges{name}}  }}"}';
+        return this.service.post<any,any>(url, item);
+    }
+
+    getRadiocarbons() {
+        let url = `${Consts.baseURL}api/graphql`;
+        let item = '{"query": "{Radiocarbon{ id name date s sampleDesc bcadSecondTop bcadSecondBot }}"}';
         return this.service.post<any,any>(url, item);
     }
 
@@ -85,6 +114,12 @@ export class SearchService {
     getPublicationID(id: number) {
         let url = `${Consts.baseURL}api/graphql`;
         let item = `{"query": "{Publication(id:${id}){ published_at name pages researches{ id name year description type{id ru_name} author{id name} report{id  year name} publication{id name published_at} excavations{id name area boss artifacts{id name depth excRegion}} radiocarbons{id name date s sampleDesc bcadSecondTop bcadSecondBot } coauthors{id name} knowledges{ culture{id ru_name} id name description excavations_count artifacts_count site{ heritages{ id name}  epoch{id ru_name}  spatial{ date x y type{id ru_name  }}}} }}}"}`;
+        return this.service.post<any, any>(url, item);
+    }
+
+    getRadiocarbonID(id: number) {
+        let url = `${Consts.baseURL}api/graphql`;
+        let item = `{"query": "{Radiocarbon(id:${id}){name date s sampleDesc bcadSecondTop bcadSecondBot researches{id  knowledges{site{spatial{date x y type{id ru_name}}}}}  }}"}`;
         return this.service.post<any, any>(url, item);
     }
 
